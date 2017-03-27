@@ -2,6 +2,7 @@ import os, random
 import flask 
 import flask_socketio, requests
 import pokeAPI
+
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
@@ -84,11 +85,11 @@ def spotify(data):
 	random_track_link = "https://embed.spotify.com/?uri="+random_track
 	socketio.emit('fromSpotify', random_track_link)
 
-
-socketio.run(
-    app,
-    host=os.getenv('IP', '0.0.0.0'),
-    port=int(os.getenv('PORT', 8080)),
-    debug=True
-)
+if __name__ == '__main__': # __name__!
+    socketio.run(
+        app,
+        host=os.getenv('IP', '0.0.0.0'),
+        port=int(os.getenv('PORT', 8080)),
+        debug=True
+    )
 

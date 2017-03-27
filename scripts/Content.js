@@ -1,16 +1,36 @@
 import * as React from 'react';
-//import Sound from './Sound'
+import { Grid } from './Grid';
+import { Form } from './Form';
 import { Socket } from './Socket';
+
 export class Content extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            'session': ''
+        };
+    }
+
+    componentDidMount() {
+        Socket.on('game start', (data) => { 
+            this.setState({
+                'session': data['session']
+            });
+            Socket.emit('draw board', {'board': data['board']});
+        });
+    }
+    
     render() {
+        let session = this.state.session;
         return (
-        <div>
-        <div><a href = '/play'>Play Game</a></div>
-       <div className = "spotifyContainer">
-              <Sound/> 
+            <div>
+            Game ID: {session}
+            <Form/>
+            <Grid/>
+            <div className = "spotifyContainer">
+                  <Sound/> 
+            </div>
         </div>
-        </div>
-      
     )}
 }
 export class Sound extends React.Component {

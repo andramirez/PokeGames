@@ -1,44 +1,23 @@
-# lecture6-thuhe
+# Documentation - PokeGames!
+### 03/27/17 CST 438 Project 3
+## Developers
+### Katelynn Jones
+### Andrea Ramirez 
+### Dante Lacey-Thompson
+### Javar Alexander
 
-Some starter code for React on Flask.
 
-## Upgrade Node version to 6
+# What does your app do?
 
-```$ nvm install 6```
 
-## Installing Webpack
+# Who worked on it?
 
-```$ npm install -g webpack```
 
-## Installing `npm` dependencies from `package.json`
+# What were you able to complete for this handin?
 
-```$ npm install```
 
-## Compiling Javascript using Webpack
+# What are known problems, if any, with your project?
 
-```$ webpack --watch```
 
-(The program should not stop running. Leave it running.)
 
-## Edit a JS file
-
-Make a change to `scripts/Content.js`. Webpack should detect the change and 
-print a bunch of stuff.
-
-**Do not manually edit `static/script.js`!!**
-
-## Add new JS files
-
-Stuff that is added to `scripts/` and referenced somewhere else will 
-automatically be packaged into `static/script.js`.
-
-## Running the web server
-
-Click on the green button on `app.py`, or open up a new terminal and type:
-
-```$ python app.py```
-
-## Confused?
-
-I'll explain what all this does in a bit. For now, use it as a starter to
-write some React code.
+# How would you improve it if you had more time?

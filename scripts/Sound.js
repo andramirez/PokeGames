@@ -1,19 +1,9 @@
+//Written by Javar A. code sets up our view for spotify, and allows it to talk to our backend sockets. 
+
+
 import * as React from 'react';
-import { Grid } from './Grid';
 import { Socket } from './Socket';
 
-export class Content extends React.Component {
-    render() {
-        return (
-            <div>
-            <div><a href = '/play'>Play Game</a></div>
-            <Grid/>
-            <div className = "spotifyContainer">
-                  <Sound/> 
-            </div>
-        </div>
-    )}
-}
 export class Sound extends React.Component {
     constructor(props) {
         super(props);
@@ -56,7 +46,7 @@ export class Sound extends React.Component {
                 <option value="Track" >Track</option>
                 </select>
                 <input type = "text" id = "searchQuery" name="searchQuery"/>
-                <input type="submit" id = "submit" value = "search song!" />
+                <input type="submit" id = "submit" value = "Spotify Search!" />
             </form>
             </div>
             <div>

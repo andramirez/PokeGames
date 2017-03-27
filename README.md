@@ -8,7 +8,8 @@
 
 
 # What does your app do?
-### We aim to deliver a real-time arena-type strategy game web app. The web app will provide social login to allow users to easily identify themselves, and include features such as a chat room, a game master-like chatbot, the game itself, an event log, a media player, and if time permits an android component to go along with our game.
+### We aim to deliver a real-time arena-type strategy game. The web app will provide social login to allow users to easily identify themselves, and include features such as a chat room, a game master chatbot, the game itself, an event log, and a media player to go along with our game.
+### The goal of the game will be to traverse a digital grid in search of pokemon and items in order to out-survive and out-battle all the other players and be the last one standing.
 
 # Who worked on it?
 

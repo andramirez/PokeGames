@@ -38,7 +38,6 @@ def getNameByType(pType):
 def getRandomPokemon():
     pid = random.randint(1, 718) #retrieves random pokemon id
     pokemon = pykemon.get(pokemon_id=pid)
-    
     return pokemon.name
 
 #returns the type of pokemon will be found at given terrain

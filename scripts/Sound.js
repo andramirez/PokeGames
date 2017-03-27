@@ -21,36 +21,12 @@ export class Sound extends React.Component {
         document.getElementById("Spotifyframe").style.visibility ="visible";
     });
     }
-    //this is what handles our spotify search button queries. Once the user hits submit that data is sent through a socket to the server and processed server side. 
-     handleSubmitMusic(event) {
-         event.preventDefault();
-         var searchType = document.getElementById('SearchFor').value;
-         var searchQuery = document.getElementById('searchQuery').value;
-        Socket.emit('Spotify' , {
-            'searchType' : searchType, 
-            'searchQuery' : searchQuery,
-        });
-     }
+
      //here is where we piece everything together and render the spotify button on the screen, search box and button. 
       render() {
         return (
         <div>    
-        <div>
-        <br />
-        <br />
-        <iframe src="https://embed.spotify.com/?uri=spotify%3Aalbum%3qW0KwoP8BdFzqZSDh1ScI" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-         </div>
-         <div className = "spotifyinput">
-            <form onSubmit={this.handleSubmitMusic}>
-                <select id = "SearchFor">
-                <option value="Track" >Track</option>
-                </select>
-                <input type = "text" id = "searchQuery" name="searchQuery"/>
-                <input type="submit" id = "submit" value = "search song!" />
-            </form>
-            </div>
-            <div>
-            </div>
+       <iframe src="https://embed.spotify.com/?uri=spotify%3Aalbum%3A3qW0KwoP8BdFzqZSDh1ScI" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
             </div>
         );
     }

@@ -10,10 +10,10 @@ img {
 }
 audio { width: 100px; }
 #Spotifyframe {
-    height:320px;
-    width:302px;
+    height:380px;
+    width:300px;
     position: absolute;
     top:0;
     right: 0;
-    visibility: hidden
+    /*visibility: hidden*/
 }

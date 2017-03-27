@@ -5,6 +5,7 @@ app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
 maps = {}
+team = []
 
 @app.route('/')
 def index():
@@ -28,7 +29,14 @@ def play(data):
         grid = createGrid('medium') 
         maps[key] = grid
     socketio.emit('game start', {'session': key, 'board': grid})
-    
+
+@socketio.on('get pokemon')
+def get_pokemon(data): #Andrea
+    #get a pokemon based on terrain
+    print data['terrain']
+    name = data['terrain']
+    team.append(name)
+    socketio.emit('new poke', {'team': team})
 
 def createGrid(size):
     # Define Lists

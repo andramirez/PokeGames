@@ -1,6 +1,7 @@
 import os, random
 import flask 
 import flask_socketio, requests
+import pokeAPI
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
@@ -36,6 +37,7 @@ def get_pokemon(data): #Andrea
     print data['terrain']
     name = data['terrain']
     team.append(name)
+    pokemon = pokeAPI.terrainToType(name) #generates pokemon name
     socketio.emit('new poke', {'team': team})
 
 def createGrid(size):

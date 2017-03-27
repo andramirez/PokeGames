@@ -43,59 +43,46 @@ def getRandomPokemon():
 #returns the type of pokemon will be found at given terrain
 def terrainToType(terrain):
     terrain = terrain.lower()
-    if terrain == "lake":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "water"
-        else:
-            pType = "flying"
-    elif terrain == "desert":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "ground"
-        else:
-            pType = "fire"
-    elif terrain == "plains":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "grass"
-        else:
-            pType = "normal"
-    elif terrain == "forest":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "bug"
-        else:
-            pType = "fairy"
-    elif terrain == "mountain":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "rock"
-        else:
-            pType = "fighting"
-    elif terrain == "mountain-peak":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "ice"
-        else:
-            pType = "dragon"
-    elif terrain == "city":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "electric"
-        else:
-            pType = "steel"
-    elif terrain == "swamp":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "poison"
-        else:
-            pType = "dark"
-    elif terrain == "unknown":
-        drawing = random.randint(1,2);
-        if drawing == 1:
-            pType = "ghost"
-        else:
-            pType = "psychic"
+    terrains = {
+        'lake': {
+                    1:"water",
+                    2:"flying"
+                },
+        'desert': {
+                    1:"ground",
+                    2:"fire"
+                },
+        'plains': {
+                    1:"grass",
+                    2:"normal"
+                },
+        'forest': {
+                    1:"bug",
+                    2:"fairy"
+                },
+        'mountain': {
+                    1:"rock",
+                    2:"fighting"
+                    },
+        'mountain-peak': {
+                    1:"ice",
+                    2:"dragon"
+                },
+        'city': {
+                    1:"steel",
+                    2:"electric"
+                },
+        'swamp': {
+                    1:"poison",
+                    2:"dark"
+                },
+        'unknown': {
+                    1:"ghost",
+                    2:"psychic"
+                }
+        }
+    drawing = random.randint(1,2)
+    pType = terrains[terrain][drawing]
+
             
     return getNameByType(pType)

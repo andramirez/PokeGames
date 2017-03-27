@@ -20,7 +20,7 @@ def getStatsByName(name):
     
     return pokemon.name, pokemon.hp, pokemon.types.keys(), moveSet
 
-#returns pokemon name by type
+#returns pokemon name(1) by type
 def getNameByType(types):
     pid = random.randint(1, 718) #retrieves random pokemon id
     pokemon = pykemon.get(pokemon_id=pid)
@@ -43,4 +43,3 @@ def getRandomPokemon():
     pokemon = pykemon.get(pokemon_id=pid)
     
     return pokemon.name
-

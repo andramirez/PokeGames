@@ -10,20 +10,6 @@ maps = {}
 def index():
     return flask.render_template('index.html')
 
-@app.route("/play")
-def play():
-    key = generateKey()
-    grid = createGrid('medium') 
-    maps[key] = grid
-    return flask.render_template("game.html", grid = grid, key = key)
-
-@app.route("/play/<string:key>")
-def load(key):
-    #if grid for login already exists, load, else create and save to db (index being a randomly generated key)
-    if maps[key]:
-        grid = maps[key]
-    return flask.render_template("game.html", grid = grid, key = key)
-    
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
@@ -31,6 +17,18 @@ def on_connect():
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
+
+@socketio.on('play')
+def play(data):
+    key = data['key']
+    if key in maps: #if grid for login already exists, load 
+        grid = maps[key]
+    else: #else create and save
+        key = generateKey()
+        grid = createGrid('medium') 
+        maps[key] = grid
+    socketio.emit('game start', {'session': key, 'board': grid})
+    
 
 def createGrid(size):
     # Define Lists

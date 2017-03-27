@@ -5,19 +5,27 @@ export class Grid extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            grid: {}
+            board: [[]]
         };
-        Socket.on('set grid', (data) => {
-            this.setState({
-                grid: data['grid']
-            });
-        })
     }
+    componentDidMount() {
+        Socket.on('game start', (data) => {
+            this.setState({
+                board: data['board']
+            });
+        });
+    }
+    
     render() {
-        let grid = this.state.grid;
+        let board = this.state.board.map((n,i) => 
+            <tr> {n.map((m, j) => <td ><img src={'/static/image/'+m+'.jpg'}></img></td>)} </tr>
+        );
+            
         return (
             <div>
-                Grid Placeholder
+                <table>
+                    {board}
+                </table>
             </div>
         );
     }

@@ -8,7 +8,7 @@
 
 
 # What does your app do?
-###We aim to deliver a real-time arena-type strategy game web app. The web app will provide social login to allow users to easily identify themselves, and include features such as a chat room, a game master-like chatbot, the game itself, an event log, a media player, and if time permits an android component to go along with our game.
+### We aim to deliver a real-time arena-type strategy game web app. The web app will provide social login to allow users to easily identify themselves, and include features such as a chat room, a game master-like chatbot, the game itself, an event log, a media player, and if time permits an android component to go along with our game.
 
 # Who worked on it?
 

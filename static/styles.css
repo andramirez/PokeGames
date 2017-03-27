@@ -18,3 +18,13 @@ table table {
     background-size:cover;
 }
 audio { width: 100px; }
+
+#Spotifyframe {
+    height:320px;
+    width:302px;
+    position: absolute;
+    top:198;
+    right: 198;
+    visibility: hidden
+        
+}

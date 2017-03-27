@@ -14,9 +14,10 @@
 
 
 # What were you able to complete for this handin?
-
+### For this handin, we were able to set up the basic layout for our web game. We also were able to implement the spotify API. Since the theme is pokemon, we have a pokemon album queued up on spotify where users can listen to and game. 
 
 # What are known problems, if any, with your project?
+### right now, there is a login glitch with spotify. Where it's prompting the user to sign in when selecting a song. Most likely due to an Oauth token error. Still researching
 
 
 

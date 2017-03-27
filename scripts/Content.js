@@ -1,16 +1,17 @@
 import * as React from 'react';
-//import Sound from './Sound'
+import { Grid } from './Grid';
 import { Socket } from './Socket';
+
 export class Content extends React.Component {
     render() {
         return (
-        <div>
-        <div><a href = '/play'>Play Game</a></div>
-       <div className = "spotifyContainer">
-              <Sound/> 
+            <div>
+            <div><a href = '/play'>Play Game</a></div>
+            <Grid/>
+            <div className = "spotifyContainer">
+                  <Sound/> 
+            </div>
         </div>
-        </div>
-      
     )}
 }
 export class Sound extends React.Component {

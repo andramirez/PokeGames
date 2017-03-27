@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid } from './Grid';
+import { Board } from './Board';
 import { Form } from './Form';
 import { Sound } from './Sound';
 import { Socket } from './Socket';
@@ -27,7 +27,7 @@ export class Content extends React.Component {
             <div>
             Game ID: {session}
             <Form/>
-            <Grid/>
+            <Board/>
             <div className = "spotifyContainer">
                   <Sound/> 
             </div>

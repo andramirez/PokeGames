@@ -28,7 +28,6 @@ def play(data):
         grid = createGrid('medium') 
         maps[key] = grid
     socketio.emit('game start', {'session': key, 'board': grid})
-    
 
 def createGrid(size):
     # Define Lists

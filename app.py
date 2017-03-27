@@ -5,7 +5,10 @@ import pokeAPI
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
+#game vars
 maps = {}
+
+#player vars
 team = []
 
 @app.route('/')
@@ -32,18 +35,17 @@ def play(data):
     socketio.emit('game start', {'session': key, 'board': grid})
 
 @socketio.on('get pokemon')
-def get_pokemon(data): #Andrea
+def get_pokemon(data):
     #get a pokemon based on terrain
-    print data['terrain']
-    name = data['terrain']
-    team.append(name)
-    pokemon = pokeAPI.terrainToType(name) #generates pokemon name
+    terrain = data['terrain']
+    pokemon = pokeAPI.terrainToType(terrain) #generates pokemon name
+    team.append(pokemon)
     socketio.emit('new poke', {'team': team})
 
 def createGrid(size):
     # Define Lists
     units = {'small': 5, 'medium': 6, 'large': 7}
-    terrain = ['water','sand','grass','trees','mountain','snow']
+    terrain = ['lake','desert','plains','forest','mountain','mountain-peak','factory','swamp','unknown']
     grid = []
     
     for row in range(units[size]):

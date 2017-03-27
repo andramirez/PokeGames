@@ -1,3 +1,4 @@
+// handles rules of game creation
 import * as React from 'react';
 
 import { Socket } from './Socket';
@@ -20,7 +21,8 @@ export class Form extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         Socket.emit('play', {
-            'key': this.state.key
+            'key': this.state.key,
+            'size': this.state.size
         });
     }
 

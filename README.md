@@ -1,5 +1,6 @@
 # Documentation - PokeGames!
 
+## Developers
 ### Katelynn Jones
 ### Andrea Ramirez 
 ### Dante Lacey-Thompson

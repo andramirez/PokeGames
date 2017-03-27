@@ -100,6 +100,3 @@ def terrainToType(terrain):
             pType = "psychic"
             
     return getNameByType(pType)
-    
-print getStatsByName(terrainToType('lake'))
-        

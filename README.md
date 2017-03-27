@@ -21,3 +21,4 @@
 
 
 # How would you improve it if you had more time?
+### If given more time, we would have liked to change more of the Set-Up Page, as well as the overall look of the game page. We would have liked to add more features at this point, but with the base that we have, we will be able to add the features that we initially wanted for the game page. 

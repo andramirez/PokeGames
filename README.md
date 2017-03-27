@@ -1,11 +1,11 @@
 # Documentation - PokeGames!
-
+### 03/27/17 CST 438 Project 3
 ## Developers
 ### Katelynn Jones
 ### Andrea Ramirez 
 ### Dante Lacey-Thompson
 ### Javar Alexander
-### 03/27/17 CST 438 Project 3
+
 
 # What does your app do?
 

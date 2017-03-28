@@ -32,4 +32,4 @@
 
 
 # Link to deployed application
-[Heroku Deployment]("www.still-beyond-48460.herokuapp.com")
+[Heroku Deployment](https://www.still-beyond-48460.herokuapp.com)

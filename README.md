@@ -32,4 +32,4 @@
 
 
 # Link to deployed application
-## <a href = "www.still-beyond-48460.herokuapp.com" > Heroku Deployment </a>
+[Heroku Deployment]("www.still-beyond-48460.herokuapp.com")

@@ -12,7 +12,10 @@
 ### The goal of the game will be to traverse a digital grid in search of pokemon and items in order to out-survive and out-battle all the other players and be the last one standing.
 
 # Who worked on it?
-
+### Katelynn Jones:
+### Andrea Ramirez: Implemented PokeAPI, worked on Documentation and set up the PokeGames Set-Up page
+### Javar Alexander:
+### Dante Lacey-Thompson:
 
 # What were you able to complete for this handin?
 ### For this handin, we were able to set up the basic layout for our web game. We also were able to implement the spotify API. Since the theme is pokemon, we have a pokemon album queued up on spotify where users can listen to and game. 

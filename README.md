@@ -12,7 +12,11 @@
 ### The goal of the game will be to traverse a digital grid in search of pokemon and items in order to out-survive and out-battle all the other players and be the last one standing.
 
 # Who worked on it?
-### Javar worked on some design aspects of the game, along with integrating spotify api, and the sockets for a collaborative listening envoirment for spotify. Users connected to a specific game/lobby will listen to the same songs. Users can select and search for songs. For this handin, there is only a static pokemon album shown which will be changed in later handins.                                      ### Katelynn -                                                                                                                            ### Andrea -                                                                                                                             ### Dante - 
+### Javar worked on some design aspects of the game, along with integrating spotify api, and the sockets for a collaborative listening envoirment for spotify. Users connected to a specific game/lobby will listen to the same songs. Users can select and search for songs. For this handin, there is only a static pokemon album shown which will be changed in later handins.                                      
+### Katelynn -                                                                                                                            
+### Andrea -                                                                                                                             
+
+### Dante - 
 
 
 # What were you able to complete for this handin?

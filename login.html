@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <title>PokeGames Login</title>
+
+	    <meta name="description" content="pokeGames Login">
+	    <meta name="author" content="Dante Lacey-Thompson!">
+
+	    <link href="css/bootstrap.min.css" rel="stylesheet">
+	    <link href="css/style.css" rel="stylesheet">
+	    <script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="689477792087-6lkj6410qknjtkdn7cg9o0jdinqavd3q.apps.googleusercontent.com">
+	</head>
+	<body>
+		<script>
+			window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '1566496380057860',
+		      xfbml      : true,
+		      version    : 'v2.8',
+		      cookie	 : true
+		    });
+		    FB.Event.subscribe("auth.login", function(response) {
+	         // Reload the same page
+	         //window.location.reload();
+	         // Or uncomment the following line to redirect
+	         //window.location = "https://www.google.com";
+	         if(response.status=='connected'){
+	         window.location = "https://still-beyond-48460.herokuapp.com/";
+	        	}
+	         });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+		<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		<script>
+			function onSignIn(googleUser) {
+			  var profile = googleUser.getBasicProfile();
+			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			  console.log('Name: ' + profile.getName());
+			  console.log('Image URL: ' + profile.getImageUrl());
+			  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			  window.location = "https://still-beyond-48460.herokuapp.com/"
+			}
+		</script>
+	</body>
+</html>

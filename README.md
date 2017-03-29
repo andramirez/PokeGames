@@ -12,6 +12,11 @@
 ### The goal of the game will be to traverse a digital grid in search of pokemon and items in order to out-survive and out-battle all the other players and be the last one standing.
 
 # Who worked on it?
+### Javar worked on some design aspects of the game, along with integrating spotify api, and the sockets for a collaborative listening envoirment for spotify. Users connected to a specific game/lobby will listen to the same songs. Users can select and search for songs. For this handin, there is only a static pokemon album shown which will be changed in later handins.                                      
+### Katelynn set up the basic framework for the game. Added the early visuals for the game board. She set up the python scripts and the webpage shells.                                                                                                                          
+### Andrea helped katelynn set up the webpage shells for the game. Implemented PokeAPI, worked on Documentation and set up the PokeGames Set-Up page                                                                                                                         
+
+### Dante worked on some design aspects of the page. CSS, and was the go-to debugger for the application. Also helped with setting up the initial sockets in the game.
 
 
 # What were you able to complete for this handin?
@@ -23,3 +28,8 @@
 
 # How would you improve it if you had more time?
 ### If given more time, we would have liked to change more of the Set-Up Page, as well as the overall look of the game page. We would have liked to add more features at this point, but with the base that we have, we will be able to add the features that we initially wanted for the game page. 
+
+
+
+# Link to deployed application
+[Heroku Deployment](http://still-beyond-48460.herokuapp.com)

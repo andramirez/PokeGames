@@ -27,3 +27,6 @@ li {
 }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
+#game {
+    display: none;
+}

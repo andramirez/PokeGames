@@ -24,6 +24,8 @@ export class Form extends React.Component {
             'key': this.state.key,
             'size': this.state.size
         });
+        document.getElementById('content').style.display = "none";
+        document.getElementById('game').style.display = "block";
     }
 
     render() {

@@ -57,13 +57,14 @@ def getNameByType(pType):
             if key == pType:
                 return pokemon.name
             else:
-                pid = random.randint(1, 718) #retrieves random pokemon id
+                pid = random.randint(gen[drawing]['min'],gen[drawing]['min'])
+                 #retrieves random pokemon id
                 pokemon = pykemon.get(pokemon_id=pid)
     
 
 #returns random pokemon name
 def getRandomPokemon():
-    pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
+    pid = random.randint(1, 718) #retrieves random pokemon id
     pokemon = pykemon.get(pokemon_id=pid)
     return pokemon.name
 

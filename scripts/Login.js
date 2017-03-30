@@ -8,10 +8,10 @@ export class Login extends React.Component{
     responseFacebook(response){
         console.log(response);
         //Code implementation here
-        console.log(response.accessToken);
         //window.location.href = "https://www.facebook.com"; checking response
         if(response.accessToken.length > 0){
-            window.location.href = "https://www.facebook.com";
+            //window.location.href = "https://www.facebook.com";
+            console.log(response.accessToken);
         }
         else{
             window.location.reload();

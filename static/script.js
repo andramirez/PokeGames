@@ -30510,14 +30510,7 @@ var Login = exports.Login = function (_React$Component) {
     _createClass(Login, [{
         key: 'responseFacebook',
         value: function responseFacebook(response) {
-            console.log(response);
-            //Code implementation here
-            console.log(response.accessToken);
-            //window.location.href = "https://www.facebook.com"; checking response
             if (response.accessToken.length > 0) {
-                // window.location.href = "https://www.facebook.com";
-                //console.log(response.accessToken);
-                //return response.accessToken;
                 document.getElementById('login').style.display = 'none';
             } else {
                 window.location.reload();
@@ -30527,9 +30520,7 @@ var Login = exports.Login = function (_React$Component) {
         key: 'responseGoogle',
         value: function responseGoogle(googleUser) {
             var id_token = googleUser.getAuthResponse().id_token;
-            console.log({ "accessToken": id_token });
-            console.log(googleUser.getAuthResponse());
-            if (googleUser.getAuthResponse().id_token.length > 0) {
+            if (id_token.length > 0) {
                 document.getElementById('login').style.display = 'none';
             }
         }

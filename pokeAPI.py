@@ -162,7 +162,19 @@ flying = {'charizard', 'butterfree', 'pidgey', 'pidgeotto', 'pidgeot', 'spearow'
 'chatot', 'mantyke', 'togekiss', 'yanmega', 'gliscor', 'rotom', 'pidove', 'tranquill', 'unfezant', 'woobat', 'swoobat', 
 'sigilyph', 'archen', 'archeops', 'ducklett', 'swanna', 'emolga', 'rufflet', 'braviary', 'vullaby', 'mandibuzz'
 }
+normal = {'pidgey', 'pidgeotto', 'pidgeot', 'spearow', 'fearow', 'rattata', 'raticate', 'jigglypuff', 'wigglytuff', 'meowth', 'persian', 
+'farfetchd', 'doduo', 'dodrio', 'lickitung', 'chansey', 'kangaskhan', 'tauros', 'eevee', 'porygon', 'snorlax', 'sentret', 
+'furret', 'hoothoot', 'noctowl', 'igglybuff', 'aipom', 'girafarig', 'dunsparce', 'ursaring', 'miltank', 'blissey', 'zigzagoon', 
+'linoone', 'taillow', 'swellow', 'slakoth', 'vigoroth', 'slaking', 'whismur', 'loudred', 'exploud', 'azurill', 'skitty', 'delcatty', 'spinda', 
+'swablu', 'zangoose', 'castform', 'kecleon', 'starly', 'staravia', 'staraptor', 'bidoof', 'ambipom', 'buneary', 'lopunny', 'glameow', 
+'purugly', 'happiny', 'chatot', 'munchlax', 'lickilicky', 'porygon-z', 'regigigas', 'arceus', 'patrat', 'watchog', 'lillipup', 'herdier', 
+'stoutland', 'pidove', 'tranquill', 'unfezant', 'audino', 'minccino', 'cinccino', 'deerling', 'sawsbuck', 'bouffalant', 'rufflet', 'braviary'
+}
 
-for p in flying:
+
+
+
+
+for p in normal:
     print p
     print getStatsByName(p)

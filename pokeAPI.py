@@ -177,10 +177,19 @@ bug = {'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'par
 'scolipede', 'dwebble', 'crustle', 'karrablast', 'escavalier', 'joltik', 'galvantula', 'shelmet', 'accelgor', 'durant', 'larvesta', 
 'volcarona', 'genesect'
 }
+ground = {'sandshrew', 'sandslash', 'nidoqueen', 'nidoking', 'diglett', 'dugtrio', 'geodude', 'graveler', 'golem', 'onix', 'cubone', 
+'marowak', 'rhyhorn', 'rhydon', 'gligar', 'steelix', 'swinub', 'piloswine', 'phanpy', 'donphan', 'larvitar', 'pupitar', 'marshtomp', 
+'swampert', 'nincada', 'numel', 'camerupt', 'trapinch', 'vibrava', 'flygon', 'barboach', 'whiscash', 'baltoy', 'claydol', 'groudon', 
+'torterra', 'gastrodon', 'gible', 'gabite', 'garchomp', 'hippopotas', 'hippowdon', 'rhyperior', 'gliscor', 'mamoswine', 'drilbur', 
+'excadrill', 'palpitoad', 'seismitoad', 'sandile', 'krokorok', 'krookodile', 'stunfisk', 'golett', 'golurk'
+}
+rock = {'geodude', 'graveler', 'golem', 'onix', 'rhyhorn', 'rhydon','omanyte', 'omastar', 'kabuto', 'kabutops', 'aerodactyl', 
+'shuckle', 'magcargo', 'corsola', 'larvitar', 'pupitar', 'tyranitar', 'nosepass', 'aron', 'lairon', 'aggron', 'lunatone', 'solrock', 
+'lileep', 'cradily', 'anorith', 'relicanth', 'regirock', 'cranidos', 'rampardos', 'shieldon', 'bastiodon', 'rhyperior', 'probopass', 
+'boldore', 'gigalith', 'dwebble', 'crustle', 'tirtouga', 'carracosta', 'archen', 'archeops', 'terrakion'
+}
 
 
-
-
-for p in bug:
+for p in rock:
     print p
     print getStatsByName(p)

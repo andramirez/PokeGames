@@ -22,11 +22,6 @@ def getStatsByName(name):
 
 #returns pokemon name(1) by type
 def getNameByType(pType):
-<<<<<<< HEAD
-
-    drawing = random.randint(1,6)
-    pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
-=======
     # gen = {
     #     1: {
     #         'min':1,
@@ -56,7 +51,6 @@ def getNameByType(pType):
     # drawing = random.randint(1,6)
     # pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
     pid = random.randint(1,718)
->>>>>>> 84e2476a0492c0a2e1df2fa60290c02413cdd189
     pokemon = pykemon.get(pokemon_id=pid)
     match = False
     while match == False:
@@ -135,7 +129,19 @@ water = {'squirtle', 'wartortle', 'blastoise', 'psyduck', 'golduck', 'poliwag', 
 'phione', 'manaphy', 'oshawott', 'dewott', 'samurott', 'panpour', 'simipour', 'tympole', 'palpitoad', 'seismitoad', 
 'tirtouga', 'carracosta', 'ducklett', 'swanna', 'frillish', 'jellicent', 'alomomola'
 }
+fire = {'charmander', 'charmeleon', 'charizard', 'vulpix', 'ninetales', 'growlithe', 'arcanine', 'ponyta', 'rapidash', 
+'marowak', 'magmar', 'flareon', 'moltres', 'cyndaquil', 'quilava', 'typhlosion', 'slugma', 'magcargo', 'houndour', 
+'houndoom', 'magby', 'entei', 'ho-oh', 'torchic', 'combusken', 'blaziken', 'numel', 'camerupt', 'torkoal', 'castform', 
+'chimchar', 'monferno', 'infernape', 'magmortar', 'rotom', 'heatran', 'victini', 'tepig', 'pignite', 'emboar', 'pansear', 
+'simisear', 'darumaka', 'litwick', 'lampent', 'chandelure', 'heatmor', 'larvesta', 'volcarona', 'reshiram'
+}
+fighting = {'mankey', 'primeape', 'poliwrath', 'machop', 'machoke', 'machamp', 'hitmonlee', 'hitmonchan', 'heracross', 
+'tyrogue', 'hitmontop', 'combusken', 'blaziken', 'breloom', 'makuhita', 'hariyama', 'meditite', 'medicham', 'monferno', 
+'infernape', 'riolu', 'lucario', 'croagunk', 'toxicroak', 'gallade', 'pignite', 'emboar', 'timburr', 'gurdurr', 'conkeldurr', 
+'throh', 'sawk', 'scraggy', 'mienfoo', 'mienshao', 'cobalion', 'terrakion', 'virizion'
+}
 
-for p in water:
+
+for p in fighting:
     print p
     print getStatsByName(p)

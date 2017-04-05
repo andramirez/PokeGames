@@ -18,6 +18,9 @@ export class Game extends React.Component {
                 'session': data['session']
             });
         });
+        Socket.on('rest', (data) => { 
+            alert("REST");
+        });
         Socket.on('new poke', (data) => { 
             this.setState({
                 'team': data['team']

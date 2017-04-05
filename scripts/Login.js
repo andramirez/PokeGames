@@ -30,14 +30,16 @@ export class Login extends React.Component{
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
-        document.getElementById('FBGlogin').style.display="none";
+        document.getElementById('login').style.display="none";
+        document.getElementById('content').style.display="block";
     }
     
     onStatusChange(response){
         console.log(response);
         if(response.status=='connected'){
             console.log('connected');
-            document.getElementById('FBGlogin').style.display="none";
+            document.getElementById('login').style.display="none";
+            document.getElementById('content').style.display="block";
         }
         else{
             console.log('App is either not authorized or user isnt logged in');
@@ -47,16 +49,14 @@ export class Login extends React.Component{
     render(){
         return (
             <div>
-                <div id="FBGlogin">
-                    <div
-                        className="fb-login-button"
-                        data-max-rows="1"
-                        data-size="medium"
-                        data-show-faces="false"
-                        data-auto-logout-link="true">
-                    </div>
-                    <div id="g-signin2"></div>
+                <div
+                    className="fb-login-button"
+                    data-max-rows="1"
+                    data-size="medium"
+                    data-show-faces="false"
+                    data-auto-logout-link="true">
                 </div>
+                <div id="g-signin2"></div>
             </div>
         );
     }

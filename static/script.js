@@ -13259,7 +13259,8 @@ var Game = exports.Game = function (_React$Component) {
 
         _this.state = {
             'session': '',
-            'team': []
+            'team': [],
+            'inventory': []
         };
         return _this;
     }
@@ -13277,7 +13278,14 @@ var Game = exports.Game = function (_React$Component) {
             _Socket.Socket.on('rest', function (data) {
                 alert("REST");
             });
+            _Socket.Socket.on('new item', function (data) {
+                alert("NEW ITEM");
+                _this2.setState({
+                    'inventory': data['inventory']
+                });
+            });
             _Socket.Socket.on('new poke', function (data) {
+                alert("NEW POKEMON");
                 _this2.setState({
                     'team': data['team']
                 });
@@ -13287,6 +13295,13 @@ var Game = exports.Game = function (_React$Component) {
         key: 'render',
         value: function render() {
             var team = this.state.team.map(function (n, index) {
+                return React.createElement(
+                    'li',
+                    { key: index },
+                    n
+                );
+            });
+            var inventory = this.state.inventory.map(function (n, index) {
                 return React.createElement(
                     'li',
                     { key: index },
@@ -13305,6 +13320,13 @@ var Game = exports.Game = function (_React$Component) {
                     'ul',
                     null,
                     team
+                ),
+                React.createElement('br', null),
+                'Inventory: ',
+                React.createElement(
+                    'ul',
+                    null,
+                    inventory
                 ),
                 React.createElement(_Board.Board, null),
                 React.createElement(
@@ -13542,20 +13564,42 @@ var Board = exports.Board = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
         _this.state = {
+            choice: '',
+            terrain: '',
+            coords: '',
             board: [[]]
         };
+        _this.handleClick = _this.handleClick.bind(_this);
+        _this.handleChange = _this.handleChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
     _createClass(Board, [{
+        key: 'handleClick',
+        value: function handleClick(event) {
+            event.preventDefault();
+            this.setState({
+                choice: event.target.alt,
+                coords: event.target.id
+            });
+            document.getElementById('action').style.visibility = "visible";
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ choice: event.target.value });
+        }
+    }, {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
-            alert("CLICK");
-            _Socket.Socket.emit('get pokemon', {
-                'terrain': event.target.alt
+            _Socket.Socket.emit('make choice', {
+                'choice': this.state.choice,
+                'terrain': this.state.terrain,
+                'coords': this.state.coords
             });
+            document.getElementById('action').style.visibility = "hidden";
         }
     }, {
         key: 'componentDidMount',
@@ -13581,7 +13625,7 @@ var Board = exports.Board = function (_React$Component) {
                         return React.createElement(
                             'td',
                             null,
-                            React.createElement('img', { src: '/static/image/' + m + '.jpg', alt: m, id: i + ',' + j, onClick: _this3.handleSubmit })
+                            React.createElement('img', { src: '/static/image/' + m + '.jpg', alt: m, id: i + ',' + j, onClick: _this3.handleClick })
                         );
                     })
                 );
@@ -13597,6 +13641,43 @@ var Board = exports.Board = function (_React$Component) {
                         'tbody',
                         null,
                         board
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { id: 'action' },
+                    React.createElement(
+                        'form',
+                        { onSubmit: this.handleSubmit },
+                        React.createElement(
+                            'select',
+                            { onChange: this.handleChange },
+                            React.createElement(
+                                'option',
+                                { value: '' },
+                                '--'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'poke' },
+                                'Search for Pokemon'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'item' },
+                                'Look for Supplies'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'rest' },
+                                'Rest to Recover'
+                            )
+                        ),
+                        React.createElement(
+                            'button',
+                            null,
+                            'Choose an Action'
+                        )
                     )
                 )
             );

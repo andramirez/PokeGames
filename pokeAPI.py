@@ -22,9 +22,41 @@ def getStatsByName(name):
 
 #returns pokemon name(1) by type
 def getNameByType(pType):
+<<<<<<< HEAD
 
     drawing = random.randint(1,6)
     pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
+=======
+    # gen = {
+    #     1: {
+    #         'min':1,
+    #         'max':151
+    #     },
+    #     2: {
+    #         'min':152,
+    #         'max':251
+    #     },
+    #     3: {
+    #         'min':252,
+    #         'max':386
+    #     },
+    #     4: {
+    #         'min':387,
+    #         'max':493
+    #     },
+    #     5: {
+    #         'min':494,
+    #         'max':649
+    #     },
+    #     6: {
+    #         'min':650,
+    #         'max':718
+    #     },
+    # }
+    # drawing = random.randint(1,6)
+    # pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
+    pid = random.randint(1,718)
+>>>>>>> 84e2476a0492c0a2e1df2fa60290c02413cdd189
     pokemon = pykemon.get(pokemon_id=pid)
     match = False
     while match == False:
@@ -32,7 +64,8 @@ def getNameByType(pType):
             if key == pType:
                 return pokemon.name
             else:
-                pid = random.randint(gen[drawing]['min'],gen[drawing]['min'])
+                # pid = random.randint(gen[drawing]['min'],gen[drawing]['min'])
+                pid = random.randint(1,718)
                  #retrieves random pokemon id
                 pokemon = pykemon.get(pokemon_id=pid)
     

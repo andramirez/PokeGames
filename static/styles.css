@@ -26,4 +26,8 @@ li { display: inline; }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
 #content { display: none; }
-#game { display: none; }
+#action { visibility: hidden; }
+#game { 
+    display: none; 
+    text-align: center;
+}

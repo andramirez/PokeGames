@@ -11,6 +11,7 @@ maps = {}
 
 #player vars
 team = []
+inventory = []
 
 @app.route('/')
 def index():
@@ -35,13 +36,28 @@ def play(data):
         maps[key] = grid
     socketio.emit('game start', {'session': key, 'board': grid})
 
-@socketio.on('get pokemon')
+@socketio.on('make choice')
+def make_choice(data):
+    if data['choice'] == 'poke':
+        get_pokemon(data['terrain'])
+    elif data['choice'] == 'item':
+        get_item(data['terrain'])
+    elif data['choice'] == 'rest':
+        get_rest(data['terrain'])
+
 def get_pokemon(data):
-    #get a pokemon based on terrain
-    terrain = data['terrain']
-    pokemon = pokeAPI.terrainToType(terrain) #generates pokemon name
-    team.append(pokemon)
+    if len(team) > 6:
+        pokemon = pokeAPI.terrainToType(data['terrain']) #get a pokemon's name based on terrain
+        team.append(pokemon)
     socketio.emit('new poke', {'team': team})
+    
+def get_item(data):
+    item = 'Potion' #change later
+    inventory.append(item)
+    socketio.emit('new item', {'inventory': inventory})
+
+def get_rest(data):
+    socketio.emit('rest')
 
 def createGrid(size):
     # Define Lists

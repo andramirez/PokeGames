@@ -5,16 +5,34 @@ export class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            choice: '',
+            terrain: '',
+            coords: '',
             board: [[]]
         };
+        this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleSubmit(event) {
+    handleClick(event) {
         event.preventDefault();
-        alert("CLICK");
-        Socket.emit('get pokemon', {
-            'terrain': event.target.alt
+        this.setState({
+            choice: event.target.alt,
+            coords: event.target.id
         });
+        document.getElementById('action').style.visibility = "visible";
+    }
+    handleChange(event) {
+        this.setState({choice: event.target.value});
+    }
+    handleSubmit(event) {
+        event.preventDefault()
+        Socket.emit('make choice', {
+            'choice': this.state.choice,
+            'terrain': this.state.terrain,
+            'coords': this.state.coords
+        });
+        document.getElementById('action').style.visibility = "hidden";
     }
     componentDidMount() {
         Socket.on('game start', (data) => {
@@ -26,7 +44,7 @@ export class Board extends React.Component {
     
     render() {
         let board = this.state.board.map((n,i) => 
-            <tr>{n.map((m, j) => <td><img src={'/static/image/'+m+'.jpg'} alt={m} id={i+','+j} onClick={this.handleSubmit}></img></td>)}</tr>
+            <tr>{n.map((m, j) => <td><img src={'/static/image/'+m+'.jpg'} alt={m} id={i+','+j} onClick={this.handleClick}></img></td>)}</tr>
         );
             
         return (
@@ -36,6 +54,17 @@ export class Board extends React.Component {
                         {board}
                     </tbody>
                 </table>
+                <div id='action'>
+                    <form onSubmit={this.handleSubmit}>
+                        <select onChange={this.handleChange}>
+                            <option value=''>--</option>
+                            <option value='poke'>Search for Pokemon</option>
+                            <option value='item'>Look for Supplies</option>
+                            <option value='rest'>Rest to Recover</option>
+                        </select>
+                        <button>Choose an Action</button>
+                    </form>
+                </div>
             </div>
         );
     }

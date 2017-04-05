@@ -188,8 +188,43 @@ rock = {'geodude', 'graveler', 'golem', 'onix', 'rhyhorn', 'rhydon','omanyte', '
 'lileep', 'cradily', 'anorith', 'relicanth', 'regirock', 'cranidos', 'rampardos', 'shieldon', 'bastiodon', 'rhyperior', 'probopass', 
 'boldore', 'gigalith', 'dwebble', 'crustle', 'tirtouga', 'carracosta', 'archen', 'archeops', 'terrakion'
 }
+dark = {'umbreon', 'murkrow', 'sneasel', 'houndour', 'houndoom', 'tyranitar', 'poochyena', 'mightyena', 'nuzleaf', 'shiftry', 
+'carvanha', 'sharpedo', 'cacturne', 'crawdaunt', 'absol', 'honchkrow', 'stunky', 'skuntank', 'spiritomb', 'drapion', 'weavile', 
+'darkrai', 'purrloin', 'liepard', 'sandile', 'krokorok', 'krookodile', 'scraggy', 'scrafty', 'zorua', 'zoroark', 'pawniard', 
+'bisharp', 'vullaby', 'mandibuzz', 'deino', 'zweilous', 'hydreigon', 'sableye'}
 
+ice = {'dewgong', 'cloyster', 'jynx', 'lapras', 'articuno', 'sneasel', 'swinub', 'piloswine', 'delibird', 'smoochum', 'snorunt', 
+'glalie', 'spheal', 'sealeo', 'walrein', 'snover', 'abomasnow', 'weavile', 'glaceon', 'mamoswine', 'froslass', 'vanillite', 
+'vanillish', 'vanilluxe'
+}
 
-for p in rock:
-    print p
-    print getStatsByName(p)
+dragon = {'dratini', 'dragonair', 'dragonite', 'kingdra', 'vibrava', 'flygon', 'altaria', 'bagon', 'shelgon', 'salamence', 'latias', 
+'latios', 'rayquaza', 'gible', 'gabite', 'garchomp', 'dialga', 'palkia', 'axew', 'fraxure', 'haxorus'
+}
+
+ghost = {'gastly', 'haunter', 'gengar', 'misdreavus', 'shedinja', 'sableye', 'shuppet', 'banette', 'duskull', 'dusclops', 'drifloon', 
+'drifblim', 'mismagius', 'froslass', 'dusknoir', 'yamask', 'cofagrigus', 'frillish', 'jellicent', 'litwick', 'lampent', 
+'chandelure'
+}
+
+psychic = {'slowpoke', 'slowbro', 'drowzee', 'hypno', 'exeggcute', 'exeggutor', 'starmie', 'jynx', 'mewtwo', 'mew', 'natu', 
+'xatu', 'espeon', 'slowking', 'wobbuffet', 'girafarig', 'smoochum', 'lugia', 'celebi', 'ralts', 'kirlia', 'gardevoir', 'meditite', 
+'medicham', 'baltoy', 'claydol', 'chimecho', 'wynaut', 'beldum', 'metang', 'metagross', 'latias', 'latios', 'jirachi', 'chingling', 
+'bronzor', 'bronzong', 'gallade', 'uxie', 'mesprit', 'azelf', 'cresselia', 'victini', 'munna', 'musharna', 'woobat', 'swoobat', 
+'sigilyph', 'gothita', 'gothorita', 'gothitelle', 'solosis', 'duosion', 'reuniclus', 'elgyem', 'beheeyem'
+}
+
+electric = {'magnemite', 'magneton', 'pikachu', 'raichu', 'voltorb', 'electrode', 'electabuzz', 'jolteon', 'zapdos', 'chinchou', 'lanturn', 
+'pichu', 'mareep', 'flaaffy', 'ampharos', 'elekid', 'raikou', 'manectric', 'plusle', 'minun', 'pachirisu', 'magnezone', 
+'electivire', 'rotom', 'blitzle', 'zebstrika', 'emolga', 'joltik', 'galvantula', 'tynamo', 'eelektrik', 'eelektross', 'stunfisk', 'zekrom'
+}
+
+steel = {'magnemite', 'magneton', 'forretress', 'steelix', 'scizor', 'skarmory', 'mawile', 'aron', 'lairon', 'aggron', 'beldum', 'metang', 
+'metagross', 'registeel', 'jirachi', 'empoleon', 'shieldon', 'bastiodon', 'lucario', 'magnezone', 'probopass', 'dialga', 'heatran', 
+'excadrill', 'escavalier', 'ferroseed', 'ferrothorn', 'klink', 'klang', 'klinklang', 'pawniard', 'bisharp', 'durant', 'cobalion', 'genesect', 
+'bronzor', 'bronzong'
+}
+
+fairy = {'clefairy', 'clefable', 'jigglypuff', 'wigglytuff', 'mr.mime', 'cleffa', 'igglybuff', 'togepi', 'togetic', 'marill', 'azumarill', 
+'snubbull', 'granbull', 'ralts', 'kirlia', 'gardevoir', 'azurill', 'mawile', 'togekiss', 'cottonee', 'whimsicott'
+}

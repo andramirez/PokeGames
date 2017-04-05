@@ -170,11 +170,17 @@ normal = {'pidgey', 'pidgeotto', 'pidgeot', 'spearow', 'fearow', 'rattata', 'rat
 'purugly', 'happiny', 'chatot', 'munchlax', 'lickilicky', 'porygon-z', 'regigigas', 'arceus', 'patrat', 'watchog', 'lillipup', 'herdier', 
 'stoutland', 'pidove', 'tranquill', 'unfezant', 'audino', 'minccino', 'cinccino', 'deerling', 'sawsbuck', 'bouffalant', 'rufflet', 'braviary'
 }
+bug = {'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'paras', 'parasect', 'venonat', 'venomoth', 'scyther', 'pinsir', 
+'ledyba', 'ledian', 'spinarak', 'ariados', 'pineco', 'forretress', 'scizor', 'shuckle', 'heracross', 'wurmple', 'silcoon', 'beautifly', 
+'cascoon', 'dustox', 'surskit', 'masquerain', 'nincada', 'ninjask', 'shedinja', 'volbeat', 'illumise', 'anorith', 'kricketot', 
+'kricketune', 'burmy', 'mothim', 'combee', 'vespiquen', 'skorupi', 'sewaddle', 'swadloon', 'leavanny', 'venipede', 'whirlipede', 
+'scolipede', 'dwebble', 'crustle', 'karrablast', 'escavalier', 'joltik', 'galvantula', 'shelmet', 'accelgor', 'durant', 'larvesta', 
+'volcarona', 'genesect'
+}
 
 
 
 
-
-for p in normal:
+for p in bug:
     print p
     print getStatsByName(p)

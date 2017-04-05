@@ -33,6 +33,7 @@ export class Board extends React.Component {
             'coords': this.state.coords
         });
         document.getElementById('action').style.visibility = "hidden";
+        document.getElementById('select').value = ""; //Reset Action to Null
     }
     componentDidMount() {
         Socket.on('game start', (data) => {
@@ -49,14 +50,9 @@ export class Board extends React.Component {
             
         return (
             <div>
-                <table>
-                    <tbody>
-                        {board}
-                    </tbody>
-                </table>
                 <div id='action'>
                     <form onSubmit={this.handleSubmit}>
-                        <select onChange={this.handleChange}>
+                        <select id='select' onChange={this.handleChange}>
                             <option value=''>--</option>
                             <option value='poke'>Search for Pokemon</option>
                             <option value='item'>Look for Supplies</option>
@@ -64,6 +60,18 @@ export class Board extends React.Component {
                         </select>
                         <button>Choose an Action</button>
                     </form>
+                </div>
+                <table>
+                    <tbody>
+                        {board}
+                    </tbody>
+                </table>
+                <div className="container">
+                  <div className="stats health">Health</div>
+                </div>
+                
+                <div className="container">
+                  <div className="stats energy">Energy</div>
                 </div>
             </div>
         );

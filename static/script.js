@@ -13279,10 +13279,13 @@ var Game = exports.Game = function (_React$Component) {
                 alert("REST");
             });
             _Socket.Socket.on('new item', function (data) {
-                alert("NEW ITEM");
-                _this2.setState({
-                    'inventory': data['inventory']
-                });
+                if (Math.floor(Math.random() * 10) > 7) {
+                    //percent chance of finding an item
+                    alert("NEW ITEM");
+                    _this2.setState({
+                        'inventory': data['inventory']
+                    });
+                } else alert("Nothing found...");
             });
             _Socket.Socket.on('new poke', function (data) {
                 alert("NEW POKEMON");
@@ -13312,6 +13315,7 @@ var Game = exports.Game = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
+                React.createElement(_Board.Board, null),
                 'Game ID: ',
                 session,
                 React.createElement('br', null),
@@ -13328,7 +13332,6 @@ var Game = exports.Game = function (_React$Component) {
                     null,
                     inventory
                 ),
-                React.createElement(_Board.Board, null),
                 React.createElement(
                     'div',
                     { className: 'spotifyContainer' },
@@ -13600,6 +13603,7 @@ var Board = exports.Board = function (_React$Component) {
                 'coords': this.state.coords
             });
             document.getElementById('action').style.visibility = "hidden";
+            document.getElementById('select').value = ""; //Reset Action to Null
         }
     }, {
         key: 'componentDidMount',
@@ -13635,15 +13639,6 @@ var Board = exports.Board = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(
-                    'table',
-                    null,
-                    React.createElement(
-                        'tbody',
-                        null,
-                        board
-                    )
-                ),
-                React.createElement(
                     'div',
                     { id: 'action' },
                     React.createElement(
@@ -13651,7 +13646,7 @@ var Board = exports.Board = function (_React$Component) {
                         { onSubmit: this.handleSubmit },
                         React.createElement(
                             'select',
-                            { onChange: this.handleChange },
+                            { id: 'select', onChange: this.handleChange },
                             React.createElement(
                                 'option',
                                 { value: '' },
@@ -13678,6 +13673,33 @@ var Board = exports.Board = function (_React$Component) {
                             null,
                             'Choose an Action'
                         )
+                    )
+                ),
+                React.createElement(
+                    'table',
+                    null,
+                    React.createElement(
+                        'tbody',
+                        null,
+                        board
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'container' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats health' },
+                        'Health'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'container' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy' },
+                        'Energy'
                     )
                 )
             );

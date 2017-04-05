@@ -1,50 +1,61 @@
 import * as React from 'react';
-import { FacebookLogin } from 'react-facebook-login-component';
-import { GoogleLogin } from 'react-google-login-component';
 
 export class Login extends React.Component{
-    constructor(props, context){
-        super(props, context);
+    constructor(props){
+        super(props);
     }
     
-    responseFacebook(response){
-        if(response.accessToken.length > 0){
-           document.getElementById('login').style.display = 'none';
+    componentDidMount(){
+        FB.Event.subscribe('auth.statusChange', this.onStatusChange.bind(this));
+        gapi.signin2.render('g-signin2', {
+            'scope': 'https://www.googleapis.com/auth/plus.login',
+            'width': 200,
+            'height': 20,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': this.onSignIn
+        });
+    }
+    
+    onSignIn(googleUser){
+        console.log("User signed into Google");
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+        document.getElementById('FBGlogin').style.display="none";
+    }
+    
+    onStatusChange(response){
+        console.log(response);
+        if(response.status=='connected'){
+            console.log('connected');
+            document.getElementById('FBGlogin').style.display="none";
         }
         else{
-            window.location.reload();
+            console.log('App is either not authorized or user isnt logged in');
         }
     }
     
-    responseGoogle(googleUser){
-        var id_token = googleUser.getAuthResponse().id_token;
-        if(id_token.length>0){
-            document.getElementById('login').style.display='none';
-        }
-    }
-    
-    handleSubmit(event){
-        event.preventDefault();
-    }
     render(){
         return (
             <div>
-                <div id="fbl">
-                    <FacebookLogin socialId="1566496380057860"
-                    language="en_US"
-                    scope="public_profile, email"
-                    responseHandler={this.responseFacebook}
-                    xfbml={true}
-                    version="v2.8"
-                    class="facebook-login"
-                    buttonText="Login With Facebook"/>
-                </div>
-                <div id="gl">
-                    <GoogleLogin socialId="689477792087-6lkj6410qknjtkdn7cg9o0jdinqavd3q.apps.googleusercontent.com"
-                    class="google-login"
-                    scope="profile"
-                    responseHandler={this.responseGoogle}
-                    buttonText="Login With Google"/>
+                <div id="FBGlogin">
+                    <div
+                        className="fb-login-button"
+                        data-max-rows="1"
+                        data-size="medium"
+                        data-show-faces="false"
+                        data-auto-logout-link="true">
+                    </div>
+                    <div id="g-signin2"></div>
                 </div>
             </div>
         );

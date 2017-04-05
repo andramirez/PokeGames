@@ -19,8 +19,6 @@ def index():
 
 @socketio.on('connect')
 def on_connect():
-    pokemon = pokeAPI.terrainToType('mountain')
-    print pokemon
     print 'Someone connected!'
 
 @socketio.on('disconnect')

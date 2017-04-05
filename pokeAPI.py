@@ -146,8 +146,16 @@ grass = {'bulbasaur', 'ivysaur', 'venusaur', 'oddish', 'gloom', 'vileplume', 'pa
 'shroomish', 'breloom', 'roselia', 'cacnea', 'cacturne', 'lileep', 'cradily', 'tropius', 'turtwig', 'grotle', 'torterra', 'budew', 
 'roserade', 'cherubi', 'cherrim', 'carnivine', 'snover', 'abomasnow', 'tangrowth', 'leafeon', 'rotom', 'snivy', 
 'servine', 'serperior', 'pansage', 'simisage', 'sewaddle', 'swadloon', 'leavanny', 'cottonee', 'whimsicott', 'petilil', 'lilligant', 
-'maractus', 'deerling', 'sawsbuck', 'foongus', 'amoonguss', 'ferroseed', 'ferrothorn', 'virizion'}
+'maractus', 'deerling', 'sawsbuck', 'foongus', 'amoonguss', 'ferroseed', 'ferrothorn', 'virizion'
+}
+poison = {'bulbasaur', 'ivysaur', 'venusaur', 'weedle', 'kakuna', 'beedrill', 'ekans', 'arbok','nidorina', 'nidoqueen', 
+'nidorino', 'nidoking', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'venonat', 'venomoth', 'bellsprout', 'weepinbell', 'victreebel', 
+'grimer', 'muk', 'gastly', 'haunter', 'gengar', 'koffing', 'weezing', 'spinarak', 'ariados', 'crobat', 'qwilfish', 'dustox', 'roselia', 
+'gulpin', 'swalot', 'seviper', 'budew', 'roserade', 'stunky', 'skuntank', 'skorupi', 'drapion', 'croagunk', 'toxicroak', 'venipede', 
+'whirlipede', 'scolipede', 'trubbish', 'garbodor', 'foongus', 'amoonguss'
+}
 
-for p in grass:
+
+for p in poison:
     print p
     print getStatsByName(p)

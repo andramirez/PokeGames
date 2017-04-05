@@ -93,13 +93,13 @@ def spotify(data):
     		tracks.append(item['uri'])
 
 	my_headers = {"Accept" : "application/json", "Authorization" : "Bearer BQCm9bzjiDxNb9FurI8AWVgraOhvdZyzpBBNq753DwEXocrLa8kyPNOalfXuevtiZ10Kt8FIuvM1RMnv6mWiVsz9bXU8VQzEv3xdHAE5Qs4-eFI4dh3spBArHnzQLl6gGqvddte-H7JZQVzJEsxobx1TSStfVqonFzxWdH418b5RtzgZMHFgnKtV-6qW9g_axQ1bKwQ4Fm8e1NI"}
-	url = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY"
+	url = "https://api.spotify.com/vwe/tracks/1zHlj4dQ8ZAtrayhuDDmkY"
 	track_response = requests.get(url, headers= my_headers)
 	spotify_links = track_response.json()
 	random_track = random.choice(tracks)
 
 	random_track_link = "https://embed.spotify.com/?uri="+random_track
-	socketio.emit('fromSpotify', random_track_link)
+	socketio.emit('fromSpotify', random_track_linkno
 
 if __name__ == '__main__': # __name__!
     socketio.run(

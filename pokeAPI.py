@@ -22,6 +22,11 @@ def getStatsByName(name):
 
 #returns pokemon name(1) by type
 def getNameByType(pType):
+<<<<<<< HEAD
+
+    drawing = random.randint(1,6)
+    pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
+=======
     # gen = {
     #     1: {
     #         'min':1,
@@ -51,6 +56,7 @@ def getNameByType(pType):
     # drawing = random.randint(1,6)
     # pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
     pid = random.randint(1,718)
+>>>>>>> 84e2476a0492c0a2e1df2fa60290c02413cdd189
     pokemon = pykemon.get(pokemon_id=pid)
     match = False
     while match == False:
@@ -116,3 +122,20 @@ def terrainToType(terrain):
 
             
     return getNameByType(pType)
+
+water = {'squirtle', 'wartortle', 'blastoise', 'psyduck', 'golduck', 'poliwag', 'poliwhirl', 'poliwrath', 'tentacool', 
+'tentacruel', 'slowpoke', 'slowbro', 'seel', 'dewgong', 'shellder', 'cloyster', 'krabby', 'kingler', 'horsea', 'seadra', 
+'goldeen', 'seaking', 'staryu', 'starmie', 'magikarp', 'gyarados', 'lapras', 'vaporeon', 'omanyte', 'omastar', 'kabuto', 
+'kabutops', 'totodile', 'croconaw', 'feraligatr', 'chinchou', 'lanturn', 'marill', 'azumarill', 'politoed', 'wooper', 
+'quagsire', 'slowking', 'qwilfish', 'corsola', 'remoraid', 'octillery', 'mantine', 'kingdra', 'suicune', 'mudkip', 
+'marshtomp', 'swampert', 'lotad', 'lombre', 'ludicolo', 'wingull', 'pelipper', 'surskit', 'carvanha', 'sharpedo', 
+'wailmer', 'wailord', 'barboach', 'whiscash', 'corphish', 'crawdaunt', 'feebas', 'milotic', 'castform', 'spheal', 
+'sealeo', 'walrein', 'clamperl', 'huntail', 'gorebyss', 'relicanth', 'luvdisc', 'kyogre', 'piplup', 'prinplup', 
+'empoleon', 'bibarel', 'buizel', 'floatzel', 'shellos', 'gastrodon', 'finneon', 'lumineon', 'mantyke', 'palkia', 
+'phione', 'manaphy', 'oshawott', 'dewott', 'samurott', 'panpour', 'simipour', 'tympole', 'palpitoad', 'seismitoad', 
+'tirtouga', 'carracosta', 'ducklett', 'swanna', 'frillish', 'jellicent', 'alomomola'
+}
+
+for p in water:
+    print p
+    print getStatsByName(p)

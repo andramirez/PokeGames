@@ -99,7 +99,7 @@ def spotify(data):
 	random_track = random.choice(tracks)
 
 	random_track_link = "https://embed.spotify.com/?uri="+random_track
-	socketio.emit('fromSpotify', random_track_linkno
+	socketio.emit('fromSpotify', random_track_link)
 
 if __name__ == '__main__': # __name__!
     socketio.run(

@@ -154,8 +154,15 @@ poison = {'bulbasaur', 'ivysaur', 'venusaur', 'weedle', 'kakuna', 'beedrill', 'e
 'gulpin', 'swalot', 'seviper', 'budew', 'roserade', 'stunky', 'skuntank', 'skorupi', 'drapion', 'croagunk', 'toxicroak', 'venipede', 
 'whirlipede', 'scolipede', 'trubbish', 'garbodor', 'foongus', 'amoonguss'
 }
+flying = {'charizard', 'butterfree', 'pidgey', 'pidgeotto', 'pidgeot', 'spearow', 'fearow', 'zubat', 'golbat','farfetchd', 'doduo', 
+'dodrio', 'scyther', 'gyarados', 'aerodactyl', 'articuno', 'zapdos', 'moltres', 'dragonite', 'hoothoot', 'noctowl', 'ledyba', 'ledian', 
+'crobat', 'togetic', 'natu', 'xatu', 'hoppip', 'skiploom', 'jumpluff', 'yanma', 'murkrow', 'gligar', 'delibird', 'mantine', 'skarmory', 
+'lugia', 'ho-oh', 'beautifly', 'taillow', 'swellow', 'wingull', 'pelipper', 'masquerain', 'ninjask', 'swablu', 'altaria', 'tropius', 
+'salamence', 'rayquaza', 'starly', 'staravia', 'staraptor', 'mothim', 'combee', 'vespiquen', 'drifloon', 'drifblim', 'honchkrow', 
+'chatot', 'mantyke', 'togekiss', 'yanmega', 'gliscor', 'rotom', 'pidove', 'tranquill', 'unfezant', 'woobat', 'swoobat', 
+'sigilyph', 'archen', 'archeops', 'ducklett', 'swanna', 'emolga', 'rufflet', 'braviary', 'vullaby', 'mandibuzz'
+}
 
-
-for p in poison:
+for p in flying:
     print p
     print getStatsByName(p)

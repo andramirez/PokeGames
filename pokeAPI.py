@@ -140,8 +140,29 @@ fighting = {'mankey', 'primeape', 'poliwrath', 'machop', 'machoke', 'machamp', '
 'infernape', 'riolu', 'lucario', 'croagunk', 'toxicroak', 'gallade', 'pignite', 'emboar', 'timburr', 'gurdurr', 'conkeldurr', 
 'throh', 'sawk', 'scraggy', 'mienfoo', 'mienshao', 'cobalion', 'terrakion', 'virizion'
 }
+grass = {'bulbasaur', 'ivysaur', 'venusaur', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'bellsprout', 'weepinbell', 
+'victreebel', 'exeggcute', 'exeggutor', 'tangela', 'chikorita', 'bayleef', 'meganium', 'bellossom', 'hoppip', 'skiploom', 'jumpluff', 
+'sunkern', 'sunflora', 'celebi', 'treecko', 'grovyle', 'sceptile', 'lotad', 'lombre', 'ludicolo', 'seedot', 'shiftry', 
+'shroomish', 'breloom', 'roselia', 'cacnea', 'cacturne', 'lileep', 'cradily', 'tropius', 'turtwig', 'grotle', 'torterra', 'budew', 
+'roserade', 'cherubi', 'cherrim', 'carnivine', 'snover', 'abomasnow', 'tangrowth', 'leafeon', 'rotom', 'snivy', 
+'servine', 'serperior', 'pansage', 'simisage', 'sewaddle', 'swadloon', 'leavanny', 'cottonee', 'whimsicott', 'petilil', 'lilligant', 
+'maractus', 'deerling', 'sawsbuck', 'foongus', 'amoonguss', 'ferroseed', 'ferrothorn', 'virizion'
+}
+poison = {'bulbasaur', 'ivysaur', 'venusaur', 'weedle', 'kakuna', 'beedrill', 'ekans', 'arbok','nidorina', 'nidoqueen', 
+'nidorino', 'nidoking', 'zubat', 'golbat', 'oddish', 'gloom', 'vileplume', 'venonat', 'venomoth', 'bellsprout', 'weepinbell', 'victreebel', 
+'grimer', 'muk', 'gastly', 'haunter', 'gengar', 'koffing', 'weezing', 'spinarak', 'ariados', 'crobat', 'qwilfish', 'dustox', 'roselia', 
+'gulpin', 'swalot', 'seviper', 'budew', 'roserade', 'stunky', 'skuntank', 'skorupi', 'drapion', 'croagunk', 'toxicroak', 'venipede', 
+'whirlipede', 'scolipede', 'trubbish', 'garbodor', 'foongus', 'amoonguss'
+}
+flying = {'charizard', 'butterfree', 'pidgey', 'pidgeotto', 'pidgeot', 'spearow', 'fearow', 'zubat', 'golbat','farfetchd', 'doduo', 
+'dodrio', 'scyther', 'gyarados', 'aerodactyl', 'articuno', 'zapdos', 'moltres', 'dragonite', 'hoothoot', 'noctowl', 'ledyba', 'ledian', 
+'crobat', 'togetic', 'natu', 'xatu', 'hoppip', 'skiploom', 'jumpluff', 'yanma', 'murkrow', 'gligar', 'delibird', 'mantine', 'skarmory', 
+'lugia', 'ho-oh', 'beautifly', 'taillow', 'swellow', 'wingull', 'pelipper', 'masquerain', 'ninjask', 'swablu', 'altaria', 'tropius', 
+'salamence', 'rayquaza', 'starly', 'staravia', 'staraptor', 'mothim', 'combee', 'vespiquen', 'drifloon', 'drifblim', 'honchkrow', 
+'chatot', 'mantyke', 'togekiss', 'yanmega', 'gliscor', 'rotom', 'pidove', 'tranquill', 'unfezant', 'woobat', 'swoobat', 
+'sigilyph', 'archen', 'archeops', 'ducklett', 'swanna', 'emolga', 'rufflet', 'braviary', 'vullaby', 'mandibuzz'
+}
 
-
-for p in fighting:
+for p in flying:
     print p
     print getStatsByName(p)

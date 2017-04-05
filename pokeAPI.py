@@ -140,8 +140,14 @@ fighting = {'mankey', 'primeape', 'poliwrath', 'machop', 'machoke', 'machamp', '
 'infernape', 'riolu', 'lucario', 'croagunk', 'toxicroak', 'gallade', 'pignite', 'emboar', 'timburr', 'gurdurr', 'conkeldurr', 
 'throh', 'sawk', 'scraggy', 'mienfoo', 'mienshao', 'cobalion', 'terrakion', 'virizion'
 }
+grass = {'bulbasaur', 'ivysaur', 'venusaur', 'oddish', 'gloom', 'vileplume', 'paras', 'parasect', 'bellsprout', 'weepinbell', 
+'victreebel', 'exeggcute', 'exeggutor', 'tangela', 'chikorita', 'bayleef', 'meganium', 'bellossom', 'hoppip', 'skiploom', 'jumpluff', 
+'sunkern', 'sunflora', 'celebi', 'treecko', 'grovyle', 'sceptile', 'lotad', 'lombre', 'ludicolo', 'seedot', 'shiftry', 
+'shroomish', 'breloom', 'roselia', 'cacnea', 'cacturne', 'lileep', 'cradily', 'tropius', 'turtwig', 'grotle', 'torterra', 'budew', 
+'roserade', 'cherubi', 'cherrim', 'carnivine', 'snover', 'abomasnow', 'tangrowth', 'leafeon', 'rotom', 'snivy', 
+'servine', 'serperior', 'pansage', 'simisage', 'sewaddle', 'swadloon', 'leavanny', 'cottonee', 'whimsicott', 'petilil', 'lilligant', 
+'maractus', 'deerling', 'sawsbuck', 'foongus', 'amoonguss', 'ferroseed', 'ferrothorn', 'virizion'}
 
-
-for p in fighting:
+for p in grass:
     print p
     print getStatsByName(p)

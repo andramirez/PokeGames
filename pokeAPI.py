@@ -22,32 +22,7 @@ def getStatsByName(name):
 
 #returns pokemon name(1) by type
 def getNameByType(pType):
-    gen = {
-        1: {
-            'min':1,
-            'max':151
-        },
-        2: {
-            'min':152,
-            'max':251
-        },
-        3: {
-            'min':252,
-            'max':386
-        },
-        4: {
-            'min':387,
-            'max':493
-        },
-        5: {
-            'min':494,
-            'max':649
-        },
-        6: {
-            'min':650,
-            'max':718
-        },
-    }
+
     drawing = random.randint(1,6)
     pid = random.randint(gen[drawing]['min'],gen[drawing]['min']) #retrieves random pokemon id
     pokemon = pykemon.get(pokemon_id=pid)
@@ -114,3 +89,20 @@ def terrainToType(terrain):
 
             
     return getNameByType(pType)
+
+water = {'squirtle', 'wartortle', 'blastoise', 'psyduck', 'golduck', 'poliwag', 'poliwhirl', 'poliwrath', 'tentacool', 
+'tentacruel', 'slowpoke', 'slowbro', 'seel', 'dewgong', 'shellder', 'cloyster', 'krabby', 'kingler', 'horsea', 'seadra', 
+'goldeen', 'seaking', 'staryu', 'starmie', 'magikarp', 'gyarados', 'lapras', 'vaporeon', 'omanyte', 'omastar', 'kabuto', 
+'kabutops', 'totodile', 'croconaw', 'feraligatr', 'chinchou', 'lanturn', 'marill', 'azumarill', 'politoed', 'wooper', 
+'quagsire', 'slowking', 'qwilfish', 'corsola', 'remoraid', 'octillery', 'mantine', 'kingdra', 'suicune', 'mudkip', 
+'marshtomp', 'swampert', 'lotad', 'lombre', 'ludicolo', 'wingull', 'pelipper', 'surskit', 'carvanha', 'sharpedo', 
+'wailmer', 'wailord', 'barboach', 'whiscash', 'corphish', 'crawdaunt', 'feebas', 'milotic', 'castform', 'spheal', 
+'sealeo', 'walrein', 'clamperl', 'huntail', 'gorebyss', 'relicanth', 'luvdisc', 'kyogre', 'piplup', 'prinplup', 
+'empoleon', 'bibarel', 'buizel', 'floatzel', 'shellos', 'gastrodon', 'finneon', 'lumineon', 'mantyke', 'palkia', 
+'phione', 'manaphy', 'oshawott', 'dewott', 'samurott', 'panpour', 'simipour', 'tympole', 'palpitoad', 'seismitoad', 
+'tirtouga', 'carracosta', 'ducklett', 'swanna', 'frillish', 'jellicent', 'alomomola'
+}
+
+for p in water:
+    print p
+    print getStatsByName(p)

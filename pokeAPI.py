@@ -130,7 +130,7 @@ def getNameByType(pType):
         ]
     }
     
-    return types[pType][random.randint(1, len(types[pType])-1)]
+    return types[pType][random.randint(0, len(types[pType])-1)].title()
     
 
 #returns random pokemon name

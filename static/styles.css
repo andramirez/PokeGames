@@ -15,7 +15,6 @@ audio { width: 100px; }
     position: absolute;
     top:0;
     right:0;
-    /*visibility: hidden*/
 }
 ul {
     padding:0;
@@ -30,4 +29,24 @@ li:last-child:after { content: ""; }
 #game { 
     display: none; 
     text-align: center;
+}
+.container {
+    margin: auto;
+    width: 100%;
+    background-color: #ddd;
+}
+.stats {
+    text-align: right;
+    padding-right: 20px;
+    line-height: 20px;
+    color: white;
+}
+.health {
+    width: 100%; 
+    background-color: #f44336;
+    transition: all 1s;
+}
+.energy {
+    width: 100%; 
+    background-color: #4CAF50;
 }

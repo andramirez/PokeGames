@@ -23,10 +23,15 @@ export class Game extends React.Component {
             alert("REST");
         });
         Socket.on('new item', (data) => { 
-            alert("NEW ITEM");
-            this.setState({
-                'inventory': data['inventory']
-            });
+            if (Math.floor(Math.random() * 10) > 7){ //percent chance of finding an item
+                alert("NEW ITEM");
+                this.setState({
+                    'inventory': data['inventory']
+                });
+            }
+            else 
+                alert("Nothing found...");
+            
         });
         Socket.on('new poke', (data) => { 
             alert("NEW POKEMON");
@@ -46,12 +51,12 @@ export class Game extends React.Component {
         let session = this.state.session;
         return (
             <div>
+                <Board/>
                 Game ID: {session}
                 <br />
                 Pokemon: <ul>{team}</ul>
                 <br />
                 Inventory: <ul>{inventory}</ul>
-                <Board/>
                 <div className = "spotifyContainer">
                       <Sound/> 
                 </div>

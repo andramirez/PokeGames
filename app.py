@@ -45,18 +45,17 @@ def make_choice(data):
     elif data['choice'] == 'rest':
         get_rest(data['terrain'])
 
-def get_pokemon(data):
-    if len(team) > 6:
-        pokemon = pokeAPI.terrainToType(data['terrain']) #get a pokemon's name based on terrain
-        team.append(pokemon)
+def get_pokemon(terrain):
+    pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
+    team.append(pokemon)
     socketio.emit('new poke', {'team': team})
     
-def get_item(data):
+def get_item(terrain):
     item = 'Potion' #change later
     inventory.append(item)
     socketio.emit('new item', {'inventory': inventory})
 
-def get_rest(data):
+def get_rest(terrain):
     socketio.emit('rest')
 
 def createGrid(size):

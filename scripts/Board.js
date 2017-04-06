@@ -17,7 +17,7 @@ export class Board extends React.Component {
     handleClick(event) {
         event.preventDefault();
         this.setState({
-            choice: event.target.alt,
+            terrain: event.target.alt,
             coords: event.target.id
         });
         document.getElementById('action').style.visibility = "visible";

@@ -13583,7 +13583,7 @@ var Board = exports.Board = function (_React$Component) {
         value: function handleClick(event) {
             event.preventDefault();
             this.setState({
-                choice: event.target.alt,
+                terrain: event.target.alt,
                 coords: event.target.id
             });
             document.getElementById('action').style.visibility = "visible";

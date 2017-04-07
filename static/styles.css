@@ -61,6 +61,18 @@ li:last-child:after { content: ""; }
     border: 1px solid #ccc;
     background-color: #f3f3f3;
 }
-#body {
-    background-color: blue
+body {
+    background-image: url("background.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#loginContainer {
+      margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.3;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+    
 }

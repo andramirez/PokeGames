@@ -6,6 +6,9 @@ import pokeAPI
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
+#user vars
+user_list = []
+
 #game vars
 maps = {}
 
@@ -45,6 +48,18 @@ def make_choice(data):
     elif data['choice'] == 'rest':
         get_rest(data['terrain'])
 
+@socketio.on('fb_user_details')
+def fb_user_details(data):
+    print data
+    user_list.append({
+        'name': data['user'],
+        'picture': data['pic'],
+        'email' : data['email'],
+        'identifier' : data['fb_id'],
+        'source': 'facebook'
+    })
+    print user_list
+    
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
     team.append(pokemon)

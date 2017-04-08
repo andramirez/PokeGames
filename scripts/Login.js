@@ -12,15 +12,6 @@ export class Login extends React.Component{
     }
     
     componentWillMount(){
-        gapi.signin2.render('g-signin2', {
-            'scope': 'https://www.googleapis.com/auth/plus.login',
-            'width': 200,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': this.responseGoogle
-        }); 
-        cookie.remove('userID', {path: '/'});
         this.state = {userID : cookie.load('userID')};
     }
     
@@ -28,7 +19,7 @@ export class Login extends React.Component{
         gapi.signin2.render('g-signin2', {
             'scope': 'https://www.googleapis.com/auth/plus.login',
             'width': 200,
-            'height': 50,
+            'height': 20,
             'longtitle': true,
             'theme': 'dark',
             'onsuccess': this.responseGoogle

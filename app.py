@@ -59,7 +59,19 @@ def fb_user_details(data):
         'source': 'facebook'
     })
     print user_list
-    
+
+@socketio.on('g_user_details')
+def g_user_details(data):
+    print data
+    user_list.append({
+        'name': data['user'],
+        'picture': data['pic'],
+        'email': data['email'],
+        'identifier': data['g_identifier'],
+        'source': 'Google'
+    })
+    print user_list
+
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
     team.append(pokemon)

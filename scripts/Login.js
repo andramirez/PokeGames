@@ -66,11 +66,22 @@ export class Login extends React.Component{
         console.log('auth_response', googleUser.getAuthResponse());
         console.log("id_token:", id_token);
         var google_user_info_url = `https://www.googleapis.com/plus/v1/people/me?access_token=${googleUser.getAuthResponse().access_token}`;
+        var g_user_name = googleUser.w3['ig'];
+        var g_user_email = googleUser.w3['U3'];
+        var g_user_pic = googleUser.w3['Paa'];
+        console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
         console.log('google_user_info_url:', google_user_info_url);
         if(id_token.length>0){
             document.getElementById('login').style.display='none';
             document.getElementById('content').style.display = 'block';
             cookie.save('userID', id_token, { path: '/' });
+            Socket.emit('g_user_details', {
+                'user': g_user_name,
+                'pic': g_user_pic,
+                'email': g_user_email,
+                'source': 'Google',
+                'g_identifier': id_token
+            });
         }
         else{
             console.log(googleUser.getAuthResponse());

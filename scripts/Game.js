@@ -3,7 +3,7 @@ import { Board } from './Board';
 import { Sound } from './Sound';
 import { Socket } from './Socket';
 import { Logout } from './Logout';
-
+import {Chatroom} from './Chat';
 export class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -60,6 +60,9 @@ export class Game extends React.Component {
                 Inventory: <ul>{inventory}</ul>
                 <div className = "spotifyContainer">
                       <Sound/> 
+                </div>
+                <div className ="chatContainer">
+                <Chatroom/>
                 </div>
                 <div className = "logoutContainer">
                     <Logout/>

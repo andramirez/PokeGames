@@ -16,6 +16,13 @@ audio { width: 100px; }
     top:100;
 
 }
+#chatroom {
+      
+    position: absolute;
+    top:100;
+    right: 5;
+    
+}
 ul {
     padding:0;
     display: inline;

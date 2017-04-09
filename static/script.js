@@ -13435,6 +13435,8 @@ var _Socket = __webpack_require__(26);
 
 var _Logout = __webpack_require__(68);
 
+var _Chat = __webpack_require__(248);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13530,6 +13532,11 @@ var Game = exports.Game = function (_React$Component) {
                     'div',
                     { className: 'spotifyContainer' },
                     React.createElement(_Sound.Sound, null)
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'chatContainer' },
+                    React.createElement(_Chat.Chatroom, null)
                 ),
                 React.createElement(
                     'div',
@@ -31749,30 +31756,19 @@ var Chatroom = exports.Chatroom = function (_React$Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
 
-			var x = "/static/BOT.jpg";
-			var allMessages = this.props.messages.map(function (msg) {
-				return React.createElement(
-					'p',
-					{ id: 'msgtext' },
-					React.createElement('img', { id: 'photo', style: { width: 100, height: 100 }, src: msg.picture }),
-					' ',
-					_this2.handleName(msg.name),
-					': \xA0',
-					msg.msg,
-					_this2.handleLink(msg.link)
-				);
-			});
+			/*	var x = "/static/BOT.jpg";	
+                let allMessages = this.props.messages.map( (msg) =>
+            <p id="msgtext">
+            <img id="photo" style={{width : 100, height: 100}}src={msg.picture} /> {this.handleName(msg.name)}: &nbsp;
+            {msg.msg}
+            {this.handleLink(msg.link)}
+        	</p>	); */
 
 			return React.createElement(
 				'div',
 				{ className: 'chatroom' },
-				React.createElement(
-					'div',
-					{ id: 'messageArea', className: 'msgArea' },
-					allMessages
-				),
+				React.createElement('div', { id: 'messageArea', className: 'msgArea' }),
 				React.createElement('br', null),
 				React.createElement(
 					'div',

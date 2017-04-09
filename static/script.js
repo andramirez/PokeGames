@@ -8716,6 +8716,8 @@ var _Sound = __webpack_require__(69);
 
 var _Logout = __webpack_require__(68);
 
+var _Chat = __webpack_require__(248);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -11471,7 +11473,7 @@ module.exports = focusNode;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11497,7 +11499,7 @@ module.exports = focusNode;
  * @return {?DOMElement}
  */
 function getActiveElement(doc) /*?DOMElement*/{
-  doc = doc || global.document;
+  doc = doc || (typeof document !== 'undefined' ? document : undefined);
   if (typeof doc === 'undefined') {
     return null;
   }
@@ -11509,7 +11511,6 @@ function getActiveElement(doc) /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
 /* 96 */
@@ -31664,6 +31665,247 @@ module.exports = __webpack_amd_options__;
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.Chatroom = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(10);
+
+var React = _interopRequireWildcard(_react);
+
+var _Button = __webpack_require__(249);
+
+var _Socket = __webpack_require__(26);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//this class checks links to see if their urls. If they are then we break them up by general urls, image urls, and youtube urls and display them approaitely
+var Chatroom = exports.Chatroom = function (_React$Component) {
+	_inherits(Chatroom, _React$Component);
+
+	function Chatroom() {
+		_classCallCheck(this, Chatroom);
+
+		return _possibleConstructorReturn(this, (Chatroom.__proto__ || Object.getPrototypeOf(Chatroom)).apply(this, arguments));
+	}
+
+	_createClass(Chatroom, [{
+		key: 'handleLink',
+		value: function handleLink(link) {
+			console.log("checcking if url");
+
+			var c = link.replace(/\s/g, '');
+			link = c;
+			// empty string do nothing
+			if (link === '') return;
+
+			var len = link.length;
+			var res = link.slice(len - 3, len);
+
+			if (res === 'jpg' || res === 'png' || res === 'gif') return React.createElement('img', { src: link });else if (link.slice(len - 4, len) == 'jpeg') return React.createElement('img', { src: link });else if (link.slice(0, 12) === 'http://cache') return React.createElement('img', { src: link });else if (link.includes('getty')) {
+
+				return React.createElement('img', { src: link });
+			} else if (link.includes('youtube.com')) {
+
+				var res = link.split("=");
+
+				var ytlink = "https://www.youtube.com/embed/" + res[1];
+				return React.createElement('iframe', { width: '560', height: '315', src: ytlink });
+			} else return React.createElement(
+				'a',
+				{ href: link, target: '_blank' },
+				' ',
+				link,
+				' '
+			);
+		}
+	}, {
+		key: 'handleName',
+		value: function handleName(name) {
+
+			if (name == 'Bender_from_futurama') return React.createElement(
+				'b',
+				null,
+				name
+			);else return name;
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			var x = "/static/BOT.jpg";
+			var allMessages = this.props.messages.map(function (msg) {
+				return React.createElement(
+					'p',
+					{ id: 'msgtext' },
+					React.createElement('img', { id: 'photo', style: { width: 100, height: 100 }, src: msg.picture }),
+					' ',
+					_this2.handleName(msg.name),
+					': \xA0',
+					msg.msg,
+					_this2.handleLink(msg.link)
+				);
+			});
+
+			return React.createElement(
+				'div',
+				{ className: 'chatroom' },
+				React.createElement(
+					'div',
+					{ id: 'messageArea', className: 'msgArea' },
+					allMessages
+				),
+				React.createElement('br', null),
+				React.createElement(
+					'div',
+					{ className: 'sendMessageArea' },
+					React.createElement(_Button.Button, { name: 'Send Message' })
+				)
+			);
+		}
+	}]);
+
+	return Chatroom;
+}(React.Component);
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Button = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(10);
+
+var React = _interopRequireWildcard(_react);
+
+var _Socket = __webpack_require__(26);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Button = exports.Button = function (_React$Component) {
+    _inherits(Button, _React$Component);
+
+    function Button() {
+        _classCallCheck(this, Button);
+
+        return _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).apply(this, arguments));
+    }
+
+    _createClass(Button, [{
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            event.preventDefault();
+
+            var random = Math.floor(Math.random() * 100);
+            console.log('bruh i made a new number : ', random);
+            console.log('sahhhh dude : ');
+
+            // grabbing the contents of the textbox and storing them
+            var referenceToMessage = document.getElementById('msg');
+            var newMsg = referenceToMessage.value;
+            referenceToMessage.value = "";
+
+            //resetting the value of the textbox.    
+            document.getElementById('msg').value = " ";
+
+            //before sending the message, checking to see if the user is authenticated
+            FB.getLoginStatus(function (response) {
+                if (response.status == 'connected') {
+
+                    var header = document.getElementById("banner");
+                    header.innerHTML = "";
+                    console.log("facbook user is logged in");
+                    _Socket.Socket.emit('new msg', {
+                        'google_user_token': '',
+                        'facebook_user_token': response.authResponse.accessToken,
+                        'number': random,
+                        'msg': newMsg
+
+                    });
+                } else {
+
+                    var auth = gapi.auth2.getAuthInstance();
+                    var user = auth.currentUser.get();
+                    if (user.isSignedIn()) {
+                        console.log("google logged in");
+                        var header = document.getElementById("banner");
+                        header.innerHTML = "";
+
+                        _Socket.Socket.emit('new msg', {
+                            'google_user_token': user.getAuthResponse().id_token,
+                            'facebook_user_token': '',
+                            'number': random,
+                            'msg': newMsg
+                        });
+                    }
+                    //letting the user know to sign in when attempting to send a message without being authenticated
+                    else {
+                            var header = document.getElementById("banner");
+                            header.innerHTML = "You must be logged in to message!";
+                        }
+                }
+            });
+
+            console.log('Sent up the random number to server!');
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'form',
+                    { onSubmit: this.handleSubmit },
+                    React.createElement(
+                        'div',
+                        { className: 'enjoy-css' },
+                        React.createElement('input', { type: 'text', id: 'msg', name: 'lname' })
+                    ),
+                    React.createElement(
+                        'button',
+                        null,
+                        this.props.name
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Button;
+}(React.Component);
 
 /***/ })
 /******/ ]);

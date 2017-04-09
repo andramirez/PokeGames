@@ -61,7 +61,7 @@ li:last-child:after { content: ""; }
     border: 1px solid #ccc;
     background-color: #f3f3f3;
 }
-/*body {
+body {
     background-image: url("background.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -70,7 +70,7 @@ li:last-child:after { content: ""; }
     border: 2px solid black;
 }
 
-*/
+
 div.transbox {
   margin: 50px;
 }

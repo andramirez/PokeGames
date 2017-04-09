@@ -13677,12 +13677,12 @@ var Game = exports.Game = function (_React$Component) {
                     React.createElement(
                         'div',
                         { className: 'scroll' },
-                        messageData
-                    ),
-                    React.createElement('input', { name: 'text', size: '80', id: 'sendMessageBox', placeholder: 'enter message here' }),
-                    React.createElement(SubButton, null),
-                    ' ',
-                    React.createElement('br', null)
+                        messageData,
+                        React.createElement('input', { name: 'text', size: '80', id: 'sendMessageBox', placeholder: 'enter message here' }),
+                        React.createElement(SubButton, null),
+                        ' ',
+                        React.createElement('br', null)
+                    )
                 ),
                 React.createElement(
                     'div',

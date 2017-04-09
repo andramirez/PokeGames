@@ -108,6 +108,14 @@ div.transbox button {
     opacity: 0.8;
     text-align:center;
     padding:30px;
+    width: 500px;
+
+ position: absolute;
+ top: 60;
+ right: 0;
+}
+.scroll input{
+    color:black;
 }
 .scrollPhoto {
     background-color: #ffffff;
@@ -118,6 +126,7 @@ div.transbox button {
     opacity: 0.8;
     text-align:center;
     padding:30px;
+    
 }
 input:focus {
     border: 2px solid black;

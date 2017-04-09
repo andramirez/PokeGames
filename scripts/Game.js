@@ -87,10 +87,9 @@ document.getElementById("sendMessageBox").value = " ";
             <form onSubmit={this.handleSubmit}>
             <div className="scroll">
                 {messageData}
-                </div>
                 <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />
-                         </form>
+                         </div></form>
                 <div className = "logoutContainer">
                     <Logout/>
                 </div>

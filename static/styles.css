@@ -121,6 +121,14 @@ div.transbox button {
 }
 input:focus {
     border: 2px solid black;
-    background-color: #ffffff;
-    color:orange;
+    background-color:orange;
+    color:black;
 }  
+p {
+font-family:Verdana;
+font-size: 20px;
+font-style: normal;
+font-variant: normal;
+font-weight: normal;
+ color: black;
+}

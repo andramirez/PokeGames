@@ -61,18 +61,25 @@ li:last-child:after { content: ""; }
     border: 1px solid #ccc;
     background-color: #f3f3f3;
 }
-body {
+/*body {
     background-image: url("background.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    border: 2px solid black;
 }
-#loginContainer {
-      margin: 30px;
+*/
+div.transbox {
+  margin: 50px;
   background-color: #ffffff;
-  border: 1px solid black;
-  opacity: 0.3;
+  border: 5px solid black;
+  opacity: 0.6;
   filter: alpha(opacity=60); /* For IE8 and earlier */
-    
+}
+
+div.transbox button {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
 }

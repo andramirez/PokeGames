@@ -61,13 +61,20 @@ export class Game extends React.Component {
                 <div className = "spotifyContainer">
                       <Sound/> 
                 </div>
-                <div className ="chatContainer">
-                <Chatroom/>
-                </div>
+             <SubButton/>
                 <div className = "logoutContainer">
                     <Logout/>
                 </div>
             </div>
     )}
 }
-
+    
+export class SubButton extends React.Component {
+    render() {
+        return (
+            
+                <button>Send it!</button>
+           
+        );
+    }
+}

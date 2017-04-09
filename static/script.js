@@ -8882,7 +8882,7 @@ var Sound = exports.Sound = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'div',
-                null,
+                { id: 'spotifyframe' },
                 React.createElement('iframe', { src: 'https://embed.spotify.com/?uri=spotify%3Aalbum%3A3qW0KwoP8BdFzqZSDh1ScI', width: '300', height: '380', frameborder: '0', allowtransparency: 'true' })
             );
         }

@@ -25,7 +25,7 @@ export class Sound extends React.Component {
      //here is where we piece everything together and render the spotify button on the screen, search box and button. 
       render() {
         return (
-        <div>    
+        <div id  = "spotifyframe">    
        <iframe src="https://embed.spotify.com/?uri=spotify%3Aalbum%3A3qW0KwoP8BdFzqZSDh1ScI" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
             </div>
         );

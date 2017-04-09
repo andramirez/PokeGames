@@ -13,8 +13,8 @@ audio { width: 100px; }
     height:380px;
     width:300px;
     position: absolute;
-    top:0;
-    right:0;
+    top:100;
+
 }
 ul {
     padding:0;
@@ -81,6 +81,10 @@ div.transbox {
   border: 5px solid black;
   opacity: 0.6;
   filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+#spotifyContainer{
+ 
+    
 }
 
 div.transbox button {

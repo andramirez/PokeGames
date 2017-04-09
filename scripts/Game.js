@@ -71,7 +71,7 @@ document.getElementById("sendMessageBox").value = " ";
         
          let messageData = this.state.messageHolder.map(
             (n, index) => 
-                <p key={index}><b>{n.user}<img src= {n.picture}/></b></p>
+                <p id="msgtext" key={index}><img id="photo" style={{width : 50, height: 50}} src={n.picture}/><b><font size="2">{n.user}</font><br /></b>{n.message}</p>
             );
         return (
             <div>
@@ -85,8 +85,14 @@ document.getElementById("sendMessageBox").value = " ";
                       <Sound/> 
                 </div>
             <form onSubmit={this.handleSubmit}>
+            <div className="chatHeading">
+            <h3> In game Chat! </h3>
+            </div>
             <div className="scroll">
+            
                 {messageData}
+                </div>
+                <div className="scrollInput">
                 <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />
                          </div></form>

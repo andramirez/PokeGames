@@ -13637,13 +13637,19 @@ var Game = exports.Game = function (_React$Component) {
             var messageData = this.state.messageHolder.map(function (n, index) {
                 return React.createElement(
                     'p',
-                    { key: index },
+                    { id: 'msgtext', key: index },
+                    React.createElement('img', { id: 'photo', style: { width: 50, height: 50 }, src: n.picture }),
                     React.createElement(
                         'b',
                         null,
-                        n.user,
-                        React.createElement('img', { src: n.picture })
-                    )
+                        React.createElement(
+                            'font',
+                            { size: '2' },
+                            n.user
+                        ),
+                        React.createElement('br', null)
+                    ),
+                    n.message
                 );
             });
             return React.createElement(
@@ -13676,8 +13682,21 @@ var Game = exports.Game = function (_React$Component) {
                     { onSubmit: this.handleSubmit },
                     React.createElement(
                         'div',
+                        { className: 'chatHeading' },
+                        React.createElement(
+                            'h3',
+                            null,
+                            ' In game Chat! '
+                        )
+                    ),
+                    React.createElement(
+                        'div',
                         { className: 'scroll' },
-                        messageData,
+                        messageData
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'scrollInput' },
                         React.createElement('input', { name: 'text', size: '80', id: 'sendMessageBox', placeholder: 'enter message here' }),
                         React.createElement(SubButton, null),
                         ' ',

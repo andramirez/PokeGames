@@ -12,8 +12,9 @@ audio { width: 100px; }
 #Spotifyframe {
     height:380px;
     width:300px;
-    position: absolute;
-    top:100;
+  
+     position: absolute;
+ top: 60;
 
 }
 #chatroom {
@@ -77,10 +78,6 @@ body {
     border: 2px solid black;
 }
 
-
-div.transbox {
-  margin: 50px;
-}
 #loginContainer {
   margin: 30px;
 
@@ -99,27 +96,69 @@ div.transbox button {
   font-weight: bold;
   color: #000000;
 }
+#msgtext{
+  padding:15px;
+  width: 100%;
+  margin: 5px 10px 0;
+  background: #1ddced;
+  border-radius: 18px;
+  color: black;   
+  font-size: 18px;
+}
+
+#photo{
+  width: 60px;
+  height: 60px;
+  background: #ccc;
+  border-radius: 50%;
+
+}
 .scroll {
-    background-color: #ffffff;
+    	background-color:white;
+	height:100%;
+    border-radius: 58px 0px 49px 0px;
+    -moz-border-radius: 58px 0px 49px 0px;
+    -webkit-border-radius: 58px 0px 49px 0px;
+    border: 18px solid #000000;
+	opacity: 0.8;
+	overflow-y:scroll;
     height: 200px;
-    overflow: scroll;
     margin: 50px;
-    border: 2px solid black;
-    opacity: 0.8;
     text-align:center;
-    padding:30px;
+    padding:5px;
     width: 500px;
 
  position: absolute;
  top: 60;
  right: 0;
 }
-.scroll input{
-    color:black;
+.chatHeading{
+position: absolute;
+ top: 0;
+ right:250;
+    
+}
+.scrollInput{
+     position: absolute;
+ top: 350;
+ right: 0;
+    
+    
+}
+h3 {
+font-family: Verdana;
+font-size: 40px;
+font-weight: 50;
+line-height: 26.4px;
+text-align: center;
+color: black;
+-webkit-text-fill-color: white; /* keeping text visible on any background */
+-webkit-text-stroke-width: 3px;
+-webkit-text-stroke-color: black;
 }
 .scrollPhoto {
     background-color: #ffffff;
-    height: 100px;
+    height: 50px;
     overflow: scroll;
     margin: 50px;
     border: 2px solid black;

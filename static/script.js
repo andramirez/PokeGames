@@ -3845,6 +3845,28 @@ exports.decodePayloadAsBinary = function (data, binaryType, callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Socket = undefined;
+
+var _socket = __webpack_require__(218);
+
+var SocketIO = _interopRequireWildcard(_socket);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var Socket = exports.Socket = SocketIO.connect();
+
+//here were importing the client side sockeio. this is what enables our client server interaction.
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -4125,7 +4147,7 @@ module.exports = EventPluginHub;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4141,7 +4163,7 @@ module.exports = EventPluginHub;
 
 
 
-var EventPluginHub = __webpack_require__(26);
+var EventPluginHub = __webpack_require__(27);
 var EventPluginUtils = __webpack_require__(42);
 
 var accumulateInto = __webpack_require__(84);
@@ -4265,7 +4287,7 @@ module.exports = EventPropagators;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4318,7 +4340,7 @@ var ReactInstanceMap = {
 module.exports = ReactInstanceMap;
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4382,7 +4404,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 module.exports = SyntheticUIEvent;
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -4549,28 +4571,6 @@ Emitter.prototype.hasListeners = function(event){
   return !! this.listeners(event).length;
 };
 
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Socket = undefined;
-
-var _socket = __webpack_require__(218);
-
-var SocketIO = _interopRequireWildcard(_socket);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var Socket = exports.Socket = SocketIO.connect();
-
-//here were importing the client side sockeio. this is what enables our client server interaction.
 
 /***/ }),
 /* 32 */
@@ -5183,7 +5183,7 @@ module.exports = ReactBrowserEventEmitter;
 
 
 
-var SyntheticUIEvent = __webpack_require__(29);
+var SyntheticUIEvent = __webpack_require__(30);
 var ViewportMetrics = __webpack_require__(83);
 
 var getEventModifierState = __webpack_require__(50);
@@ -6662,7 +6662,7 @@ module.exports = ReactErrorUtils;
 var _prodInvariant = __webpack_require__(2);
 
 var ReactCurrentOwner = __webpack_require__(12);
-var ReactInstanceMap = __webpack_require__(28);
+var ReactInstanceMap = __webpack_require__(29);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactUpdates = __webpack_require__(11);
 
@@ -8041,7 +8041,7 @@ module.exports = emptyObject;
  */
 
 var parser = __webpack_require__(25);
-var Emitter = __webpack_require__(30);
+var Emitter = __webpack_require__(31);
 
 /**
  * Module exports.
@@ -8832,7 +8832,7 @@ var _react = __webpack_require__(10);
 
 var React = _interopRequireWildcard(_react);
 
-var _Socket = __webpack_require__(31);
+var _Socket = __webpack_require__(26);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -10100,7 +10100,7 @@ var ReactDOMComponentTree = __webpack_require__(4);
 var ReactDOMContainerInfo = __webpack_require__(135);
 var ReactDOMFeatureFlags = __webpack_require__(137);
 var ReactFeatureFlags = __webpack_require__(77);
-var ReactInstanceMap = __webpack_require__(28);
+var ReactInstanceMap = __webpack_require__(29);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactMarkupChecksum = __webpack_require__(157);
 var ReactReconciler = __webpack_require__(23);
@@ -11471,7 +11471,7 @@ module.exports = focusNode;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(global) {
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -11497,7 +11497,7 @@ module.exports = focusNode;
  * @return {?DOMElement}
  */
 function getActiveElement(doc) /*?DOMElement*/{
-  doc = doc || (typeof document !== 'undefined' ? document : undefined);
+  doc = doc || global.document;
   if (typeof doc === 'undefined') {
     return null;
   }
@@ -11509,6 +11509,7 @@ function getActiveElement(doc) /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
 /* 96 */
@@ -11808,7 +11809,7 @@ module.exports = ReactPropTypesSecret;
 
 var eio = __webpack_require__(223);
 var Socket = __webpack_require__(101);
-var Emitter = __webpack_require__(30);
+var Emitter = __webpack_require__(31);
 var parser = __webpack_require__(66);
 var on = __webpack_require__(100);
 var bind = __webpack_require__(102);
@@ -12403,7 +12404,7 @@ function on (obj, ev, fn) {
  */
 
 var parser = __webpack_require__(66);
-var Emitter = __webpack_require__(30);
+var Emitter = __webpack_require__(31);
 var toArray = __webpack_require__(245);
 var on = __webpack_require__(100);
 var bind = __webpack_require__(102);
@@ -13429,7 +13430,7 @@ var _Board = __webpack_require__(114);
 
 var _Sound = __webpack_require__(69);
 
-var _Socket = __webpack_require__(31);
+var _Socket = __webpack_require__(26);
 
 var _Logout = __webpack_require__(68);
 
@@ -13569,6 +13570,8 @@ var _reactCookie2 = _interopRequireDefault(_reactCookie);
 
 var _Content = __webpack_require__(67);
 
+var _Socket = __webpack_require__(26);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -13582,16 +13585,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Login = exports.Login = function (_React$Component) {
     _inherits(Login, _React$Component);
 
-    function Login(props) {
+    function Login(props, context) {
         _classCallCheck(this, Login);
 
-        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props, context));
     }
 
     _createClass(Login, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
             this.state = { userID: _reactCookie2.default.load('userID') };
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            gapi.signin2.render('g-signin2', {
+                'scope': 'https://www.googleapis.com/auth/plus.login',
+                'width': 200,
+                'height': 20,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': this.responseGoogle
+            });
         }
     }, {
         key: 'responseFacebook',
@@ -13601,18 +13616,56 @@ var Login = exports.Login = function (_React$Component) {
                 document.getElementById('login').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
                 _reactCookie2.default.save('userID', response.accessToken, { path: '/' });
+                var fb_username = response.name;
+                var fb_email = response.email;
+                var fb_pic_url = response.picture.data.url;
+                var fb_user_id = response.id;
+                console.log('info I want:', fb_username, fb_email, fb_pic_url, fb_user_id);
+                _Socket.Socket.emit('fb_user_details', {
+                    'user': fb_username,
+                    'pic': fb_pic_url,
+                    'email': fb_email,
+                    'source': 'facebook',
+                    'fb_id': fb_user_id
+                });
             } else {
                 console.log(response);
             }
         }
     }, {
+        key: 'onSignIn',
+        value: function onSignIn(googleUser) {
+            console.log('In Google Sign in');
+        }
+    }, {
         key: 'responseGoogle',
         value: function responseGoogle(googleUser) {
+            var auth = gapi.auth2.getAuthInstance();
+            var google_user = auth.currentUser.get();
+            var g_profile = googleUser.getBasicProfile();
+            console.log('Auth instance:', google_user);
+            console.log('GoogleUser:', googleUser);
+            console.log('GoogleProfile:', g_profile);
             var id_token = googleUser.getAuthResponse().id_token;
+            console.log('auth_response', googleUser.getAuthResponse());
+            console.log("id_token:", id_token);
+            var google_user_info_url = 'https://www.googleapis.com/plus/v1/people/me?access_token=' + googleUser.getAuthResponse().access_token;
+            var g_user_name = googleUser.w3['ig'];
+            var g_user_email = googleUser.w3['U3'];
+            var g_user_pic = googleUser.w3['Paa'];
+            console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
+            console.log('google_user_info_url:', google_user_info_url);
             if (id_token.length > 0) {
                 document.getElementById('login').style.display = 'none';
                 document.getElementById('content').style.display = 'block';
                 _reactCookie2.default.save('userID', id_token, { path: '/' });
+                _Socket.Socket.emit('g_user_details', {
+                    'user': g_user_name,
+                    'pic': g_user_pic,
+                    'email': g_user_email,
+                    'source': 'Google',
+                    'g_identifier': id_token
+                });
             } else {
                 console.log(googleUser.getAuthResponse());
             }
@@ -13630,6 +13683,7 @@ var Login = exports.Login = function (_React$Component) {
                         React.createElement(_reactFacebookLoginComponent.FacebookLogin, { socialId: '1566496380057860',
                             language: 'en_US',
                             scope: 'public_profile, email',
+                            fields: 'name,email,picture',
                             responseHandler: this.responseFacebook,
                             xfbml: true,
                             version: 'v2.8',
@@ -13639,11 +13693,7 @@ var Login = exports.Login = function (_React$Component) {
                     React.createElement(
                         'div',
                         { id: 'gl' },
-                        React.createElement(_reactGoogleLoginComponent.GoogleLogin, { socialId: '689477792087-6lkj6410qknjtkdn7cg9o0jdinqavd3q.apps.googleusercontent.com',
-                            'class': 'google-login',
-                            scope: 'profile',
-                            responseHandler: this.responseGoogle,
-                            buttonText: 'Login With Google' })
+                        React.createElement('div', { id: 'g-signin2', 'data-onSuccess': this.responseGoogle, 'data-theme': 'dark' })
                     )
                 );
             } else if (this.state.userID) {
@@ -13683,7 +13733,7 @@ var _react = __webpack_require__(10);
 
 var React = _interopRequireWildcard(_react);
 
-var _Socket = __webpack_require__(31);
+var _Socket = __webpack_require__(26);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -13862,7 +13912,7 @@ var _react = __webpack_require__(10);
 
 var React = _interopRequireWildcard(_react);
 
-var _Socket = __webpack_require__(31);
+var _Socket = __webpack_require__(26);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -14397,7 +14447,7 @@ module.exports = AutoFocusUtils;
 
 
 
-var EventPropagators = __webpack_require__(27);
+var EventPropagators = __webpack_require__(28);
 var ExecutionEnvironment = __webpack_require__(6);
 var FallbackCompositionState = __webpack_require__(128);
 var SyntheticCompositionEvent = __webpack_require__(171);
@@ -15002,8 +15052,8 @@ module.exports = CSSPropertyOperations;
 
 
 
-var EventPluginHub = __webpack_require__(26);
-var EventPropagators = __webpack_require__(27);
+var EventPluginHub = __webpack_require__(27);
+var EventPropagators = __webpack_require__(28);
 var ExecutionEnvironment = __webpack_require__(6);
 var ReactDOMComponentTree = __webpack_require__(4);
 var ReactUpdates = __webpack_require__(11);
@@ -15413,7 +15463,7 @@ module.exports = DefaultEventPluginOrder;
 
 
 
-var EventPropagators = __webpack_require__(27);
+var EventPropagators = __webpack_require__(28);
 var ReactDOMComponentTree = __webpack_require__(4);
 var SyntheticMouseEvent = __webpack_require__(34);
 
@@ -16037,7 +16087,7 @@ var React = __webpack_require__(24);
 var ReactComponentEnvironment = __webpack_require__(45);
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactErrorUtils = __webpack_require__(46);
-var ReactInstanceMap = __webpack_require__(28);
+var ReactInstanceMap = __webpack_require__(29);
 var ReactInstrumentation = __webpack_require__(9);
 var ReactNodeTypes = __webpack_require__(81);
 var ReactReconciler = __webpack_require__(23);
@@ -17066,7 +17116,7 @@ var DOMLazyTree = __webpack_require__(22);
 var DOMNamespaces = __webpack_require__(41);
 var DOMProperty = __webpack_require__(16);
 var DOMPropertyOperations = __webpack_require__(73);
-var EventPluginHub = __webpack_require__(26);
+var EventPluginHub = __webpack_require__(27);
 var EventPluginRegistry = __webpack_require__(32);
 var ReactBrowserEventEmitter = __webpack_require__(33);
 var ReactDOMComponentFlags = __webpack_require__(74);
@@ -20159,7 +20209,7 @@ module.exports = REACT_ELEMENT_TYPE;
 
 
 
-var EventPluginHub = __webpack_require__(26);
+var EventPluginHub = __webpack_require__(27);
 
 function runEventQueueInBatch(events) {
   EventPluginHub.enqueueEvents(events);
@@ -20397,7 +20447,7 @@ module.exports = ReactHostOperationHistoryHook;
 
 
 var DOMProperty = __webpack_require__(16);
-var EventPluginHub = __webpack_require__(26);
+var EventPluginHub = __webpack_require__(27);
 var EventPluginUtils = __webpack_require__(42);
 var ReactComponentEnvironment = __webpack_require__(45);
 var ReactEmptyComponent = __webpack_require__(76);
@@ -20536,7 +20586,7 @@ module.exports = ReactMarkupChecksum;
 var _prodInvariant = __webpack_require__(2);
 
 var ReactComponentEnvironment = __webpack_require__(45);
-var ReactInstanceMap = __webpack_require__(28);
+var ReactInstanceMap = __webpack_require__(29);
 var ReactInstrumentation = __webpack_require__(9);
 
 var ReactCurrentOwner = __webpack_require__(12);
@@ -21965,7 +22015,7 @@ module.exports = SVGDOMPropertyConfig;
 
 
 
-var EventPropagators = __webpack_require__(27);
+var EventPropagators = __webpack_require__(28);
 var ExecutionEnvironment = __webpack_require__(6);
 var ReactDOMComponentTree = __webpack_require__(4);
 var ReactInputSelection = __webpack_require__(79);
@@ -22165,7 +22215,7 @@ module.exports = SelectEventPlugin;
 var _prodInvariant = __webpack_require__(2);
 
 var EventListener = __webpack_require__(92);
-var EventPropagators = __webpack_require__(27);
+var EventPropagators = __webpack_require__(28);
 var ReactDOMComponentTree = __webpack_require__(4);
 var SyntheticAnimationEvent = __webpack_require__(169);
 var SyntheticClipboardEvent = __webpack_require__(170);
@@ -22176,7 +22226,7 @@ var SyntheticMouseEvent = __webpack_require__(34);
 var SyntheticDragEvent = __webpack_require__(172);
 var SyntheticTouchEvent = __webpack_require__(176);
 var SyntheticTransitionEvent = __webpack_require__(177);
-var SyntheticUIEvent = __webpack_require__(29);
+var SyntheticUIEvent = __webpack_require__(30);
 var SyntheticWheelEvent = __webpack_require__(178);
 
 var emptyFunction = __webpack_require__(15);
@@ -22564,7 +22614,7 @@ module.exports = SyntheticDragEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(29);
+var SyntheticUIEvent = __webpack_require__(30);
 
 /**
  * @interface FocusEvent
@@ -22647,7 +22697,7 @@ module.exports = SyntheticInputEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(29);
+var SyntheticUIEvent = __webpack_require__(30);
 
 var getEventCharCode = __webpack_require__(49);
 var getEventKey = __webpack_require__(184);
@@ -22736,7 +22786,7 @@ module.exports = SyntheticKeyboardEvent;
 
 
 
-var SyntheticUIEvent = __webpack_require__(29);
+var SyntheticUIEvent = __webpack_require__(30);
 
 var getEventModifierState = __webpack_require__(50);
 
@@ -23120,7 +23170,7 @@ var _prodInvariant = __webpack_require__(2);
 
 var ReactCurrentOwner = __webpack_require__(12);
 var ReactDOMComponentTree = __webpack_require__(4);
-var ReactInstanceMap = __webpack_require__(28);
+var ReactInstanceMap = __webpack_require__(29);
 
 var getHostComponentFromComposite = __webpack_require__(86);
 var invariant = __webpack_require__(1);
@@ -27559,7 +27609,7 @@ module.exports.parser = __webpack_require__(25);
  */
 
 var transports = __webpack_require__(103);
-var Emitter = __webpack_require__(30);
+var Emitter = __webpack_require__(31);
 var debug = __webpack_require__(17)('engine.io-client:socket');
 var index = __webpack_require__(107);
 var parser = __webpack_require__(25);
@@ -28543,7 +28593,7 @@ JSONPPolling.prototype.doWrite = function (data, fn) {
 
 var XMLHttpRequest = __webpack_require__(64);
 var Polling = __webpack_require__(104);
-var Emitter = __webpack_require__(30);
+var Emitter = __webpack_require__(31);
 var inherit = __webpack_require__(39);
 var debug = __webpack_require__(17)('engine.io-client:polling-xhr');
 

@@ -69,9 +69,14 @@ li:last-child:after { content: ""; }
     background-size: cover;
     border: 2px solid black;
 }
+
 */
 div.transbox {
   margin: 50px;
+}
+#loginContainer {
+  margin: 30px;
+
   background-color: #ffffff;
   border: 5px solid black;
   opacity: 0.6;

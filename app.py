@@ -2,6 +2,7 @@ import os, random
 import flask 
 import flask_socketio, requests
 import pokeAPI
+from flask import request
 import flask_sqlalchemy
 import random, os, flask, flask_socketio, flask_sqlalchemy,requests, time
 from random import randint, choice
@@ -17,8 +18,8 @@ socketio = flask_socketio.SocketIO(app)
 
 
 #user vars
-user_list = []
-
+usersList = []
+messageList = []
 #game vars
 maps = {}
 
@@ -37,6 +38,9 @@ def on_connect():
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
+
+
+
 
 @socketio.on('play')
 def play(data):
@@ -61,26 +65,29 @@ def make_choice(data):
 @socketio.on('fb_user_details')
 def fb_user_details(data):
     print data
-    user_list.append({
+    usersList.append({
         'name': data['user'],
         'picture': data['pic'],
         'email' : data['email'],
         'identifier' : data['fb_id'],
-        'source': 'facebook'
+        'source': 'facebook',
+        'socket' : request.sid
     })
-    print user_list
+    
 
 @socketio.on('g_user_details')
 def g_user_details(data):
-    print data
-    user_list.append({
+	print data
+	usersList.append({
         'name': data['user'],
         'picture': data['pic'],
         'email': data['email'],
         'identifier': data['g_identifier'],
-        'source': 'Google'
+        'source': 'Google',
+        'socket' : request.sid
     })
-    print user_list
+
+   
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
@@ -113,6 +120,57 @@ def createGrid(size):
 def generateKey():
     key = os.urandom(24).encode('hex')
     return key
+    
+    
+##Message Handlers
+
+@socketio.on("newMessage")
+def handle_message(messageData):
+    passedContents = messageData
+    if (getUsernameFromID(request.sid)):
+            if ("https" or "http" or ".com" in passedContents):
+                link = passedContents
+                messageList.append({
+                'message' : link,
+                'socket'  : request.sid,
+                'user'   : getUsernameFromID(request.sid),
+                'picture' : getUserPhotoFromID(request.sid),
+                })
+                socketio.emit('passedMessageList', messageList )
+                return
+            messageList.append({
+            'message' : passedContents,
+            'socket'  : request.sid,
+            'user'   : getUsernameFromID(request.sid),
+            'picture' : getUserPhotoFromID(request.sid),
+            })
+            socketio.emit('passedMessageList', messageList )
+            return
+            
+def getUsernameFromID(socket_id):
+    passedID = socket_id
+    if (socket_id != None):
+        for connections in usersList:
+            if (connections['socket'] == passedID):
+                user = connections['name']
+                return user
+    else:
+        return False
+        
+def getUserPhotoFromID(socket_id):
+    if (socket_id == ""):
+        return False
+    passedID = socket_id
+    for connections in usersList:
+        if (connections['socket'] == passedID):
+            photoLink = connections['picture']
+            print photoLink
+            return photoLink
+            
+
+
+
+    
 
 # Function that Javar wrote. Fetches data from the Spotify API and display it
 @socketio.on('Spotify')

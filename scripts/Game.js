@@ -10,7 +10,8 @@ export class Game extends React.Component {
         this.state = {
             'session': '',
             'team': [],
-            'inventory': []
+            'inventory': [],
+            'messageHolder' : []
         };
     }
 
@@ -40,8 +41,22 @@ export class Game extends React.Component {
                 'team': data['team']
             });
         });
-    }
+         Socket.on('passedMessageList', (data) => {
+        this.setState({
+        messageHolder : data,
+        });
+        console.log(data);
+    });
     
+    }
+      
+handleSubmit(event) {
+event.preventDefault();
+var message = document.getElementById("sendMessageBox").value;
+console.log(message);
+Socket.emit('newMessage', message);
+document.getElementById("sendMessageBox").value = " ";
+}
     render() {
         let team = this.state.team.map((n, index) => 
             <li key={index}>{n}</li>
@@ -50,6 +65,14 @@ export class Game extends React.Component {
             <li key={index}>{n}</li>
         );
         let session = this.state.session;
+        
+        
+        
+        
+         let messageData = this.state.messageHolder.map(
+            (n, index) => 
+                <p key={index}><b>{n.user}<img src= {n.picture}/></b></p>
+            );
         return (
             <div>
                 <Board/>
@@ -61,7 +84,13 @@ export class Game extends React.Component {
                 <div className = "spotifyContainer">
                       <Sound/> 
                 </div>
-             <SubButton/>
+            <form onSubmit={this.handleSubmit}>
+            <div className="scroll">
+                {messageData}
+                </div>
+                <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>
+                         <SubButton /> <br />
+                         </form>
                 <div className = "logoutContainer">
                     <Logout/>
                 </div>

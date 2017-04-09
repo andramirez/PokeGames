@@ -99,3 +99,28 @@ div.transbox button {
   font-weight: bold;
   color: #000000;
 }
+.scroll {
+    background-color: #ffffff;
+    height: 200px;
+    overflow: scroll;
+    margin: 50px;
+    border: 2px solid black;
+    opacity: 0.8;
+    text-align:center;
+    padding:30px;
+}
+.scrollPhoto {
+    background-color: #ffffff;
+    height: 100px;
+    overflow: scroll;
+    margin: 50px;
+    border: 2px solid black;
+    opacity: 0.8;
+    text-align:center;
+    padding:30px;
+}
+input:focus {
+    border: 2px solid black;
+    background-color: #ffffff;
+    color:orange;
+}  

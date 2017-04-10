@@ -3,14 +3,15 @@ import { Board } from './Board';
 import { Sound } from './Sound';
 import { Socket } from './Socket';
 import { Logout } from './Logout';
-
+import {Chatroom} from './Chat';
 export class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             'session': '',
             'team': [],
-            'inventory': []
+            'inventory': [],
+            'messageHolder' : []
         };
     }
 
@@ -40,8 +41,22 @@ export class Game extends React.Component {
                 'team': data['team']
             });
         });
-    }
+         Socket.on('passedMessageList', (data) => {
+        this.setState({
+        messageHolder : data,
+        });
+        console.log(data);
+    });
     
+    }
+      
+handleSubmit(event) {
+event.preventDefault();
+var message = document.getElementById("sendMessageBox").value;
+console.log(message);
+Socket.emit('newMessage', message);
+document.getElementById("sendMessageBox").value = " ";
+}
     render() {
         let team = this.state.team.map((n, index) => 
             <li key={index}>{n}</li>
@@ -50,6 +65,14 @@ export class Game extends React.Component {
             <li key={index}>{n}</li>
         );
         let session = this.state.session;
+        
+        
+        
+        
+         let messageData = this.state.messageHolder.map(
+            (n, index) => 
+                <p id="msgtext" key={index}><img id="photo" style={{width : 50, height: 50}} src={n.picture}/><b><font size="2">{n.user}</font><br /></b>{n.message}</p>
+            );
         return (
             <div>
                 <Board/>
@@ -61,10 +84,31 @@ export class Game extends React.Component {
                 <div className = "spotifyContainer">
                       <Sound/> 
                 </div>
+            <form onSubmit={this.handleSubmit}>
+            <div className="chatHeading">
+            <h3> In game Chat! </h3>
+            </div>
+            <div className="scroll">
+            
+                {messageData}
+                </div>
+                <div className="scrollInput">
+                <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>
+                         <SubButton /> <br />
+                         </div></form>
                 <div className = "logoutContainer">
                     <Logout/>
                 </div>
             </div>
     )}
 }
-
+    
+export class SubButton extends React.Component {
+    render() {
+        return (
+            
+                <button>Send it!</button>
+           
+        );
+    }
+}

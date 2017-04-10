@@ -20,6 +20,7 @@ socketio = flask_socketio.SocketIO(app)
 #user vars
 usersList = []
 messageList = []
+
 #game vars
 maps = {}
 
@@ -39,9 +40,6 @@ def on_connect():
 def on_disconnect():
     print 'Someone disconnected!'
 
-
-
-
 @socketio.on('play')
 def play(data):
     key = data['key']
@@ -60,7 +58,7 @@ def make_choice(data):
     elif data['choice'] == 'item':
         get_item(data['terrain'])
     elif data['choice'] == 'rest':
-        get_rest(data['terrain'])
+        get_rest()
 
 @socketio.on('fb_user_details')
 def fb_user_details(data):
@@ -74,7 +72,6 @@ def fb_user_details(data):
         'socket' : request.sid
     })
     
-
 @socketio.on('g_user_details')
 def g_user_details(data):
 	print data
@@ -87,11 +84,12 @@ def g_user_details(data):
         'socket' : request.sid
     })
 
-   
-
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
-    team.append(pokemon)
+    if len(team) < 6:
+        team.append(pokemon)
+    # else:
+        #ask player to select a team member to replace or select no
     socketio.emit('new poke', {'team': team})
     
 def get_item(terrain):
@@ -99,7 +97,7 @@ def get_item(terrain):
     inventory.append(item)
     socketio.emit('new item', {'inventory': inventory})
 
-def get_rest(terrain):
+def get_rest():
     socketio.emit('rest')
 
 def createGrid(size):
@@ -167,11 +165,6 @@ def getUserPhotoFromID(socket_id):
             print photoLink
             return photoLink
             
-
-
-
-    
-
 # Function that Javar wrote. Fetches data from the Spotify API and display it
 @socketio.on('Spotify')
 def spotify(data):

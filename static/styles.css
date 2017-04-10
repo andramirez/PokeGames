@@ -12,16 +12,13 @@ audio { width: 100px; }
 #Spotifyframe {
     height:380px;
     width:300px;
-     position: absolute;
- top: 60;
-
+    position: absolute;
+    top: 60;
 }
 #chatroom {
-      
     position: absolute;
     top:100;
     right: 5;
-    
 }
 ul {
     padding:0;

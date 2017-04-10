@@ -2,8 +2,4 @@ requests
 Flask
 flask_socketio
 pykemon
-<<<<<<< HEAD
-Flask-SQLAlchemy
-=======
 flask_sqlalchemy
->>>>>>> 1e7188f31b3b7545a173a77658a2698d987c128d

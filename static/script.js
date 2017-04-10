@@ -13636,7 +13636,7 @@ var Login = exports.Login = function (_React$Component) {
                     null,
                     React.createElement(
                         'div',
-                        { id: 'fbl' },
+                        { id: 'login_buttons' },
                         React.createElement(_reactFacebookLoginComponent.FacebookLogin, { socialId: '1566496380057860',
                             language: 'en_US',
                             scope: 'public_profile, email',
@@ -13645,11 +13645,7 @@ var Login = exports.Login = function (_React$Component) {
                             xfbml: true,
                             version: 'v2.8',
                             'class': 'facebook-login',
-                            buttonText: 'Login With Facebook' })
-                    ),
-                    React.createElement(
-                        'div',
-                        { id: 'gl' },
+                            buttonText: 'Login With Facebook' }),
                         React.createElement('div', { id: 'g-signin2', 'data-onSuccess': this.responseGoogle, 'data-theme': 'dark' })
                     )
                 );
@@ -14055,22 +14051,11 @@ var Form = exports.Form = function (_React$Component) {
                     React.createElement(
                         'legend',
                         null,
-                        'Create Game'
-                    ),
-                    React.createElement('input', { type: 'text', name: 'key', onChange: this.handleChange }),
-                    React.createElement(
-                        'button',
-                        null,
-                        'Play'
-                    )
-                ),
-                React.createElement(
-                    'fieldset',
-                    null,
-                    React.createElement(
-                        'h1',
-                        null,
-                        'PokeGames Set-Up'
+                        React.createElement(
+                            'h1',
+                            null,
+                            'PokeGames Set-Up'
+                        )
                     ),
                     React.createElement(
                         'div',
@@ -14111,6 +14096,14 @@ var Form = exports.Form = function (_React$Component) {
                             'Starting Song:',
                             React.createElement('input', { type: 'textarea', name: 'song' })
                         )
+                    ),
+                    'Existing Game Key: ',
+                    React.createElement('input', { type: 'text', name: 'key', onChange: this.handleChange }),
+                    React.createElement('br', null),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Play'
                     )
                 )
             );

@@ -1,5 +1,16 @@
+body {
+    background-image: url("image/background.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border: 2px solid black;
+    color: white;
+}
 h1 { text-align: center; }
-fieldset { display: inline; }
+fieldset { 
+    display: inline; 
+}
 table {
     margin: auto;
     border-collapse: collapse;
@@ -12,16 +23,13 @@ audio { width: 100px; }
 #Spotifyframe {
     height:380px;
     width:300px;
-     position: absolute;
- top: 60;
-
+    position: absolute;
+    top: 60;
 }
 #chatroom {
-      
     position: absolute;
     top:100;
     right: 5;
-    
 }
 ul {
     padding:0;
@@ -58,24 +66,22 @@ li:last-child:after { content: ""; }
     background-color: #4CAF50;
 }
 #login {
-  position:fixed;
-    top: 50%;
-    left: 50%;
-    width:8em;
-    height:3em;
-    margin-top: -9em; /*set to a negative number 1/2 of your height*/
-    margin-left: -15em; /*set to a negative number 1/2 of your width*/
-    border: 1px solid #ccc;
-    background-color: #f3f3f3;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin: auto;
+    height:600px;
+    width:600px;
+    background-image: url("image/logo1.png");
+    background-repeat: no-repeat;
+    background-size:cover;
 }
-body {
-    background-image: url("background.png");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    border: 2px solid black;
+#login_buttons {
+    transform: translateY(+200%);
+    text-align: center;
+    margin:auto;
+    width: 200px;
 }
+
 
 #loginContainer {
   margin: 30px;

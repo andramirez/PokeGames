@@ -32,12 +32,7 @@ export class Form extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <fieldset>
-                    <legend>Create Game</legend>
-                    <input type="text" name="key" onChange={this.handleChange}></input>
-                    <button>Play</button>
-                </fieldset>
-                <fieldset>
-                    <h1>PokeGames Set-Up</h1>
+                    <legend><h1>PokeGames Set-Up</h1></legend>
                     <div class="settings-Container">
                         <div class="settings-GameName">
                             <legend>Game Name:</legend> 
@@ -60,6 +55,10 @@ export class Form extends React.Component {
                             <input type="textarea" name="song"/>
                         </div>
                     </div>
+                    
+                    Existing Game Key: <input type="text" name="key" onChange={this.handleChange}></input>
+                    <br/>
+                    <button>Play</button>
                 </fieldset>
             </form>
         );

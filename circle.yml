@@ -1,5 +1,3 @@
-test:
-    override:
 deployment:
     production:
         branch: master

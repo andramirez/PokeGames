@@ -27,6 +27,11 @@ maps = {}
 #player vars
 team = []
 inventory = []
+global userID
+userID = 'hello.jpg'
+global position 
+position = '99,99'
+# userID and position not working
 
 @app.route('/')
 def index():
@@ -53,6 +58,8 @@ def play(data):
 
 @socketio.on('make choice')
 def make_choice(data):
+    position = data['coords']
+    socketio.emit('draw pos', {'image': getUserPhotoFromID(userID), 'pos': position})
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':
@@ -71,6 +78,7 @@ def fb_user_details(data):
         'source': 'facebook',
         'socket' : request.sid
     })
+    userID = request.sid
     
 @socketio.on('g_user_details')
 def g_user_details(data):

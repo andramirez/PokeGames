@@ -13563,10 +13563,19 @@ var Game = exports.Game = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, props));
 
         _this.state = {
+<<<<<<< HEAD
+            image: '',
+            pos: '99,99',
+            choice: '',
+            terrain: '',
+            coords: '99,99',
+            board: [[]]
+=======
             'session': '',
             'team': [],
             'inventory': [],
             'messageHolder': []
+>>>>>>> 4ddf0048bf16ac268d0017f3a89861d44d521377
         };
         return _this;
     }
@@ -13584,6 +13593,18 @@ var Game = exports.Game = function (_React$Component) {
             _Socket.Socket.on('rest', function (data) {
                 alert("REST");
             });
+<<<<<<< HEAD
+
+            document.getElementById('action').style.visibility = "hidden";
+            document.getElementById('select').value = ""; //Reset Action to Null
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            _Socket.Socket.on('game start', function (data) {
+=======
             _Socket.Socket.on('new item', function (data) {
                 if (Math.floor(Math.random() * 10) > 7) {
                     //percent chance of finding an item
@@ -13595,6 +13616,7 @@ var Game = exports.Game = function (_React$Component) {
             });
             _Socket.Socket.on('new poke', function (data) {
                 alert("NEW POKEMON");
+>>>>>>> 4ddf0048bf16ac268d0017f3a89861d44d521377
                 _this2.setState({
                     'team': data['team']
                 });
@@ -13604,6 +13626,12 @@ var Game = exports.Game = function (_React$Component) {
                     messageHolder: data
                 });
                 console.log(data);
+            });
+            _Socket.Socket.on('draw pos', function (data) {
+                _this2.setState({
+                    pos: data['pos'],
+                    image: data['image']
+                });
             });
         }
     }, {
@@ -13618,6 +13646,23 @@ var Game = exports.Game = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+<<<<<<< HEAD
+            var _this3 = this;
+
+            var pos = this.state.pos;
+            var img = this.state.image;
+            var board = this.state.board.map(function (n, i) {
+                return React.createElement(
+                    'tr',
+                    null,
+                    n.map(function (m, j) {
+                        return React.createElement(
+                            'td',
+                            null,
+                            i + ',' + j == pos ? React.createElement('img', { src: img }) : React.createElement('img', { src: '/static/image/' + m + '.jpg', alt: m, id: i + ',' + j, onClick: _this3.handleClick })
+                        );
+                    })
+=======
             var team = this.state.team.map(function (n, index) {
                 return React.createElement(
                     'li',
@@ -13630,6 +13675,7 @@ var Game = exports.Game = function (_React$Component) {
                     'li',
                     { key: index },
                     n
+>>>>>>> 4ddf0048bf16ac268d0017f3a89861d44d521377
                 );
             });
             var session = this.state.session;

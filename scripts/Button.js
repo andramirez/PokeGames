@@ -71,7 +71,7 @@ else {
             <div>
             <form onSubmit={this.handleSubmit}>
             <div className ="enjoy-css">
-				 <input type = "text" id = "msg" name="lname"/>
+				 <input type = "text" id = "msg" name="lname" value="hi"/>
 			</div>
                 <button>{this.props.name}</button>
             </form>

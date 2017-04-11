@@ -19,6 +19,23 @@ def getStatsByName(name):
             move = pokemon.moves.keys()[key]
     
     return pokemon.name, pokemon.hp, pokemon.types.keys(), moveSet
+    
+    
+##returns type(s)
+def getTypeByName(name):
+    pokemon = pykemon.get(pokemon=name.lower())
+    moveSet = []
+    count = 0
+    move=""
+    while count < 2:
+        if move not in moveSet and move != "":
+            moveSet.append(move)
+            count+=1
+        else:
+            key = random.randint(0,(len(pokemon.moves.keys())-1)) 
+            move = pokemon.moves.keys()[key]
+    
+    return pokemon.types.keys()
 
 #returns pokemon name(1) by type
 def getNameByType(pType):

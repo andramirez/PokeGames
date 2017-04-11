@@ -1,4 +1,7 @@
-deployment:
+test:
+    override:
+        - python tests.py
+eployment:
     production:
         branch: master
         heroku:

@@ -92,6 +92,8 @@ document.getElementById("sendMessageBox").value = " ";
             
                 {messageData}
                 </div>
+                <div>
+                </div>
                 <div className="scrollInput">
                 <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />

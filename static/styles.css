@@ -10,6 +10,7 @@ body {
 h1 { text-align: center; }
 fieldset { 
     display: inline; 
+    background-color: rgba(190, 190, 190, .75);
 }
 table {
     margin: auto;

@@ -14131,9 +14131,11 @@ var Board = exports.Board = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 
         _this.state = {
+            image: '',
+            pos: '99,99',
             choice: '',
             terrain: '',
-            coords: '',
+            coords: '99,99',
             board: [[]]
         };
         _this.handleClick = _this.handleClick.bind(_this);
@@ -14166,6 +14168,7 @@ var Board = exports.Board = function (_React$Component) {
                 'terrain': this.state.terrain,
                 'coords': this.state.coords
             });
+
             document.getElementById('action').style.visibility = "hidden";
             document.getElementById('select').value = ""; //Reset Action to Null
         }
@@ -14179,12 +14182,20 @@ var Board = exports.Board = function (_React$Component) {
                     board: data['board']
                 });
             });
+            _Socket.Socket.on('draw pos', function (data) {
+                _this2.setState({
+                    pos: data['pos'],
+                    image: data['image']
+                });
+            });
         }
     }, {
         key: 'render',
         value: function render() {
             var _this3 = this;
 
+            var pos = this.state.pos;
+            var img = this.state.image;
             var board = this.state.board.map(function (n, i) {
                 return React.createElement(
                     'tr',
@@ -14193,7 +14204,7 @@ var Board = exports.Board = function (_React$Component) {
                         return React.createElement(
                             'td',
                             null,
-                            React.createElement('img', { src: '/static/image/' + m + '.jpg', alt: m, id: i + ',' + j, onClick: _this3.handleClick })
+                            i + ',' + j == pos ? React.createElement('img', { src: img }) : React.createElement('img', { src: '/static/image/' + m + '.jpg', alt: m, id: i + ',' + j, onClick: _this3.handleClick })
                         );
                     })
                 );

@@ -167,7 +167,7 @@ def terrainToType(terrain):
                     1:"ice",
                     2:"dragon"
                 },
-        'city': {
+        'factory': {
                     1:"steel",
                     2:"electric"
                 },

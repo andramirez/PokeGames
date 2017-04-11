@@ -5,9 +5,11 @@ export class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            image: '',
+            pos: '99,99',
             choice: '',
             terrain: '',
-            coords: '',
+            coords: '99,99',
             board: [[]]
         };
         this.handleClick = this.handleClick.bind(this);
@@ -26,12 +28,13 @@ export class Board extends React.Component {
         this.setState({choice: event.target.value});
     }
     handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault();
         Socket.emit('make choice', {
             'choice': this.state.choice,
             'terrain': this.state.terrain,
             'coords': this.state.coords
         });
+       
         document.getElementById('action').style.visibility = "hidden";
         document.getElementById('select').value = ""; //Reset Action to Null
     }
@@ -41,11 +44,19 @@ export class Board extends React.Component {
                 board: data['board']
             });
         });
+        Socket.on('draw pos', (data) => {
+            this.setState({
+                pos: data['pos'],
+                image: data['image']
+            });
+        });
     }
     
     render() {
+        let pos = this.state.pos;
+        let img = this.state.image;
         let board = this.state.board.map((n,i) => 
-            <tr>{n.map((m, j) => <td><img src={'/static/image/'+m+'.jpg'} alt={m} id={i+','+j} onClick={this.handleClick}></img></td>)}</tr>
+            <tr>{n.map((m, j) => <td>{i+','+j == pos ? <img src={img}></img> : <img src={'/static/image/'+m+'.jpg'} alt={m} id={i+','+j} onClick={this.handleClick}></img>}</td>)}</tr>
         );
             
         return (

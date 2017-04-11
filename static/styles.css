@@ -45,6 +45,9 @@ li:last-child:after { content: ""; }
     display: none; 
     text-align: center;
 }
+.player {
+    z-index: 2;
+}
 .container {
     margin: auto;
     width: 100%;

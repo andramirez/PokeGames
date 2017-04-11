@@ -3,7 +3,6 @@ import sys
 sys.path.append("/home/ubuntu/workspace/PokeGames/")
 import app
 import pokeAPI
-from rfc3987 import parse
 
 class FunctionResponseTest(unittest.TestCase):
     #1.Tests chat bot where input is not a command

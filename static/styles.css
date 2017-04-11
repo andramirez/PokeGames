@@ -40,7 +40,7 @@ ul {
 li { display: inline; }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
-#content { display: none; }
+#content { display: block; }
 #action { visibility: hidden; }
 #game { 
     display: none; 
@@ -78,6 +78,7 @@ li:last-child:after { content: ""; }
     background-image: url("image/logo1.png");
     background-repeat: no-repeat;
     background-size:cover;
+    display:none;
 }
 #login_buttons {
     transform: translateY(+200%);

@@ -12,10 +12,8 @@ import botcommands
 import urlparse
 import json
 
-
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
-
 
 #user vars
 usersList = []

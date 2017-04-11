@@ -14129,10 +14129,6 @@ var Button = exports.Button = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
 
-            var random = Math.floor(Math.random() * 100);
-            console.log('bruh i made a new number : ', random);
-            console.log('sahhhh dude : ');
-
             // grabbing the contents of the textbox and storing them
             var referenceToMessage = document.getElementById('msg');
             var newMsg = referenceToMessage.value;
@@ -14178,8 +14174,6 @@ var Button = exports.Button = function (_React$Component) {
                         }
                 }
             });
-
-            console.log('Sent up the random number to server!');
         }
     }, {
         key: 'render',

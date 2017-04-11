@@ -4,16 +4,9 @@ import { Socket } from './Socket';
 
 export class Button extends React.Component {
         
-        
-        
-        
         handleSubmit(event) {
         event.preventDefault();
 
-        let random = Math.floor(Math.random() * 100);
-        console.log('bruh i made a new number : ', random);
-        console.log('sahhhh dude : ');
-        
         // grabbing the contents of the textbox and storing them
         var referenceToMessage = document.getElementById('msg');
 		var newMsg = referenceToMessage.value;
@@ -69,7 +62,6 @@ else {
 
 });
 
-            console.log('Sent up the random number to server!');
         		    
 }
 

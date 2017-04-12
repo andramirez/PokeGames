@@ -31917,13 +31917,13 @@ var _Content = __webpack_require__(106);
 
 var _Game = __webpack_require__(107);
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _Login = __webpack_require__(247);
 
-// import { Login } from './Login';
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 ReactDOM.render(React.createElement(_Content.Content, null), document.getElementById('content'));
 ReactDOM.render(React.createElement(_Game.Game, null), document.getElementById('game'));
-// ReactDOM.render(<Login />, document.getElementById('login'));
+ReactDOM.render(React.createElement(_Login.Login, null), document.getElementById('login'));
 
 /***/ }),
 /* 247 */
@@ -32032,14 +32032,19 @@ var Login = exports.Login = function (_React$Component) {
             var g_user_pic = googleUser.w3['Paa'];
             console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
             console.log('google_user_info_url:', google_user_info_url);
-
-            _Socket.Socket.emit('g_user_details', {
-                'user': g_user_name,
-                'pic': g_user_pic,
-                'email': g_user_email,
-                'source': 'Google',
-                'g_identifier': id_token
-            });
+            if (id_token.length > 0) {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                _Socket.Socket.emit('g_user_details', {
+                    'user': g_user_name,
+                    'pic': g_user_pic,
+                    'email': g_user_email,
+                    'source': 'Google',
+                    'g_identifier': id_token
+                });
+            } else {
+                console.log(googleUser);
+            }
         }
     }, {
         key: 'render',

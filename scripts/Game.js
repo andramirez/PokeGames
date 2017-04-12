@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Board } from './Board';
 import { Sound } from './Sound';
@@ -92,8 +91,6 @@ document.getElementById("sendMessageBox").value = " ";
             <div className="scroll">
             
                 {messageData}
-                </div>
-                <div>
                 </div>
                 <div className="scrollInput">
                 <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>

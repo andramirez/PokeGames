@@ -120,7 +120,6 @@ def createGrid(size):
             select = random.randrange(len(terrain))
             grid[row].append(terrain[select])
     return grid
-
 def generateKey():
     key = os.urandom(24).encode('hex')
     return key

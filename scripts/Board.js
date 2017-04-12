@@ -77,12 +77,14 @@ export class Board extends React.Component {
                         {board}
                     </tbody>
                 </table>
-                <div className="container">
-                  <div className="stats health">Health</div>
-                </div>
                 
-                <div className="container">
-                  <div className="stats energy">Energy</div>
+                <div className="energyContainer">
+                  <h2 className="stats energyTitle">Energy:</h2>
+                  <div className="stats energy1">20%</div>
+                  <div className="stats energy2">40%</div>
+                  <div className="stats energy3">60%</div>
+                  <div className="stats energy4">80%</div>
+                  <div className="stats energy5">100%</div>
                 </div>
             </div>
         );

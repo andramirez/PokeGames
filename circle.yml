@@ -1,0 +1,8 @@
+test:
+    override:
+        - python tests.py
+eployment:
+    production:
+        branch: master
+        heroku:
+            appname: still-beyond-48460

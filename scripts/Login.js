@@ -11,9 +11,7 @@ export class Login extends React.Component{
         super(props, context);
     }
     
-    componentWillMount(){
-        this.state = {userID : cookie.load('userID')};
-    }
+ 
     
     componentDidMount(){
         gapi.signin2.render('g-signin2', {
@@ -31,7 +29,6 @@ export class Login extends React.Component{
         if(response.accessToken.length > 0){
            document.getElementById('login').style.display = 'none';
            document.getElementById('content').style.display = 'block';
-           cookie.save('userID', response.accessToken, { path: '/' });
            var fb_username = response.name;
            var fb_email = response.email;
            var fb_pic_url = response.picture.data.url;
@@ -71,10 +68,7 @@ export class Login extends React.Component{
         var g_user_pic = googleUser.w3['Paa'];
         console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
         console.log('google_user_info_url:', google_user_info_url);
-        if(id_token.length>0){
-            document.getElementById('login').style.display='none';
-            document.getElementById('content').style.display = 'block';
-            cookie.save('userID', id_token, { path: '/' });
+           
             Socket.emit('g_user_details', {
                 'user': g_user_name,
                 'pic': g_user_pic,
@@ -82,15 +76,10 @@ export class Login extends React.Component{
                 'source': 'Google',
                 'g_identifier': id_token
             });
-        }
-        else{
-            console.log(googleUser.getAuthResponse());
-        }
     }
 
     
     render(){
-        if(!this.state.userID){
         return (
             <div>
                 <div id="login_buttons">
@@ -107,9 +96,6 @@ export class Login extends React.Component{
                 </div>
             </div>
         );
-        }
-        else if(this.state.userID){
-            return <Content />;
-        }
+        
     }
 }

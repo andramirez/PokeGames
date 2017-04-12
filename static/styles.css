@@ -40,10 +40,8 @@ ul {
 li { display: inline; }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
-#content { display: block; }
 #action { visibility: hidden; }
-#game { 
-    display: none; 
+#game, #content { 
     text-align: center;
 }
 .player {

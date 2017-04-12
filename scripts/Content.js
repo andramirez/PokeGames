@@ -10,7 +10,6 @@ export class Content extends React.Component {
         return (
         <div>
             <Form/>
-            <Logout/>
         </div>
     )}
 }

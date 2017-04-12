@@ -68,7 +68,9 @@ export class Login extends React.Component{
         var g_user_pic = googleUser.w3['Paa'];
         console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
         console.log('google_user_info_url:', google_user_info_url);
-           
+    if(id_token.length > 0){
+           document.getElementById('login').style.display = 'none';
+           document.getElementById('content').style.display = 'block';
             Socket.emit('g_user_details', {
                 'user': g_user_name,
                 'pic': g_user_pic,
@@ -76,6 +78,10 @@ export class Login extends React.Component{
                 'source': 'Google',
                 'g_identifier': id_token
             });
+    }
+     else{
+            console.log(googleUser);
+        }
     }
 
     

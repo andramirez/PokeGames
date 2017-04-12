@@ -36,7 +36,7 @@ def on_connect():
     playerID = request.sid
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location}
-    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}) #draw at starting location
+    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location'], 'name': playerData[playerID]['name']}) #draw at starting location
     print playerID+' connected!'
 
 @socketio.on('disconnect')
@@ -57,6 +57,10 @@ def play(data):
 @socketio.on('make choice')
 def make_choice(data):
     global playerID
+    pre = data['coords'].split(',')
+    post = playerData[playerID]['location'].split(',')
+    distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
+    print distance
     #calculate distance between data['coords'] and location
     playerData[playerID]['location'] = data['coords']
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})

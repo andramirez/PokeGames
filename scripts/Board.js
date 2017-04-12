@@ -5,11 +5,12 @@ export class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
             image: '',
             pos: '99,99',
+            coords: '99,99',
             choice: '',
             terrain: '',
-            coords: '99,99',
             board: [[]]
         };
         this.handleClick = this.handleClick.bind(this);
@@ -47,7 +48,8 @@ export class Board extends React.Component {
         Socket.on('draw pos', (data) => {
             this.setState({
                 pos: data['pos'],
-                image: data['image']
+                image: data['image'],
+                name: data['name']
             });
         });
     }
@@ -55,6 +57,7 @@ export class Board extends React.Component {
     render() {
         let pos = this.state.pos;
         let img = this.state.image;
+        let name = this.state.name;
         let board = this.state.board.map((n,i) => 
             <tr>{n.map((m, j) => <td>{i+','+j == pos ? <img src={img}></img> : <img src={'/static/image/'+m+'.jpg'} alt={m} id={i+','+j} onClick={this.handleClick}></img>}</td>)}</tr>
         );
@@ -78,13 +81,15 @@ export class Board extends React.Component {
                     </tbody>
                 </table>
                 
-                <div className="energyContainer">
-                  <h2 className="stats title">Energy:</h2>
-                  <div className="stats energy1">20%</div>
-                  <div className="stats energy2">40%</div>
-                  <div className="stats energy3">60%</div>
-                  <div className="stats energy4">80%</div>
-                  <div className="stats energy5">100%</div>
+                <div className="statBar">
+                <img src={img}></img>{name}<h2 className="stats title">Energy:</h2>
+                    <div className="energyContainer">
+                      <div className="stats energy1"> </div>
+                      <div className="stats energy2"> </div>
+                      <div className="stats energy3"> </div>
+                      <div className="stats energy4"> </div>
+                      <div className="stats energy5"> </div>
+                    </div>
                 </div>
             </div>
         );

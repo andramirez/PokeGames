@@ -79,7 +79,7 @@ export class Board extends React.Component {
                 </table>
                 
                 <div className="energyContainer">
-                  <h2 className="stats energyTitle">Energy:</h2>
+                  <h2 className="stats title">Energy:</h2>
                   <div className="stats energy1">20%</div>
                   <div className="stats energy2">40%</div>
                   <div className="stats energy3">60%</div>

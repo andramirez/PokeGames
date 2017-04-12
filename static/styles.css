@@ -65,9 +65,8 @@ li:last-child:after { content: ""; }
     margin:auto;
     margin-top:30px;
     margin-bottom:30px;
-    margin-left:300px;
 }
-.energyTitle{
+.title{
     margin:auto;
     font-size: 30px;
     font-family: Verdana;

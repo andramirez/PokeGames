@@ -8743,7 +8743,6 @@ var Content = exports.Content = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(_Login.Login, null),
                 React.createElement(_Form.Form, null)
             );
         }

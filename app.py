@@ -69,28 +69,31 @@ def make_choice(data):
 
 @socketio.on('fb_user_details')
 def fb_user_details(data):
-    print data
+    json = data
     usersList.append({
-        'name': data['user'],
-        'picture': data['pic'],
-        'email' : data['email'],
-        'identifier' : data['fb_id'],
+        'name': json['user'],
+        'picture': json['pic'],
+        'email' : json['email'],
+        'identifier' : json['fb_id'],
         'source': 'facebook',
         'socket' : request.sid
     })
-    userID = request.sid
-    
+
 @socketio.on('g_user_details')
 def g_user_details(data):
-	print data
-	usersList.append({
-        'name': data['user'],
-        'picture': data['pic'],
-        'email': data['email'],
-        'identifier': data['g_identifier'],
+    json = data
+    usersList.append({
+        'name': json['user'],
+        'picture': json['pic'],
+        'email': json['email'],
+        'identifier': json['g_identifier'],
         'source': 'Google',
         'socket' : request.sid
     })
+   
+ 
+    
+
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
@@ -147,6 +150,7 @@ def handle_message(messageData):
                 'picture' : getUserPhotoFromID(request.sid),
                 })
                 socketio.emit('passedMessageList', messageList )
+                print messageList
                 return
             messageList.append({
             'message' : passedContents,

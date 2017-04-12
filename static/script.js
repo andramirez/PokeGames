@@ -13079,6 +13079,8 @@ var _Logout = __webpack_require__(63);
 
 var _Chat = __webpack_require__(62);
 
+var _Login = __webpack_require__(247);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13102,6 +13104,7 @@ var Content = exports.Content = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
+                React.createElement(_Login.Login, null),
                 React.createElement(_Form.Form, null)
             );
         }
@@ -31921,6 +31924,522 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 ReactDOM.render(React.createElement(_Content.Content, null), document.getElementById('content'));
 ReactDOM.render(React.createElement(_Game.Game, null), document.getElementById('game'));
 // ReactDOM.render(<Login />, document.getElementById('login'));
+
+/***/ }),
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Login = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(13);
+
+var React = _interopRequireWildcard(_react);
+
+var _reactFacebookLoginComponent = __webpack_require__(248);
+
+var _reactGoogleLoginComponent = __webpack_require__(249);
+
+var _reactCookie = __webpack_require__(128);
+
+var _reactCookie2 = _interopRequireDefault(_reactCookie);
+
+var _Content = __webpack_require__(106);
+
+var _Socket = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Login = exports.Login = function (_React$Component) {
+    _inherits(Login, _React$Component);
+
+    function Login(props, context) {
+        _classCallCheck(this, Login);
+
+        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props, context));
+    }
+
+    _createClass(Login, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            gapi.signin2.render('g-signin2', {
+                'scope': 'https://www.googleapis.com/auth/plus.login',
+                'width': 200,
+                'height': 20,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': this.responseGoogle
+            });
+        }
+    }, {
+        key: 'responseFacebook',
+        value: function responseFacebook(response) {
+            console.log(response);
+            if (response.accessToken.length > 0) {
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                var fb_username = response.name;
+                var fb_email = response.email;
+                var fb_pic_url = response.picture.data.url;
+                var fb_user_id = response.id;
+                console.log('info I want:', fb_username, fb_email, fb_pic_url, fb_user_id);
+                _Socket.Socket.emit('fb_user_details', {
+                    'user': fb_username,
+                    'pic': fb_pic_url,
+                    'email': fb_email,
+                    'source': 'facebook',
+                    'fb_id': fb_user_id
+                });
+            } else {
+                console.log(response);
+            }
+        }
+    }, {
+        key: 'onSignIn',
+        value: function onSignIn(googleUser) {
+            console.log('In Google Sign in');
+        }
+    }, {
+        key: 'responseGoogle',
+        value: function responseGoogle(googleUser) {
+            var auth = gapi.auth2.getAuthInstance();
+            var google_user = auth.currentUser.get();
+            var g_profile = googleUser.getBasicProfile();
+            console.log('Auth instance:', google_user);
+            console.log('GoogleUser:', googleUser);
+            console.log('GoogleProfile:', g_profile);
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log('auth_response', googleUser.getAuthResponse());
+            console.log("id_token:", id_token);
+            var google_user_info_url = 'https://www.googleapis.com/plus/v1/people/me?access_token=' + googleUser.getAuthResponse().access_token;
+            var g_user_name = googleUser.w3['ig'];
+            var g_user_email = googleUser.w3['U3'];
+            var g_user_pic = googleUser.w3['Paa'];
+            console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
+            console.log('google_user_info_url:', google_user_info_url);
+
+            _Socket.Socket.emit('g_user_details', {
+                'user': g_user_name,
+                'pic': g_user_pic,
+                'email': g_user_email,
+                'source': 'Google',
+                'g_identifier': id_token
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'div',
+                    { id: 'login_buttons' },
+                    React.createElement(_reactFacebookLoginComponent.FacebookLogin, { socialId: '1566496380057860',
+                        language: 'en_US',
+                        scope: 'public_profile, email',
+                        fields: 'name,email,picture',
+                        responseHandler: this.responseFacebook,
+                        xfbml: true,
+                        version: 'v2.8',
+                        'class': 'facebook-login',
+                        buttonText: 'Login With Facebook' }),
+                    React.createElement('div', { id: 'g-signin2', 'data-onSuccess': this.responseGoogle, 'data-theme': 'dark' })
+                )
+            );
+        }
+    }]);
+
+    return Login;
+}(React.Component);
+
+/***/ }),
+/* 248 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory(__webpack_require__(13));
+	else if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object')
+		exports["react-facebook-login-component"] = factory(require("react"));
+	else
+		root["react-facebook-login-component"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.FacebookLogin = undefined;
+
+	var _FacebookLogin = __webpack_require__(1);
+
+	var _FacebookLogin2 = _interopRequireDefault(_FacebookLogin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.FacebookLogin = _FacebookLogin2.default;
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var FacebookLogin = function (_React$Component) {
+	  _inherits(FacebookLogin, _React$Component);
+
+	  function FacebookLogin(props) {
+	    _classCallCheck(this, FacebookLogin);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FacebookLogin).call(this, props));
+	  }
+
+	  _createClass(FacebookLogin, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      (function (d, s, id) {
+	        var element = d.getElementsByTagName(s)[0];
+	        var fjs = element;
+	        var js = element;
+	        if (d.getElementById(id)) {
+	          return;
+	        }
+	        js = d.createElement(s);js.id = id;
+	        js.src = '//connect.facebook.net/en_US/sdk.js';
+	        fjs.parentNode.insertBefore(js, fjs);
+	      })(document, 'script', 'facebook-jssdk');
+
+	      window.fbAsyncInit = function () {
+	        FB.init({
+	          appId: _this2.props.socialId,
+	          xfbml: _this2.props.xfbml,
+	          cookie: _this2.props.cookie,
+	          version: _this2.props.version
+	        });
+	      };
+	    }
+	  }, {
+	    key: 'responseApi',
+	    value: function responseApi(authResponse) {
+	      var _this3 = this;
+
+	      FB.api('/me?fields=' + this.props.fields, function (me) {
+	        me.accessToken = authResponse.accessToken;
+	        _this3.props.responseHandler(me);
+	      });
+	    }
+	  }, {
+	    key: 'checkLoginState',
+	    value: function checkLoginState(response) {
+	      if (response.authResponse) {
+	        this.responseApi(response.authResponse);
+	      } else {
+	        if (this.props.responseHandler) {
+	          this.props.responseHandler({ status: response.status });
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'clickHandler',
+	    value: function clickHandler() {
+	      FB.login(this.checkLoginState.bind(this), { scope: this.props.scope });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { className: this.props.class, onClick: this.clickHandler.bind(this) },
+	          this.props.buttonText
+	        )
+	      );
+	    }
+	  }]);
+
+	  return FacebookLogin;
+	}(_react2.default.Component);
+
+	exports.default = FacebookLogin;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ }
+/******/ ])
+});
+;
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory(__webpack_require__(13));
+	else if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object')
+		exports["react-google-login-component"] = factory(require("react"));
+	else
+		root["react-google-login-component"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.GoogleLogin = undefined;
+
+	var _GoogleLogin = __webpack_require__(1);
+
+	var _GoogleLogin2 = _interopRequireDefault(_GoogleLogin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.GoogleLogin = _GoogleLogin2.default;
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GoogleLogin = function (_React$Component) {
+	  _inherits(GoogleLogin, _React$Component);
+
+	  function GoogleLogin(props) {
+	    _classCallCheck(this, GoogleLogin);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GoogleLogin).call(this, props));
+	  }
+
+	  _createClass(GoogleLogin, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      (function (d, s, id) {
+	        var js,
+	            gs = d.getElementsByTagName(s)[0];
+	        if (d.getElementById(id)) {
+	          return;
+	        }
+	        js = d.createElement(s);js.id = id;
+	        js.src = 'https://apis.google.com/js/platform.js';
+	        gs.parentNode.insertBefore(js, gs);
+	      })(document, 'script', 'google-platform');
+	    }
+	  }, {
+	    key: 'checkLoginState',
+	    value: function checkLoginState(response) {
+	      if (auth2.isSignedIn.get()) {
+	        var profile = auth2.currentUser.get().getBasicProfile();
+	      } else {
+	        if (this.props.responseHandler) {
+	          this.props.responseHandler({ status: response.status });
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'clickHandler',
+	    value: function clickHandler() {
+	      var socialId = this.props.socialId,
+	          responseHandler = this.props.responseHandler,
+	          scope = this.props.scope;
+
+	      gapi.load('auth2', function () {
+	        var auth2 = gapi.auth2.init({
+	          client_id: socialId,
+	          fetch_basic_profile: false,
+	          scope: scope
+	        });
+	        auth2.signIn().then(function (googleUser) {
+	          responseHandler(googleUser);
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { className: this.props.class, onClick: this.clickHandler.bind(this) },
+	          this.props.buttonText
+	        )
+	      );
+	    }
+	  }]);
+
+	  return GoogleLogin;
+	}(_react2.default.Component);
+
+	exports.default = GoogleLogin;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ }
+/******/ ])
+});
+;
 
 /***/ })
 /******/ ]);

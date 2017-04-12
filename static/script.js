@@ -8907,7 +8907,6 @@ var Logout = exports.Logout = function (_React$Component) {
     _createClass(Logout, [{
         key: 'handleClick',
         value: function handleClick() {
-            _reactCookie2.default.remove('userID', { path: '/' });
             document.getElementById('content').style.display = 'none';
             document.getElementById('game').style.display = 'none';
             document.getElementById('login').style.display = 'block';
@@ -13567,7 +13566,8 @@ var Game = exports.Game = function (_React$Component) {
             'session': '',
             'team': [],
             'inventory': [],
-            'messageHolder': []
+            'messageHolder': [],
+            'isGameLaunched': false
         };
         return _this;
     }
@@ -13579,7 +13579,8 @@ var Game = exports.Game = function (_React$Component) {
 
             _Socket.Socket.on('game start', function (data) {
                 _this2.setState({
-                    'session': data['session']
+                    'session': data['session'],
+                    'isGameLaunched': true
                 });
             });
             _Socket.Socket.on('rest', function (data) {
@@ -13696,7 +13697,7 @@ var Game = exports.Game = function (_React$Component) {
                     React.createElement(
                         'div',
                         { className: 'scrollInput' },
-                        React.createElement('input', { name: 'text', size: '80', id: 'sendMessageBox', placeholder: 'enter message here' }),
+                        React.createElement('input', { name: 'text', size: '40', id: 'sendMessageBox', placeholder: 'enter message here' }),
                         React.createElement(SubButton, null),
                         ' ',
                         React.createElement('br', null)
@@ -14256,6 +14257,8 @@ var Login = exports.Login = function (_React$Component) {
     }, {
         key: 'responseGoogle',
         value: function responseGoogle(googleUser) {
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
             var auth = gapi.auth2.getAuthInstance();
             var google_user = auth.currentUser.get();
             var g_profile = googleUser.getBasicProfile();
@@ -14272,8 +14275,6 @@ var Login = exports.Login = function (_React$Component) {
             console.log('googleName:', g_user_name, 'googleEmail:', g_user_email, 'gPic:', g_user_pic);
             console.log('google_user_info_url:', google_user_info_url);
             if (id_token.length > 0) {
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
                 _Socket.Socket.emit('g_user_details', {
                     'user': g_user_name,
                     'pic': g_user_pic,

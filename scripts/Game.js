@@ -11,14 +11,16 @@ export class Game extends React.Component {
             'session': '',
             'team': [],
             'inventory': [],
-            'messageHolder' : []
+            'messageHolder' : [],
+            'isGameLaunched': false
         };
     }
 
     componentDidMount() {
         Socket.on('game start', (data) => { 
             this.setState({
-                'session': data['session']
+                'session': data['session'],
+                'isGameLaunched': true
             });
         });
         Socket.on('rest', (data) => { 
@@ -44,10 +46,10 @@ export class Game extends React.Component {
         messageHolder : data,
         });
         console.log(data);
-    });
+    })
     
     }
-      
+
 handleSubmit(event) {
 event.preventDefault();
 var message = document.getElementById("sendMessageBox").value;
@@ -91,7 +93,7 @@ document.getElementById("sendMessageBox").value = " ";
                 {messageData}
                 </div>
                 <div className="scrollInput">
-                <input name="text" size="80" id="sendMessageBox" placeholder="enter message here"/>
+                <input name="text" size="40" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />
                          </div></form>
                 <div className = "logoutContainer">

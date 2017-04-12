@@ -149,6 +149,15 @@ div.transbox button {
   color: black;   
   font-size: 18px;
 }
+#content{
+    display:none;
+}
+#game{
+    display:none;
+}
+#login{
+    display:block;
+}
 
 #photo{
   width: 60px;
@@ -158,7 +167,7 @@ div.transbox button {
 
 }
 .scroll {
-    	background-color:white;
+    background-color:white;
 	height:100%;
     border-radius: 58px 0px 49px 0px;
     -moz-border-radius: 58px 0px 49px 0px;
@@ -174,12 +183,12 @@ div.transbox button {
 
  position: absolute;
  top: 60;
- right: 0;
+ right: -50;
 }
 .chatHeading{
  position: absolute;
  top: 0;
- right:250;
+ right:20;
 }
 .scrollInput{
 position: absolute;

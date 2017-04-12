@@ -8,11 +8,10 @@ export class Logout extends React.Component{
     }
     
     handleClick(){
-        cookie.remove('userID', {path: '/'});
         document.getElementById('content').style.display='none';
         document.getElementById('game').style.display='none';
         document.getElementById('login').style.display='block';
-    }l
+    }
     render(){
         return(
             <button onClick={this.handleClick}>Logout of Game</button>     

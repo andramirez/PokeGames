@@ -13518,20 +13518,36 @@ var Board = exports.Board = function (_React$Component) {
                 ),
                 React.createElement(
                     'div',
-                    { className: 'container' },
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'h2',
+                        { className: 'stats energyTitle' },
+                        'Energy:'
+                    ),
                     React.createElement(
                         'div',
-                        { className: 'stats health' },
-                        'Health'
-                    )
-                ),
-                React.createElement(
-                    'div',
-                    { className: 'container' },
+                        { className: 'stats energy1' },
+                        '20%'
+                    ),
                     React.createElement(
                         'div',
-                        { className: 'stats energy' },
-                        'Energy'
+                        { className: 'stats energy2' },
+                        '40%'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        '60%'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy4' },
+                        '80%'
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy5' },
+                        '100%'
                     )
                 )
             );

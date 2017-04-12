@@ -12,7 +12,6 @@ export class Content extends React.Component {
         <div>
         <Login/>
             <Form/>
-            <Logout/>
         </div>
     )}
 }

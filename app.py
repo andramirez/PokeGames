@@ -23,13 +23,8 @@ messageList = []
 maps = {}
 
 #player vars
-team = []
-inventory = []
-global userID
-userID = 'hello.jpg'
-global position 
-position = '99,99'
-# userID and position not working
+playerID = 0
+playerData = {}
 
 @app.route('/')
 def index():
@@ -37,11 +32,16 @@ def index():
 
 @socketio.on('connect')
 def on_connect():
-    print 'Someone connected!'
+    global playerID
+    playerID = request.sid
+    location = str(randint(0,5))+','+str(randint(0,5))
+    playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location}
+    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}) #draw at starting location
+    print playerID+' connected!'
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print 'Someone disconnected!'
+    print playerID+' disconnected!'
 
 @socketio.on('play')
 def play(data):
@@ -56,8 +56,10 @@ def play(data):
 
 @socketio.on('make choice')
 def make_choice(data):
-    position = data['coords']
-    socketio.emit('draw pos', {'image': getUserPhotoFromID(userID), 'pos': position})
+    global playerID
+    #calculate distance between data['coords'] and location
+    playerData[playerID]['location'] = data['coords']
+    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':
@@ -95,19 +97,24 @@ def g_user_details(data):
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
-    if len(team) < 6:
-        team.append(pokemon)
+    if len(playerData[playerID]['team']) < 6:
+        playerData[playerID]['team'].append(pokemon)
     # else:
         #ask player to select a team member to replace or select no
-    socketio.emit('new poke', {'team': team})
+    socketio.emit('new poke', {'team': playerData[playerID]['team']})
     
 def get_item(terrain):
-    item = 'Potion' #change later
-    inventory.append(item)
-    socketio.emit('new item', {'inventory': inventory})
+    item = 'potion' #change later
+    if len(playerData[playerID]['inventory']) < 3:
+        playerData[playerID]['inventory'].append(item)
+    socketio.emit('new item', {'inventory': playerData[playerID]['inventory']})
 
 def get_rest():
-    socketio.emit('rest')
+    if playerData[playerID]['health'] < 100:
+        playerData[playerID]['health'] += 20
+        if (playerData[playerID]['health'] > 100):
+            playerData[playerID]['health'] = 100
+    socketio.emit('rest', {'health': playerData[playerID]['health']})
 
 def createGrid(size):
     # Define Lists

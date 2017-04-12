@@ -22,11 +22,10 @@ export class Game extends React.Component {
             });
         });
         Socket.on('rest', (data) => { 
-            alert("REST");
+            alert("Health: "+data['health']);
         });
         Socket.on('new item', (data) => { 
             if (Math.floor(Math.random() * 10) > 7){ //percent chance of finding an item
-                alert("NEW ITEM");
                 this.setState({
                     'inventory': data['inventory']
                 });
@@ -36,7 +35,6 @@ export class Game extends React.Component {
             
         });
         Socket.on('new poke', (data) => { 
-            alert("NEW POKEMON");
             this.setState({
                 'team': data['team']
             });

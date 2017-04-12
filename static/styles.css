@@ -40,10 +40,8 @@ ul {
 li { display: inline; }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
-#content { display: block; }
 #action { visibility: hidden; }
-#game { 
-    display: none; 
+#game, #content { 
     text-align: center;
 }
 .player {
@@ -60,14 +58,51 @@ li:last-child:after { content: ""; }
     line-height: 20px;
     color: white;
 }
-.health {
-    width: 100%; 
-    background-color: #f44336;
-    transition: all 1s;
+.energyContainer{
+    display:flex;
+    height:40px;
+    width:800px;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:30px;
+    margin-left:300px;
 }
-.energy {
-    width: 100%; 
-    background-color: #4CAF50;
+.energyTitle{
+    margin:auto;
+    font-size: 30px;
+    font-family: Verdana;
+    font-weight: 50;
+    line-height: 26.4px;
+    text-align: center;
+    color: black;
+    -webkit-text-fill-color: white; /* keeping text visible on any background */
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+}
+.energy1 {
+    width: 20%; 
+    background-color: #f44336;
+    flex:1;
+}
+.energy2 {
+    width: 20%; 
+    background-color: #f4a436;
+    flex:1;
+}
+.energy3 {
+    width: 20%; 
+    background-color: #f4e736;
+    flex:1;
+}
+.energy4 {
+    width: 20%; 
+    background-color: #68f436;
+    flex:1;
+}
+.energy5 {
+    width: 20%; 
+    background-color: #36b1f4;
+    flex:1;
 }
 #login {
     position: absolute;

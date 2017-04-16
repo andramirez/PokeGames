@@ -1,13 +1,12 @@
 import os, random
 import flask 
-import flask_socketio, requests
+import requests
 import pokeAPI
 from flask import request
 import flask_sqlalchemy
 import random, os, flask, flask_socketio, flask_sqlalchemy,requests, time
 from random import randint, choice
-from flask_socketio import send
-
+from flask_socketio import send, join_room, leave_room
 import botcommands
 import urlparse
 import json
@@ -35,16 +34,18 @@ def on_connect():
     global playerID
     playerID = request.sid
     location = str(randint(0,5))+','+str(randint(0,5))
-    playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location}
+    playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}) #draw at starting location
     print playerID+' connected!'
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print playerID+' disconnected!'
+    print playerData[playerID]['name'] + 'disconnected!'
 
 @socketio.on('play')
 def play(data):
+    global playerID
+    global playerData
     key = data['key']
     if key in maps: #if grid for login already exists, load 
         grid = maps[key]
@@ -52,10 +53,13 @@ def play(data):
         key = generateKey()
         grid = createGrid('medium') 
         maps[key] = grid
+    playerData[playerID]['currentSession'] = key
     socketio.emit('game start', {'session': key, 'board': grid})
+    on_join({'username':playerData[playerID]['name'],'room':playerData[playerID]['currentSession']})
 
 @socketio.on('make choice')
 def make_choice(data):
+    print playerData[playerID]['name'] + ' clicked something.'
     global playerID
     #calculate distance between data['coords'] and location
     playerData[playerID]['location'] = data['coords']
@@ -90,10 +94,19 @@ def g_user_details(data):
         'source': 'Google',
         'socket' : request.sid
     })
-   
- 
+    playerData[playerID]['image']=json['pic']
+    playerData[playerID]['name']=json['user']
     
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    socketio.emit('join', {'message': username + ' has entered the room: ' + room})
+    join_room(room)
 
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain

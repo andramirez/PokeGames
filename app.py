@@ -40,7 +40,7 @@ def on_connect():
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print playerData[playerID]['name'] + 'disconnected!'
+    print playerData[playerID]['name'] + ' disconnected!'
 
 @socketio.on('play')
 def play(data):
@@ -59,8 +59,9 @@ def play(data):
 
 @socketio.on('make choice')
 def make_choice(data):
-    print playerData[playerID]['name'] + ' clicked something.'
     global playerID
+    global playerData
+    print playerData[playerID]['name'] + ' clicked something.'
     #calculate distance between data['coords'] and location
     playerData[playerID]['location'] = data['coords']
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
@@ -100,9 +101,9 @@ def g_user_details(data):
 def on_join(data):
     username = data['username']
     room = data['room']
-    socketio.emit('join', {'message': username + ' has entered the room: ' + room})
     join_room(room)
-
+    socketio.emit('join', {'message': username + ' has entered the room: ' + room}, room=room)
+    
 def on_leave(data):
     username = data['username']
     room = data['room']

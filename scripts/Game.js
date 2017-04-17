@@ -4,6 +4,7 @@ import { Sound } from './Sound';
 import { Socket } from './Socket';
 import { Logout } from './Logout';
 import {Chatroom} from './Chat';
+
 export class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -17,6 +18,9 @@ export class Game extends React.Component {
     }
 
     componentDidMount() {
+        Socket.on('join', (data) => { 
+            alert(data['message']);
+        });
         Socket.on('game start', (data) => { 
             this.setState({
                 'session': data['session'],

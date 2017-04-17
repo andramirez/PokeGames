@@ -13686,7 +13686,7 @@ var Game = exports.Game = function (_React$Component) {
                         React.createElement(
                             'h3',
                             null,
-                            ' In game Chat! '
+                            ' Poke Chat '
                         )
                     ),
                     React.createElement(

@@ -86,7 +86,7 @@ document.getElementById("sendMessageBox").value = " ";
                 </div>
             <form onSubmit={this.handleSubmit}>
             <div className="chatHeading">
-            <h3> In game Chat! </h3>
+            <h3> Poke Chat </h3>
             </div>
             <div className="scroll">
             

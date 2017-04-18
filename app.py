@@ -137,6 +137,7 @@ def get_rest():
     socketio.emit('rest', {'health': playerData[playerID]['health']}, room=playerID)
 
 def createGrid(size):
+    
     # Define Lists
     units = {'small': 5, 'medium': 6, 'large': 7}
     terrain = ['lake','desert','plains','forest','mountain','mountain-peak','factory','swamp','unknown']

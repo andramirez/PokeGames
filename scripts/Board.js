@@ -80,17 +80,7 @@ export class Board extends React.Component {
                         {board}
                     </tbody>
                 </table>
-                
-                <div className="statBar">
-                <img src={img}></img>{name}<h2 className="stats title">Energy:</h2>
-                    <div className="energyContainer">
-                      <div className="stats energy1"> </div>
-                      <div className="stats energy2"> </div>
-                      <div className="stats energy3"> </div>
-                      <div className="stats energy4"> </div>
-                      <div className="stats energy5"> </div>
-                    </div>
-                </div>
+                <img src={img}></img>{name}
             </div>
         );
     }

@@ -1,13 +1,12 @@
 import os, random
 import flask 
-import flask_socketio, requests
+import requests
 import pokeAPI
 from flask import request
 import flask_sqlalchemy
 import random, os, flask, flask_socketio, flask_sqlalchemy,requests, time
 from random import randint, choice
-from flask_socketio import send
-
+from flask_socketio import send, join_room, leave_room
 import botcommands
 import urlparse
 import json
@@ -35,16 +34,23 @@ def on_connect():
     global playerID
     playerID = request.sid
     location = str(randint(0,5))+','+str(randint(0,5))
+<<<<<<< HEAD
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location}
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location'], 'name': playerData[playerID]['name']}) #draw at starting location
+=======
+    playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
+    on_join({'username':playerData[playerID]['name'],'room':playerID})
+>>>>>>> ea4347d2a2d9e0c50021658b41497c0fbaecbbba
     print playerID+' connected!'
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print playerID+' disconnected!'
+    print playerData[playerID]['name'] + ' disconnected!'
 
 @socketio.on('play')
 def play(data):
+    global playerID
+    global playerData
     key = data['key']
     if key in maps: #if grid for login already exists, load 
         grid = maps[key]
@@ -52,18 +58,27 @@ def play(data):
         key = generateKey()
         grid = createGrid('medium') 
         maps[key] = grid
-    socketio.emit('game start', {'session': key, 'board': grid})
+    playerData[playerID]['currentSession'] = key
+    on_join({'username':playerData[playerID]['name'],'room':playerData[playerID]['currentSession']})
+    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID) #draw at starting location
+    socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[playerID]['currentSession'])
+    
 
 @socketio.on('make choice')
 def make_choice(data):
     global playerID
+<<<<<<< HEAD
     pre = data['coords'].split(',')
     post = playerData[playerID]['location'].split(',')
     distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
     print distance
+=======
+    global playerData
+    print playerData[playerID]['name'] + ' clicked something.'
+>>>>>>> ea4347d2a2d9e0c50021658b41497c0fbaecbbba
     #calculate distance between data['coords'] and location
     playerData[playerID]['location'] = data['coords']
-    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
+    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':
@@ -94,10 +109,23 @@ def g_user_details(data):
         'source': 'Google',
         'socket' : request.sid
     })
-   
- 
+    playerData[playerID]['image']=json['pic']
+    playerData[playerID]['name']=json['user']
     
-
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    if (username == 'Placeholder Name'):
+        socketio.emit('join', {'message': 'Welcome to PokeGames, your ID is ' + room}, room=room)
+    else:
+        socketio.emit('join', {'message': username + ' has entered the room: ' + room}, room=room)
+    
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    socketio.emit('join', {'message': username + ' has left the room: ' + room}, room=room) #wont show to self, because you left room
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
@@ -105,20 +133,20 @@ def get_pokemon(terrain):
         playerData[playerID]['team'].append(pokemon)
     # else:
         #ask player to select a team member to replace or select no
-    socketio.emit('new poke', {'team': playerData[playerID]['team']})
+    socketio.emit('new poke', {'team': playerData[playerID]['team']}, room=playerID)
     
 def get_item(terrain):
     item = 'potion' #change later
     if len(playerData[playerID]['inventory']) < 3:
         playerData[playerID]['inventory'].append(item)
-    socketio.emit('new item', {'inventory': playerData[playerID]['inventory']})
+    socketio.emit('new item', {'inventory': playerData[playerID]['inventory']}, room=playerID)
 
 def get_rest():
     if playerData[playerID]['health'] < 100:
         playerData[playerID]['health'] += 20
         if (playerData[playerID]['health'] > 100):
             playerData[playerID]['health'] = 100
-    socketio.emit('rest', {'health': playerData[playerID]['health']})
+    socketio.emit('rest', {'health': playerData[playerID]['health']}, room=playerID)
 
 def createGrid(size):
     # Define Lists
@@ -153,7 +181,7 @@ def handle_message(messageData):
                 'user'   : getUsernameFromID(request.sid),
                 'picture' : getUserPhotoFromID(request.sid),
                 })
-                socketio.emit('passedMessageList', messageList )
+                socketio.emit('passedMessageList', messageList, room=playerData[playerID]['currentSession'])
                 print messageList
                 return
             messageList.append({
@@ -162,7 +190,7 @@ def handle_message(messageData):
             'user'   : getUsernameFromID(request.sid),
             'picture' : getUserPhotoFromID(request.sid),
             })
-            socketio.emit('passedMessageList', messageList )
+            socketio.emit('passedMessageList', messageList, room=playerData[playerID]['currentSession'])
             return
             
 def getUsernameFromID(socket_id):

@@ -71,7 +71,7 @@ document.getElementById("sendMessageBox").value = " ";
         );
         let health = this.state.health;
         let session = this.state.session;
-                let energy = 
+        let energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
@@ -80,7 +80,7 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy5"> </div>
               <h2>{health}</h2>
              </div>;
-        if(this.state.health == 80)
+        if(this.state.health < 80)
         {
             energy = 
             <div className="energyContainer">
@@ -92,7 +92,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        if(this.state.health == 60){
+        if(this.state.health < 60){
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
@@ -103,7 +103,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        if(this.state.health == 40){
+        if(this.state.health < 40){
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
@@ -114,7 +114,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        if(this.state.health == 20){
+        if(this.state.health < 20){
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>

@@ -13528,7 +13528,7 @@ var Game = exports.Game = function (_React$Component) {
                     health
                 )
             );
-            if (this.state.health == 80) {
+            if (this.state.health < 80) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
@@ -13564,7 +13564,7 @@ var Game = exports.Game = function (_React$Component) {
                     )
                 );
             }
-            if (this.state.health == 60) {
+            if (this.state.health < 60) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
@@ -13600,7 +13600,7 @@ var Game = exports.Game = function (_React$Component) {
                     )
                 );
             }
-            if (this.state.health == 40) {
+            if (this.state.health < 40) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
@@ -13636,7 +13636,7 @@ var Game = exports.Game = function (_React$Component) {
                     )
                 );
             }
-            if (this.state.health == 20) {
+            if (this.state.health < 20) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },

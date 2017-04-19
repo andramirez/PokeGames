@@ -13493,6 +13493,7 @@ var Game = exports.Game = function (_React$Component) {
                 );
             });
             var health = this.state.health;
+            var healthmsg = health + '%';
             var session = this.state.session;
             var messageData = this.state.messageHolder.map(function (n, index) {
                 return React.createElement(
@@ -13521,7 +13522,7 @@ var Game = exports.Game = function (_React$Component) {
                     { className: 'energy-container' },
                     React.createElement(
                         'div',
-                        { style: { width: health }, className: 'energy-bar' },
+                        { style: { width: '100%' }, className: 'energy-text energy-bar' },
                         health
                     )
                 ),

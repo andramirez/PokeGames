@@ -80,7 +80,7 @@ document.getElementById("sendMessageBox").value = " ";
             <div>
                 <Board/>
                 <div className="energy-container">
-                    <div style={{width: healthmsg}} className="energy-bar">{health}</div>
+                    <div style={{width: '100%'}} className="energy-text energy-bar">{health}</div>
                 </div>
                 Game ID: {session}
                 <br />

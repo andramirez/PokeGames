@@ -11,6 +11,7 @@ import botcommands
 import urlparse
 import json
 
+
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
@@ -37,6 +38,7 @@ def on_connect():
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}) #draw at starting location
     print playerID+' connected!'
+  
 
 @socketio.on('disconnect')
 def on_disconnect():
@@ -64,7 +66,7 @@ def make_choice(data):
     print playerData[playerID]['name'] + ' clicked something.'
     #calculate distance between data['coords'] and location
     playerData[playerID]['location'] = data['coords']
-    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
+    socketio.send('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':
@@ -227,3 +229,14 @@ if __name__ == '__main__': # __name__!
         debug=True
     )
 
+
+from flask_socketio import Namespace, emit
+class MyCustomNamespace(Namespace):
+    def on_connect(self):
+        print "Someone connected to the namespace!"
+        pass
+
+    def JoinedNameSpace(self, data):
+        emit('Hello from the class', data)
+
+socketio.on_namespace(MyCustomNamespace('/' + Namespace))

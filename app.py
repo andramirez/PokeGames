@@ -64,7 +64,16 @@ def make_choice(data):
     global playerID
     global playerData
     print playerData[playerID]['name'] + ' clicked something.'
+    
     #calculate distance between data['coords'] and location
+    pre = data['coords'].split(',')
+    post = playerData[playerID]['location'].split(',')
+    distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
+    playerData[playerID]['health'] -= distance*5
+    if (playerData[playerID]['health'] < 0):
+        playerData[playerID]['health'] = 0
+    socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
+    
     playerData[playerID]['location'] = data['coords']
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
     if data['choice'] == 'poke':
@@ -134,7 +143,7 @@ def get_rest():
         playerData[playerID]['health'] += 20
         if (playerData[playerID]['health'] > 100):
             playerData[playerID]['health'] = 100
-    socketio.emit('rest', {'health': playerData[playerID]['health']}, room=playerID)
+    socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
 
 def createGrid(size):
     

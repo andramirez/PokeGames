@@ -58,14 +58,6 @@ li:last-child:after { content: ""; }
     line-height: 20px;
     color: white;
 }
-.energyContainer{
-    display:flex;
-    height:40px;
-    width:800px;
-    margin:auto;
-    margin-top:30px;
-    margin-bottom:30px;
-}
 .title{
     margin:auto;
     font-size: 30px;
@@ -78,31 +70,39 @@ li:last-child:after { content: ""; }
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: black;
 }
-.energy1 {
-    width: 20%; 
-    background-color: #f44336;
-    flex:1;
-}
-.energy2 {
-    width: 20%; 
-    background-color: #f4a436;
-    flex:1;
-}
-.energy3 {
-    width: 20%; 
-    background-color: #f4e736;
-    flex:1;
-}
-.energy4 {
-    width: 20%; 
-    background-color: #68f436;
-    flex:1;
-}
-.energy5 {
-    width: 20%; 
-    background-color: #36b1f4;
-    flex:1;
-}
+/*.energyContainer{*/
+/*    display:flex;*/
+/*    height:40px;*/
+/*    width:800px;*/
+/*    margin:auto;*/
+/*    margin-top:30px;*/
+/*    margin-bottom:30px;*/
+/*}*/
+/*.energy1 {*/
+/*    width: 20%; */
+/*    background-color: #f44336;*/
+/*    flex:1;*/
+/*}*/
+/*.energy2 {*/
+/*    width: 20%; */
+/*    background-color: #f4a436;*/
+/*    flex:1;*/
+/*}*/
+/*.energy3 {*/
+/*    width: 20%; */
+/*    background-color: #f4e736;*/
+/*    flex:1;*/
+/*}*/
+/*.energy4 {*/
+/*    width: 20%; */
+/*    background-color: #68f436;*/
+/*    flex:1;*/
+/*}*/
+/*.energy5 {*/
+/*    width: 20%; */
+/*    background-color: #36b1f4;*/
+/*    flex:1;*/
+/*}*/
 #login {
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
@@ -120,8 +120,6 @@ li:last-child:after { content: ""; }
     margin:auto;
     width: 200px;
 }
-
-
 #loginContainer {
   margin: 30px;
 
@@ -134,7 +132,6 @@ li:last-child:after { content: ""; }
  
     
 }
-
 div.transbox button {
   margin: 5%;
   font-weight: bold;
@@ -223,10 +220,22 @@ input:focus {
     color:black;
 }  
 p {
-font-family:Verdana;
-font-size: 20px;
-font-style: normal;
-font-variant: normal;
-font-weight: normal;
- color: black;
+    font-family:Verdana;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    color: black;
+}
+.energy-container {
+  width: 100%;
+  background-color: #ddd;
+}
+.energy-bar {
+    background-color: #4CAF50;
+    text-align: right;
+    padding-right: 20px;
+    line-height: 40px;
+    color: white;
+    width: 100%;
 }

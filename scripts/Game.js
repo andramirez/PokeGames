@@ -70,8 +70,72 @@ document.getElementById("sendMessageBox").value = " ";
             <li key={index}>{n}</li>
         );
         let health = this.state.health;
-        let healthmsg = health + '%';
         let session = this.state.session;
+                let energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <h2>{health}</h2>
+             </div>;
+        if(this.state.health == 80)
+        {
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health == 60){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health == 40){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health == 20){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy2"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health == 0){
+            energy = 
+            <div className="energyContainer">
+              <div style={{backgroundColor: "black"}} className="stats energy1"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy2"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy3"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy4"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy5"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
         let messageData = this.state.messageHolder.map(
             (n, index) => 
                 <p id="msgtext" key={index}><img id="photo" style={{width : 50, height: 50}} src={n.picture}/><b><font size="2">{n.user}</font><br /></b>{n.message}</p>
@@ -79,8 +143,9 @@ document.getElementById("sendMessageBox").value = " ";
         return (
             <div>
                 <Board/>
-                <div className="energy-container">
-                    <div style={{width: '100%'}} className="energy-text energy-bar">{health}</div>
+                <div className="statBar">
+                <h2 className="stats title">Energy:</h2>
+                {energy}
                 </div>
                 Game ID: {session}
                 <br />

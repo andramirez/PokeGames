@@ -13493,8 +13493,221 @@ var Game = exports.Game = function (_React$Component) {
                 );
             });
             var health = this.state.health;
-            var healthmsg = health + '%';
             var session = this.state.session;
+            var energy = React.createElement(
+                'div',
+                { className: 'energyContainer' },
+                React.createElement(
+                    'div',
+                    { className: 'stats energy1' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy2' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy3' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy4' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy5' },
+                    ' '
+                ),
+                React.createElement(
+                    'h2',
+                    null,
+                    health
+                )
+            );
+            if (this.state.health == 80) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health == 60) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health == 40) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health == 20) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health == 0) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
             var messageData = this.state.messageHolder.map(function (n, index) {
                 return React.createElement(
                     'p',
@@ -13519,12 +13732,13 @@ var Game = exports.Game = function (_React$Component) {
                 React.createElement(_Board.Board, null),
                 React.createElement(
                     'div',
-                    { className: 'energy-container' },
+                    { className: 'statBar' },
                     React.createElement(
-                        'div',
-                        { style: { width: '100%' }, className: 'energy-text energy-bar' },
-                        health
-                    )
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
+                    energy
                 ),
                 'Game ID: ',
                 session,

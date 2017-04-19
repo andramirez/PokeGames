@@ -70,6 +70,7 @@ document.getElementById("sendMessageBox").value = " ";
             <li key={index}>{n}</li>
         );
         let health = this.state.health;
+        let healthmsg = health + '%';
         let session = this.state.session;
         let messageData = this.state.messageHolder.map(
             (n, index) => 
@@ -79,7 +80,7 @@ document.getElementById("sendMessageBox").value = " ";
             <div>
                 <Board/>
                 <div className="energy-container">
-                    <div style={{width: health}} className="energy-bar">{health}</div>
+                    <div style={{width: healthmsg}} className="energy-bar">{health}</div>
                 </div>
                 Game ID: {session}
                 <br />

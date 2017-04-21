@@ -25,18 +25,18 @@ export class Board extends React.Component {
             coords: event.target.id
         });
         document.getElementById('action').style.visibility = "visible";
+         Socket.emit('get id');
     }
     handleChange(event) {
         this.setState({choice: event.target.value});
     }
     handleSubmit(event) {
         event.preventDefault();
-        Socket.emit('get id');
-        alert(this.state.id);
-        Socket.in(this.state.id).emit('make choice', {
+        Socket.emit('make choice', {
             'choice': this.state.choice,
             'terrain': this.state.terrain,
-            'coords': this.state.coords
+            'coords': this.state.coords,
+            'id' : this.state.id
         });
        
         document.getElementById('action').style.visibility = "hidden";
@@ -59,6 +59,7 @@ export class Board extends React.Component {
             this.setState({
                 id: data['id']
             });
+         
         });
     }
     

@@ -14005,6 +14005,7 @@ var Board = exports.Board = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
             _Socket.Socket.emit('get id');
+            alert(this.state.id);
             _Socket.Socket.in(this.state.id).emit('make choice', {
                 'choice': this.state.choice,
                 'terrain': this.state.terrain,

@@ -77,9 +77,9 @@ def make_choice(data):
     socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
     
     userPositions[playerID] = playerData[playerID]['location'] = data['coords']
-    for key, value in userPositions.items():
-        if (value == playerData[playerID]['location'] and key != playerID):
-            image = '/static/image/placeholder.jpg'
+    # for key, value in userPositions.items():
+    #     if (value == playerData[playerID]['location'] and key != playerID):
+    #         image = '/static/image/placeholder.jpg'
     
     socketio.emit('draw pos', {'image': image, 'pos': playerData[playerID]['location']}, room=playerID)
     if data['choice'] == 'poke':

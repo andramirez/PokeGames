@@ -32,6 +32,7 @@ export class Board extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         Socket.emit('get id');
+        alert(this.state.id);
         Socket.in(this.state.id).emit('make choice', {
             'choice': this.state.choice,
             'terrain': this.state.terrain,

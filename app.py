@@ -1,6 +1,7 @@
 import os, random
 import flask 
 import requests
+import smtplib
 import pokeAPI
 from flask import request
 import flask_sqlalchemy
@@ -23,6 +24,7 @@ maps = {}
 userPositions = {}
 
 #player vars
+playerID = 0
 playerData = {}
 
 @app.route('/')
@@ -31,6 +33,7 @@ def index():
 
 @socketio.on('connect')
 def on_connect():
+    global playerID
     playerID = request.sid
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
@@ -42,10 +45,11 @@ def on_connect():
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print playerData[request.sid]['name'] + ' disconnected!'
+    print playerData[playerID]['name'] + ' disconnected!'
 
 @socketio.on('play')
 def play(data):
+    global playerID
     global playerData
     key = data['key']
     if key in maps: #if grid for login already exists, load 
@@ -54,35 +58,38 @@ def play(data):
         key = generateKey()
         grid = createGrid('medium') 
         maps[key] = grid
-    playerData[request.sid]['currentSession'] = key
-    on_join({'username':playerData[request.sid]['name'],'room':playerData[request.sid]['currentSession']})
-    socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid) #draw at starting location
-    socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[request.sid]['currentSession'])
+    playerData[playerID]['currentSession'] = key
+    on_join({'username':playerData[playerID]['name'],'room':playerData[playerID]['currentSession']})
+    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID) #draw at starting location
+    socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[playerID]['currentSession'])
+    print playerData[playerID]['location']
 
 @socketio.on('make choice')
 def make_choice(data):
+    global playerID
     global playerData
-    if (data['id'] == request.sid):
-        print playerData[request.sid]['name'] + ' clicked something.'
-        image = playerData[request.sid]['image']
-        room = request.sid
+    if (data['id'] == playerID):
+        print playerData[playerID]['name'] + ' clicked something.'
+        image = playerData[playerID]['image']
         #calculate distance between data['coords'] and location
-        playerData[request.sid]['location'] = data['coords']
-        socketio.send('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']})
-        socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
+        playerData[playerID]['location'] = data['coords']
+        socketio.send('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
+        socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
+        print playerData[playerID]['location']
+        print playerData
         pre = data['coords'].split(',')
-        post = playerData[request.sid]['location'].split(',')
+        post = playerData[playerID]['location'].split(',')
         distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
-        playerData[request.sid]['health'] -= distance*5
-        if (playerData[request.sid]['health'] < 0):
-            playerData[request.sid]['health'] = 0
-        socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
-        userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
-        for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and key != request.sid):
-                image = '/static/image/placeholder.jpg'
-                room = playerData[request.sid]['currentSession']
-        socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
+        playerData[playerID]['health'] -= distance*5
+        if (playerData[playerID]['health'] < 0):
+            playerData[playerID]['health'] = 0
+        socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
+        userPositions[playerID] = playerData[playerID]['location'] = data['coords']
+        # for key, value in userPositions.items():
+        #     if (value == playerData[playerID]['location'] and key != playerID):
+        #         image = '/static/image/placeholder.jpg'
+        
+        socketio.emit('draw pos', {'image': image, 'pos': playerData[playerID]['location']}, room=playerID)
         if data['choice'] == 'poke':
             get_pokemon(data['terrain'])
         elif data['choice'] == 'item':
@@ -92,7 +99,8 @@ def make_choice(data):
         
 @socketio.on('get id')
 def send_id():
-    socketio.emit('update id', {'id': request.sid}, room=request.sid)
+    print playerID
+    socketio.emit('update id', {'id': playerID}, room=playerID)
 
 @socketio.on('fb_user_details')
 def fb_user_details(data):
@@ -117,8 +125,8 @@ def g_user_details(data):
         'source': 'Google',
         'socket' : request.sid
     })
-    playerData[request.sid]['image']=json['pic']
-    playerData[request.sid]['name']=json['user']
+    playerData[playerID]['image']=json['pic']
+    playerData[playerID]['name']=json['user']
     
 def on_join(data):
     username = data['username']
@@ -137,24 +145,24 @@ def on_leave(data):
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
-    if len(playerData[request.sid]['team']) < 6:
-        playerData[request.sid]['team'].append(pokemon)
+    if len(playerData[playerID]['team']) < 6:
+        playerData[playerID]['team'].append(pokemon)
     # else:
         #ask player to select a team member to replace or select no
-    socketio.emit('new poke', {'team': playerData[request.sid]['team']}, room=request.sid)
+    socketio.emit('new poke', {'team': playerData[playerID]['team']}, room=playerID)
     
 def get_item(terrain):
     item = 'potion' #change later
-    if len(playerData[request.sid]['inventory']) < 3:
-        playerData[request.sid]['inventory'].append(item)
-    socketio.emit('new item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)
+    if len(playerData[playerID]['inventory']) < 3:
+        playerData[playerID]['inventory'].append(item)
+    socketio.emit('new item', {'inventory': playerData[playerID]['inventory']}, room=playerID)
 
 def get_rest():
-    if playerData[request.sid]['health'] < 100:
-        playerData[request.sid]['health'] += 20
-        if (playerData[request.sid]['health'] > 100):
-            playerData[request.sid]['health'] = 100
-    socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
+    if playerData[playerID]['health'] < 100:
+        playerData[playerID]['health'] += 20
+        if (playerData[playerID]['health'] > 100):
+            playerData[playerID]['health'] = 100
+    socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
 
 def createGrid(size):
     
@@ -190,7 +198,7 @@ def handle_message(messageData):
                 'user'   : getUsernameFromID(request.sid),
                 'picture' : getUserPhotoFromID(request.sid),
                 })
-                socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+                socketio.emit('passedMessageList', messageList, room=playerData[playerID]['currentSession'])
                 print messageList
                 return
             messageList.append({
@@ -199,7 +207,7 @@ def handle_message(messageData):
             'user'   : getUsernameFromID(request.sid),
             'picture' : getUserPhotoFromID(request.sid),
             })
-            socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+            socketio.emit('passedMessageList', messageList, room=playerData[playerID]['currentSession'])
             return
             
 def getUsernameFromID(socket_id):
@@ -221,6 +229,22 @@ def getUserPhotoFromID(socket_id):
             photoLink = connections['picture']
             print photoLink
             return photoLink
+            
+            
+@socketio.on('sendEmail')
+def sendMail(data):
+    recep_email = data['email']
+    gameID = data['gameID']
+    #subject = "You've been invited to play PokeGames!"
+    recp_message = "Come join me at pokegames! Game ID is: " + gameID
+    email_address = pokegames438@gmail.com
+    email_pass = "PokeGames438!!"
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(email_address, email_pass)
+    server.sendmail(email_address, recep_email, recp_message)
+    server.quit()
+    
             
 # Function that Javar wrote. Fetches data from the Spotify API and display it
 @socketio.on('Spotify')

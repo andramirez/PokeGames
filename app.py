@@ -234,9 +234,11 @@ def getUserPhotoFromID(socket_id):
 @socketio.on('sendEmail')
 def sendMail(data):
     recep_email = data['email']
+    print recep_email
     gameID = data['gameID']
-    #subject = "You've been invited to play PokeGames!"
-    recp_message = "Come join me at pokegames! Game ID is: " + gameID
+    subject = "You've been invited to play PokeGames! "
+    message = "Come join me at pokegames! https://still-beyond-48460.herokuapp.com my Game ID is [INSERT GAME ID HERE]" 
+    recp_message  = 'Subject: {}\n\n{}'.format(subject, message)
     email_address = "pokegames438@gmail.com"
     email_pass = "PokeGames438!!"
     server = smtplib.SMTP('smtp.gmail.com', 587)

@@ -170,6 +170,7 @@ document.getElementById("sendMessageBox").value = " ";
                 <div className = "logoutContainer">
                     <Logout/>
                 </div>
+                <SendEmail/>
             </div>
     )}
 }

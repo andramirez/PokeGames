@@ -13333,6 +13333,11 @@ var Game = exports.Game = function (_React$Component) {
                     'session': data['session'],
                     'isGameLaunched': true
                 });
+                document.getElementById("session").value = data['session'];
+            });
+            _Socket.Socket.on('sessionForEmail', function (data) {
+
+                document.getElementById("session").value = data;
             });
             _Socket.Socket.on('update health', function (data) {
                 _this2.setState({
@@ -13387,6 +13392,7 @@ var Game = exports.Game = function (_React$Component) {
             });
             var health = this.state.health;
             var session = this.state.session;
+
             var energy = React.createElement(
                 'div',
                 { className: 'energyContainer' },
@@ -13678,7 +13684,8 @@ var Game = exports.Game = function (_React$Component) {
                         React.createElement(SubButton, null),
                         ' ',
                         React.createElement('br', null)
-                    )
+                    ),
+                    React.createElement('input', { type: 'text', id: 'sessoionID' })
                 ),
                 React.createElement(
                     'div',
@@ -14508,7 +14515,11 @@ var SendEmail = exports.SendEmail = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SendEmail.__proto__ || Object.getPrototypeOf(SendEmail)).call(this, props));
 
+        _this.state = {
+            id: ''
+        };
         _this.handleSubmitEmail = _this.handleSubmitEmail.bind(_this);
+        _Socket.Socket.emit('get id');
         return _this;
     }
 
@@ -14516,23 +14527,22 @@ var SendEmail = exports.SendEmail = function (_React$Component) {
         key: 'handleSubmitEmail',
         value: function handleSubmitEmail(event) {
             event.preventDefault();
-
             function validateEmail(email) {
                 var re = /^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
                 return re.test(email);
             }
             var email = document.getElementById("emailbox").value;
-            console.log(email);
+            console.log(validateEmail(email));
             if (validateEmail(email) === true) {
                 _Socket.Socket.emit('sendEmail', {
                     'email': email,
-                    'gameID': "235678"
+                    'session': document.getElementById("session").value
                 });
                 alert("Invite Sent to " + document.getElementById("emailbox").value + "!");
-                document.getElementById("emailbox").value = " ";
+                document.getElementById("emailbox").value = "";
             } else {
                 alert("Invalid email, message not sent!");
-                document.getElementById("emailbox").value = " ";
+                document.getElementById("emailbox").value = "";
             }
         }
     }, {
@@ -14546,7 +14556,13 @@ var SendEmail = exports.SendEmail = function (_React$Component) {
                     { onSubmit: this.handleSubmitEmail },
                     React.createElement('div', { id: 'emailFormInner', className: 'emailFormInner' }),
                     React.createElement('br', null),
+                    React.createElement(
+                        'b',
+                        null,
+                        'Invite a friend!'
+                    ),
                     React.createElement('input', { type: 'text', placeholder: 'Enter Friend\'s email!', id: 'emailbox' }),
+                    React.createElement('input', { type: 'text', id: 'session', hidden: true }),
                     React.createElement('input', { type: 'submit', name: 'Send Email' })
                 )
             );

@@ -25,8 +25,13 @@ export class Game extends React.Component {
         Socket.on('game start', (data) => { 
             this.setState({
                 'session': data['session'],
-                'isGameLaunched': true
+                'isGameLaunched': true,
             });
+              document.getElementById("session").value = data['session'];
+        });
+        Socket.on('sessionForEmail', (data) => {
+            
+          document.getElementById("session").value = (data); 
         });
         Socket.on('update health', (data) => { 
             this.setState({
@@ -71,6 +76,8 @@ document.getElementById("sendMessageBox").value = " ";
         );
         let health = this.state.health;
         let session = this.state.session;
+      
+    
         let energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
@@ -166,7 +173,9 @@ document.getElementById("sendMessageBox").value = " ";
                 <div className="scrollInput">
                 <input name="text" size="40" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />
-                         </div></form>
+                         </div>
+                             <input type="text" id = "sessoionID"/>
+                         </form>
                 <div className = "logoutContainer">
                     <Logout/>
                 </div>

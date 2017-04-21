@@ -134,6 +134,7 @@ def on_join(data):
     join_room(room)
     if (username == 'Placeholder Name'):
         socketio.emit('join', {'message': 'Welcome to PokeGames, your ID is ' + room}, room=room)
+        socketio.emit('sessionForEmail',room , room=room)
     else:
         socketio.emit('join', {'message': username + ' has entered the room: ' + room}, room=room)
     
@@ -235,9 +236,9 @@ def getUserPhotoFromID(socket_id):
 def sendMail(data):
     recep_email = data['email']
     print recep_email
-    gameID = data['gameID']
+    session = data['session']
     subject = "You've been invited to play PokeGames! "
-    message = "Come join me at pokegames! https://still-beyond-48460.herokuapp.com my Game ID is [INSERT GAME ID HERE]" 
+    message = "Come join me at pokegames! https://still-beyond-48460.herokuapp.com my Game ID is " + session
     recp_message  = 'Subject: {}\n\n{}'.format(subject, message)
     email_address = "pokegames438@gmail.com"
     email_pass = "PokeGames438!!"

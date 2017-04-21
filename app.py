@@ -237,7 +237,7 @@ def sendMail(data):
     gameID = data['gameID']
     #subject = "You've been invited to play PokeGames!"
     recp_message = "Come join me at pokegames! Game ID is: " + gameID
-    email_address = pokegames438@gmail.com
+    email_address = "pokegames438@gmail.com"
     email_pass = "PokeGames438!!"
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()

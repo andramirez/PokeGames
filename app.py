@@ -20,6 +20,7 @@ messageList = []
 
 #game vars
 maps = {}
+userPositions = {}
 
 #player vars
 playerID = 0
@@ -36,6 +37,7 @@ def on_connect():
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
     on_join({'username':playerData[playerID]['name'],'room':playerID})
+    userPositions[playerID] = playerData[playerID]['location']
     print playerID+' connected!'
 
 @socketio.on('disconnect')
@@ -64,7 +66,7 @@ def make_choice(data):
     global playerID
     global playerData
     print playerData[playerID]['name'] + ' clicked something.'
-    
+    image = playerData[playerID]['image']
     #calculate distance between data['coords'] and location
     pre = data['coords'].split(',')
     post = playerData[playerID]['location'].split(',')
@@ -74,8 +76,12 @@ def make_choice(data):
         playerData[playerID]['health'] = 0
     socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
     
-    playerData[playerID]['location'] = data['coords']
-    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
+    userPositions[playerID] = playerData[playerID]['location'] = data['coords']
+    for key, value in userPositions.items():
+        if (value == playerData[playerID]['location'] and key != playerID):
+            image = '/static/image/placeholder.jpg'
+    
+    socketio.emit('draw pos', {'image': image, 'pos': playerData[playerID]['location']}, room=playerID)
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':

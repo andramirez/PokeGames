@@ -36,6 +36,7 @@ def on_connect():
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
     on_join({'username':playerData[playerID]['name'],'room':playerID})
+    on_join({'username':playerData[playerID]['name'],'room':playerID+'battle'}) #room for battle notifs
     print playerID+' connected!'
 
 @socketio.on('disconnect')
@@ -53,13 +54,12 @@ def play(data):
         maps[key] = grid
     playerData[request.sid]['currentSession'] = key
     on_join({'username':playerData[request.sid]['name'],'room':playerData[request.sid]['currentSession']})
-    userPositions[request.sid] = [playerData[request.sid]['location'],playerData[request.sid]['currentSession']]
+    userPositions[request.sid] = playerData[request.sid]['location']
     socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid) #draw at starting location
     socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[request.sid]['currentSession'])
 
 @socketio.on('make choice')
 def make_choice(data):
-    global playerData
     if (data['id'] == request.sid):
         print playerData[request.sid]['name'] + ' clicked something.'
         image = playerData[request.sid]['image']
@@ -76,9 +76,12 @@ def make_choice(data):
         socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
         userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
         for key, value in userPositions.items():
-            if (value[0] == playerData[request.sid]['location'] and value[1] == playerData[request.sid]['currentSession'] and key != request.sid):
+            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid):
                 image = '/static/image/swords.png'
-                room = playerData[request.sid]['currentSession']
+                room = key+'battle'
+                #join other player's pvp room
+                on_join({'username':playerData[request.sid]['name'],'room':room})
+                
         socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
         if data['choice'] == 'poke':
             get_pokemon(data['terrain'])
@@ -123,7 +126,7 @@ def on_join(data):
     room = data['room']
     join_room(room)
     if (username == 'Placeholder Name'):
-        socketio.emit('join', {'message': 'Welcome to PokeGames, your ID is ' + room}, room=room)
+        socketio.emit('join', {'message': ''}, room=room)
         socketio.emit('sessionForEmail',room , room=room)
     else:
         socketio.emit('join', {'message': username + ' has entered the room: ' + room}, room=room)
@@ -132,7 +135,6 @@ def on_leave(data):
     username = data['username']
     room = data['room']
     leave_room(room)
-    socketio.emit('join', {'message': username + ' has left the room: ' + room}, room=room) #wont show to self, because you left room
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain

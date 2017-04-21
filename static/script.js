@@ -13388,7 +13388,9 @@ var Game = exports.Game = function (_React$Component) {
             var _this2 = this;
 
             _Socket.Socket.on('join', function (data) {
-                alert(data['message']);
+                if (data['message'] != '') {
+                    alert(data['message']);
+                }
             });
             _Socket.Socket.on('game start', function (data) {
                 _this2.setState({
@@ -13423,7 +13425,6 @@ var Game = exports.Game = function (_React$Component) {
                 _this2.setState({
                     messageHolder: data
                 });
-                console.log(data);
             });
         }
     }, {
@@ -13431,7 +13432,6 @@ var Game = exports.Game = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
             var message = document.getElementById("sendMessageBox").value;
-            console.log(message);
             _Socket.Socket.emit('newMessage', message);
             document.getElementById("sendMessageBox").value = " ";
         }

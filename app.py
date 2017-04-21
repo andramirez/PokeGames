@@ -82,6 +82,10 @@ def make_choice(data):
         get_item(data['terrain'])
     elif data['choice'] == 'rest':
         get_rest()
+        
+@socketio.on('get id')
+def send_id(data):
+    socketio.emit('update id', {'id': playerID}, room=playerID)
 
 @socketio.on('fb_user_details')
 def fb_user_details(data):

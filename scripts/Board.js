@@ -5,6 +5,7 @@ export class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             name: '',
             image: '',
             pos: '99,99',
@@ -30,7 +31,8 @@ export class Board extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        Socket.emit('make choice', {
+        Socket.emit('get id');
+        Socket.in(this.state.id).emit('make choice', {
             'choice': this.state.choice,
             'terrain': this.state.terrain,
             'coords': this.state.coords
@@ -50,6 +52,11 @@ export class Board extends React.Component {
                 pos: data['pos'],
                 image: data['image'],
                 name: data['name']
+            });
+        });
+        Socket.on('update id', (data) => {
+            this.setState({
+                id: data['id']
             });
         });
     }

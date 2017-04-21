@@ -7,7 +7,7 @@ def processBotCommand(userSubmitted):
 
     if('!! about' in userSubmitted):
 
-        msg = 'website created by Honorio Vega, Javar Alexander, Antonio Villagomez'
+        msg = ''
         return msg
 
     elif('!! say' in userSubmitted):

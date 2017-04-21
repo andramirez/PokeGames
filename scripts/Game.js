@@ -3,7 +3,7 @@ import { Board } from './Board';
 import { Sound } from './Sound';
 import { Socket } from './Socket';
 import { Logout } from './Logout';
-import {Chatroom} from './Chat';
+import { Chatroom } from './Chat';
 
 export class Game extends React.Component {
     constructor(props) {
@@ -28,11 +28,10 @@ export class Game extends React.Component {
                 'isGameLaunched': true
             });
         });
-        Socket.on('rest', (data) => { 
+        Socket.on('update health', (data) => { 
             this.setState({
                 'health': data['health']
             });
-            alert("Health: "+ data['health']);
         });
         Socket.on('new item', (data) => { 
             if (Math.floor(Math.random() * 10) > 7){ //percent chance of finding an item
@@ -42,20 +41,18 @@ export class Game extends React.Component {
             }
             else 
                 alert("Nothing found...");
-            
         });
         Socket.on('new poke', (data) => { 
             this.setState({
                 'team': data['team']
             });
         });
-         Socket.on('passedMessageList', (data) => {
-        this.setState({
-        messageHolder : data,
+        Socket.on('passedMessageList', (data) => {
+            this.setState({
+            messageHolder : data,
+            });
+            console.log(data);
         });
-        console.log(data);
-    })
-    
     }
 
 handleSubmit(event) {
@@ -83,7 +80,7 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy5"> </div>
               <h2>{health}</h2>
              </div>;
-        if(this.state.health == 80)
+        if(this.state.health < 80)
         {
             energy = 
             <div className="energyContainer">
@@ -95,7 +92,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        else if(this.state.health == 60){
+        if(this.state.health < 60){
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
@@ -106,7 +103,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        else if(this.state.health == 40){
+        if(this.state.health < 40){
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
@@ -117,7 +114,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        else if(this.state.health == 20){
+        if(this.state.health < 20){
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
@@ -128,7 +125,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-        else if(this.state.health == 0){
+        if(this.state.health == 0){
             energy = 
             <div className="energyContainer">
               <div style={{backgroundColor: "black"}} className="stats energy1"> </div>
@@ -139,8 +136,7 @@ document.getElementById("sendMessageBox").value = " ";
               <h2>{health}</h2>
              </div>;
         }
-
-         let messageData = this.state.messageHolder.map(
+        let messageData = this.state.messageHolder.map(
             (n, index) => 
                 <p id="msgtext" key={index}><img id="photo" style={{width : 50, height: 50}} src={n.picture}/><b><font size="2">{n.user}</font><br /></b>{n.message}</p>
             );
@@ -181,9 +177,7 @@ document.getElementById("sendMessageBox").value = " ";
 export class SubButton extends React.Component {
     render() {
         return (
-            
-                <button>Send it!</button>
-           
+            <button>Send it!</button>
         );
     }
 }

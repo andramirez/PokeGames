@@ -11,7 +11,6 @@ import botcommands
 import urlparse
 import json
 
-
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
@@ -21,6 +20,7 @@ messageList = []
 
 #game vars
 maps = {}
+userPositions = {}
 
 #player vars
 playerID = 0
@@ -37,9 +37,12 @@ def on_connect():
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
     on_join({'username':playerData[playerID]['name'],'room':playerID})
+<<<<<<< HEAD
     #is this susposed to be the playerID(SOCKET.ID) or the room ID? 
+=======
+    userPositions[playerID] = playerData[playerID]['location']
+>>>>>>> f2258fcd5aac1642e63716114aaab2e88e54eae4
     print playerID+' connected!'
-  
 
 @socketio.on('disconnect')
 def on_disconnect():
@@ -67,18 +70,39 @@ def make_choice(data):
     global playerID
     global playerData
     print playerData[playerID]['name'] + ' clicked something.'
+    image = playerData[playerID]['image']
     #calculate distance between data['coords'] and location
+
     playerData[playerID]['location'] = data['coords']
     socketio.send('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
     print playerData[playerID]['location']
     print playerData
+
+    pre = data['coords'].split(',')
+    post = playerData[playerID]['location'].split(',')
+    distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
+    playerData[playerID]['health'] -= distance*5
+    if (playerData[playerID]['health'] < 0):
+        playerData[playerID]['health'] = 0
+    socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
+    
+    userPositions[playerID] = playerData[playerID]['location'] = data['coords']
+    # for key, value in userPositions.items():
+    #     if (value == playerData[playerID]['location'] and key != playerID):
+    #         image = '/static/image/placeholder.jpg'
+    
+    socketio.emit('draw pos', {'image': image, 'pos': playerData[playerID]['location']}, room=playerID)
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':
         get_item(data['terrain'])
     elif data['choice'] == 'rest':
         get_rest()
+        
+@socketio.on('get id')
+def send_id(data):
+    socketio.emit('update id', {'id': playerID}, room=playerID)
 
 @socketio.on('fb_user_details')
 def fb_user_details(data):
@@ -140,7 +164,7 @@ def get_rest():
         playerData[playerID]['health'] += 20
         if (playerData[playerID]['health'] > 100):
             playerData[playerID]['health'] = 100
-    socketio.emit('rest', {'health': playerData[playerID]['health']}, room=playerID)
+    socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
 
 def createGrid(size):
     
@@ -240,14 +264,3 @@ if __name__ == '__main__': # __name__!
         debug=True
     )
 
-
-from flask_socketio import Namespace, emit
-class MyCustomNamespace(Namespace):
-    def on_connect(self):
-        print "Someone connected to the namespace!"
-        pass
-
-    def JoinedNameSpace(self, data):
-        emit('Hello from the class', data)
-
-socketio.on_namespace(MyCustomNamespace('/' + Namespace))

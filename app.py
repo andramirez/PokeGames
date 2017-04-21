@@ -37,6 +37,7 @@ def on_connect():
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
     on_join({'username':playerData[playerID]['name'],'room':playerID})
+    #is this susposed to be the playerID(SOCKET.ID) or the room ID? 
     print playerID+' connected!'
   
 
@@ -59,7 +60,7 @@ def play(data):
     on_join({'username':playerData[playerID]['name'],'room':playerData[playerID]['currentSession']})
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID) #draw at starting location
     socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[playerID]['currentSession'])
-    
+    print playerData[playerID]['location']
 
 @socketio.on('make choice')
 def make_choice(data):
@@ -68,11 +69,10 @@ def make_choice(data):
     print playerData[playerID]['name'] + ' clicked something.'
     #calculate distance between data['coords'] and location
     playerData[playerID]['location'] = data['coords']
-<<<<<<< HEAD
     socketio.send('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
-=======
     socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
->>>>>>> 00648c3f5b928ea1791ea3daef4c9c92356654f7
+    print playerData[playerID]['location']
+    print playerData
     if data['choice'] == 'poke':
         get_pokemon(data['terrain'])
     elif data['choice'] == 'item':

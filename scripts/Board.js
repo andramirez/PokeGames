@@ -59,7 +59,6 @@ export class Board extends React.Component {
             this.setState({
                 id: data['id']
             });
-         
         });
     }
     

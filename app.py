@@ -23,7 +23,6 @@ maps = {}
 userPositions = {}
 
 #player vars
-playerID = 0
 playerData = {}
 
 @app.route('/')
@@ -32,7 +31,6 @@ def index():
 
 @socketio.on('connect')
 def on_connect():
-    global playerID
     playerID = request.sid
     location = str(randint(0,5))+','+str(randint(0,5))
     playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':''}
@@ -44,11 +42,10 @@ def on_connect():
 
 @socketio.on('disconnect')
 def on_disconnect():
-    print playerData[playerID]['name'] + ' disconnected!'
+    print playerData[request.sid]['name'] + ' disconnected!'
 
 @socketio.on('play')
 def play(data):
-    global playerID
     global playerData
     key = data['key']
     if key in maps: #if grid for login already exists, load 
@@ -57,38 +54,35 @@ def play(data):
         key = generateKey()
         grid = createGrid('medium') 
         maps[key] = grid
-    playerData[playerID]['currentSession'] = key
-    on_join({'username':playerData[playerID]['name'],'room':playerData[playerID]['currentSession']})
-    socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID) #draw at starting location
-    socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[playerID]['currentSession'])
-    print playerData[playerID]['location']
+    playerData[request.sid]['currentSession'] = key
+    on_join({'username':playerData[request.sid]['name'],'room':playerData[request.sid]['currentSession']})
+    socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid) #draw at starting location
+    socketio.emit('game start', {'session': key, 'board': grid}, room=playerData[request.sid]['currentSession'])
 
 @socketio.on('make choice')
 def make_choice(data):
-    global playerID
     global playerData
-    if (data['id'] == playerID):
-        print playerData[playerID]['name'] + ' clicked something.'
-        image = playerData[playerID]['image']
+    if (data['id'] == request.sid):
+        print playerData[request.sid]['name'] + ' clicked something.'
+        image = playerData[request.sid]['image']
+        room = request.sid
         #calculate distance between data['coords'] and location
-        playerData[playerID]['location'] = data['coords']
-        socketio.send('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']})
-        socketio.emit('draw pos', {'image': playerData[playerID]['image'], 'pos': playerData[playerID]['location']}, room=playerID)
-        print playerData[playerID]['location']
-        print playerData
+        playerData[request.sid]['location'] = data['coords']
+        socketio.send('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']})
+        socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
         pre = data['coords'].split(',')
-        post = playerData[playerID]['location'].split(',')
+        post = playerData[request.sid]['location'].split(',')
         distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
-        playerData[playerID]['health'] -= distance*5
-        if (playerData[playerID]['health'] < 0):
-            playerData[playerID]['health'] = 0
-        socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
-        userPositions[playerID] = playerData[playerID]['location'] = data['coords']
-        # for key, value in userPositions.items():
-        #     if (value == playerData[playerID]['location'] and key != playerID):
-        #         image = '/static/image/placeholder.jpg'
-        
-        socketio.emit('draw pos', {'image': image, 'pos': playerData[playerID]['location']}, room=playerID)
+        playerData[request.sid]['health'] -= distance*5
+        if (playerData[request.sid]['health'] < 0):
+            playerData[request.sid]['health'] = 0
+        socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
+        userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
+        for key, value in userPositions.items():
+            if (value == playerData[request.sid]['location'] and key != request.sid):
+                image = '/static/image/placeholder.jpg'
+                room = playerData[request.sid]['currentSession']
+        socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
         if data['choice'] == 'poke':
             get_pokemon(data['terrain'])
         elif data['choice'] == 'item':
@@ -98,8 +92,7 @@ def make_choice(data):
         
 @socketio.on('get id')
 def send_id():
-    print playerID
-    socketio.emit('update id', {'id': playerID}, room=playerID)
+    socketio.emit('update id', {'id': request.sid}, room=request.sid)
 
 @socketio.on('fb_user_details')
 def fb_user_details(data):
@@ -124,8 +117,8 @@ def g_user_details(data):
         'source': 'Google',
         'socket' : request.sid
     })
-    playerData[playerID]['image']=json['pic']
-    playerData[playerID]['name']=json['user']
+    playerData[request.sid]['image']=json['pic']
+    playerData[request.sid]['name']=json['user']
     
 def on_join(data):
     username = data['username']
@@ -144,24 +137,24 @@ def on_leave(data):
 
 def get_pokemon(terrain):
     pokemon = pokeAPI.terrainToType(terrain) #get a pokemon's name based on terrain
-    if len(playerData[playerID]['team']) < 6:
-        playerData[playerID]['team'].append(pokemon)
+    if len(playerData[request.sid]['team']) < 6:
+        playerData[request.sid]['team'].append(pokemon)
     # else:
         #ask player to select a team member to replace or select no
-    socketio.emit('new poke', {'team': playerData[playerID]['team']}, room=playerID)
+    socketio.emit('new poke', {'team': playerData[request.sid]['team']}, room=request.sid)
     
 def get_item(terrain):
     item = 'potion' #change later
-    if len(playerData[playerID]['inventory']) < 3:
-        playerData[playerID]['inventory'].append(item)
-    socketio.emit('new item', {'inventory': playerData[playerID]['inventory']}, room=playerID)
+    if len(playerData[request.sid]['inventory']) < 3:
+        playerData[request.sid]['inventory'].append(item)
+    socketio.emit('new item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)
 
 def get_rest():
-    if playerData[playerID]['health'] < 100:
-        playerData[playerID]['health'] += 20
-        if (playerData[playerID]['health'] > 100):
-            playerData[playerID]['health'] = 100
-    socketio.emit('update health', {'health': playerData[playerID]['health']}, room=playerID)
+    if playerData[request.sid]['health'] < 100:
+        playerData[request.sid]['health'] += 20
+        if (playerData[request.sid]['health'] > 100):
+            playerData[request.sid]['health'] = 100
+    socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
 
 def createGrid(size):
     
@@ -197,7 +190,7 @@ def handle_message(messageData):
                 'user'   : getUsernameFromID(request.sid),
                 'picture' : getUserPhotoFromID(request.sid),
                 })
-                socketio.emit('passedMessageList', messageList, room=playerData[playerID]['currentSession'])
+                socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
                 print messageList
                 return
             messageList.append({
@@ -206,7 +199,7 @@ def handle_message(messageData):
             'user'   : getUsernameFromID(request.sid),
             'picture' : getUserPhotoFromID(request.sid),
             })
-            socketio.emit('passedMessageList', messageList, room=playerData[playerID]['currentSession'])
+            socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
             return
             
 def getUsernameFromID(socket_id):

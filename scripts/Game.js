@@ -4,7 +4,7 @@ import { Sound } from './Sound';
 import { Socket } from './Socket';
 import { Logout } from './Logout';
 import { Chatroom } from './Chat';
-
+import {SendEmail} from './SendEmail';
 export class Game extends React.Component {
     constructor(props) {
         super(props);

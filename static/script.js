@@ -14021,7 +14021,6 @@ var Board = exports.Board = function (_React$Component) {
                 'coords': this.state.coords,
                 'id': this.state.id
             });
-
             document.getElementById('action').style.visibility = "hidden";
             document.getElementById('select').value = ""; //Reset Action to Null
         }

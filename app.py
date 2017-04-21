@@ -65,12 +65,11 @@ def make_choice(data):
         image = playerData[request.sid]['image']
         room = request.sid
         #calculate distance between data['coords'] and location
-        playerData[request.sid]['location'] = data['coords']
-        socketio.send('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']})
-        socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
         pre = data['coords'].split(',')
         post = playerData[request.sid]['location'].split(',')
         distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
+        playerData[request.sid]['location'] = data['coords']
+        socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
         playerData[request.sid]['health'] -= distance*5
         if (playerData[request.sid]['health'] < 0):
             playerData[request.sid]['health'] = 0

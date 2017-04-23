@@ -6,12 +6,11 @@ export class Board extends React.Component {
         super(props);
         this.state = {
             id: '',
-            name: '',
             image: '',
             pos: '99,99',
             coords: '99,99',
             choice: '',
-            ba: '',
+            ba: 'run',
             terrain: '',
             board: [[]]
         };
@@ -28,7 +27,7 @@ export class Board extends React.Component {
             coords: event.target.id
         });
         document.getElementById('action').style.visibility = "visible";
-         Socket.emit('get id');
+        Socket.emit('get id');
     }
     handleChange(event) {
         this.setState({choice: event.target.value});
@@ -42,7 +41,8 @@ export class Board extends React.Component {
             'id' : this.state.id
         });
         document.getElementById('action').style.visibility = "hidden";
-        document.getElementById('select').value = ""; //Reset Action to Null
+        document.getElementById('select').value = ""; //Reset Action to Null - form
+        this.state.choice = ""; //Reset Action to Null - var
     }
     handleChangeBattle(event) {
         this.setState({ba: event.target.value});
@@ -54,7 +54,8 @@ export class Board extends React.Component {
             'id' : this.state.id
         });
         document.getElementById('battle').style.visibility = "hidden";
-        document.getElementById('b_select').value = ""; //Reset Action to Null
+        document.getElementById('b_select').value = "run"; //Reset Battle Action to run
+        this.state.ba = "run"; //Reset Battle Action to run - var
     }
     componentDidMount() {
         Socket.on('game start', (data) => {
@@ -63,10 +64,11 @@ export class Board extends React.Component {
             });
         });
         Socket.on('draw pos', (data) => {
+            if (data['image']== '/static/image/swords.png')
+                document.getElementById('battle').style.visibility = "visible";
             this.setState({
                 pos: data['pos'],
-                image: data['image'],
-                name: data['name']
+                image: data['image']
             });
         });
         Socket.on('update id', (data) => {
@@ -79,7 +81,6 @@ export class Board extends React.Component {
     render() {
         let pos = this.state.pos;
         let img = this.state.image;
-        let name = this.state.name;
         let board = this.state.board.map((n,i) => 
             <tr>{n.map((m, j) => <td>{i+','+j == pos ? <img src={img}></img> : <img src={'/static/image/'+m+'.jpg'} alt={m} id={i+','+j} onClick={this.handleClick}></img>}</td>)}</tr>
         );

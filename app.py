@@ -100,8 +100,9 @@ def make_choice(data):
 def battle(data):
     if (data['id'] == request.sid):
         print playerData[request.sid]['name'] + ' entered a battle.'
-        print playerData[request.sid]['battleID']
-        print playerData[request.sid]['name']+' wants to '+data['battle_action']
+        if (data['battle_action'] == 'fight' and len(playerData[request.sid]['team'])>0): #if you want to fight and HAVE pokemon
+            print playerData[request.sid]['name'] + ' is ready to fight!'
+            # socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=playerData[request.sid]['battleID'])
         on_leave(playerData[request.sid]['battleID'])
         
 @socketio.on('get id')
@@ -145,8 +146,7 @@ def on_join(data):
     else:
         socketio.emit('join', {'message': username + ' has entered the room: ' + room}, room=room)
     
-def on_leave(data):
-    room = data['room']
+def on_leave(room):
     if ('battle' in room):
         if (room[0:-6] != request.sid): #if leaving someone else's battle room
             playerData[request.sid]['battleID'] = request.sid+'battle' #reset battleID

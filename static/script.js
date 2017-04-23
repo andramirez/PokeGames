@@ -13981,12 +13981,11 @@ var Board = exports.Board = function (_React$Component) {
 
         _this.state = {
             id: '',
-            name: '',
             image: '',
             pos: '99,99',
             coords: '99,99',
             choice: '',
-            ba: '',
+            ba: 'run',
             terrain: '',
             board: [[]]
         };
@@ -14025,7 +14024,8 @@ var Board = exports.Board = function (_React$Component) {
                 'id': this.state.id
             });
             document.getElementById('action').style.visibility = "hidden";
-            document.getElementById('select').value = ""; //Reset Action to Null
+            document.getElementById('select').value = ""; //Reset Action to Null - form
+            this.state.choice = ""; //Reset Action to Null - var
         }
     }, {
         key: 'handleChangeBattle',
@@ -14041,7 +14041,8 @@ var Board = exports.Board = function (_React$Component) {
                 'id': this.state.id
             });
             document.getElementById('battle').style.visibility = "hidden";
-            document.getElementById('b_select').value = ""; //Reset Action to Null
+            document.getElementById('b_select').value = "run"; //Reset Battle Action to run
+            this.state.ba = "run"; //Reset Battle Action to run - var
         }
     }, {
         key: 'componentDidMount',
@@ -14054,10 +14055,10 @@ var Board = exports.Board = function (_React$Component) {
                 });
             });
             _Socket.Socket.on('draw pos', function (data) {
+                if (data['image'] == '/static/image/swords.png') document.getElementById('battle').style.visibility = "visible";
                 _this2.setState({
                     pos: data['pos'],
-                    image: data['image'],
-                    name: data['name']
+                    image: data['image']
                 });
             });
             _Socket.Socket.on('update id', function (data) {
@@ -14073,7 +14074,6 @@ var Board = exports.Board = function (_React$Component) {
 
             var pos = this.state.pos;
             var img = this.state.image;
-            var name = this.state.name;
             var board = this.state.board.map(function (n, i) {
                 return React.createElement(
                     'tr',

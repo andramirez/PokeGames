@@ -13986,12 +13986,15 @@ var Board = exports.Board = function (_React$Component) {
             pos: '99,99',
             coords: '99,99',
             choice: '',
+            ba: '',
             terrain: '',
             board: [[]]
         };
         _this.handleClick = _this.handleClick.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleChangeBattle = _this.handleChangeBattle.bind(_this);
+        _this.handleSubmitBattle = _this.handleSubmitBattle.bind(_this);
         return _this;
     }
 
@@ -14023,6 +14026,22 @@ var Board = exports.Board = function (_React$Component) {
             });
             document.getElementById('action').style.visibility = "hidden";
             document.getElementById('select').value = ""; //Reset Action to Null
+        }
+    }, {
+        key: 'handleChangeBattle',
+        value: function handleChangeBattle(event) {
+            this.setState({ ba: event.target.value });
+        }
+    }, {
+        key: 'handleSubmitBattle',
+        value: function handleSubmitBattle(event) {
+            event.preventDefault();
+            _Socket.Socket.emit('battle start', {
+                'battle_action': this.state.ba,
+                'id': this.state.id
+            });
+            document.getElementById('battle').style.visibility = "hidden";
+            document.getElementById('b_select').value = ""; //Reset Action to Null
         }
     }, {
         key: 'componentDidMount',
@@ -14084,7 +14103,7 @@ var Board = exports.Board = function (_React$Component) {
                             React.createElement(
                                 'option',
                                 { value: '' },
-                                '--'
+                                'No Action'
                             ),
                             React.createElement(
                                 'option',
@@ -14116,6 +14135,33 @@ var Board = exports.Board = function (_React$Component) {
                         'tbody',
                         null,
                         board
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { id: 'battle' },
+                    React.createElement(
+                        'form',
+                        { onSubmit: this.handleSubmitBattle },
+                        React.createElement(
+                            'select',
+                            { id: 'b_select', onChange: this.handleChangeBattle },
+                            React.createElement(
+                                'option',
+                                { value: 'run' },
+                                'Run Away'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'fight' },
+                                'Fight'
+                            )
+                        ),
+                        React.createElement(
+                            'button',
+                            null,
+                            'Choose an Action'
+                        )
                     )
                 )
             );

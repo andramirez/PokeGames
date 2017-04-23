@@ -65,7 +65,6 @@ def make_choice(data):
         print playerData[request.sid]['name'] + ' clicked something.'
         image = playerData[request.sid]['image']
         room = request.sid
-        battle_init = True 
         #calculate distance between data['coords'] and location
         pre = data['coords'].split(',')
         post = playerData[request.sid]['location'].split(',')
@@ -78,16 +77,11 @@ def make_choice(data):
         socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
         userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
         for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                if (playerData[key]['battleID'] != key+'battle' or playerData[request.sid]['battleID'] != request.sid+'battle'): #if either player is already in battle
-                    battle_init = False #cant battle here
-        for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                if battle_init: #if no existing battles on this square      
-                    image = '/static/image/swords.png'
-                    playerData[request.sid]['battleID'] = room = key+'battle'
-                    #join other player's pvp room
-                    on_join({'username':playerData[request.sid]['name'],'room':room})
+            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid and (playerData[key]['battleID'] == key+'battle' and playerData[request.sid]['battleID'] == request.sid)): #if same location, same game, different players, both not already in combat
+                image = '/static/image/swords.png'
+                playerData[request.sid]['battleID'] = room = key+'battle'
+                #join other player's pvp room
+                on_join({'username':playerData[request.sid]['name'],'room':room})
         socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
         if data['choice'] == 'poke':
             get_pokemon(data['terrain'])

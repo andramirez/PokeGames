@@ -11,12 +11,15 @@ export class Board extends React.Component {
             pos: '99,99',
             coords: '99,99',
             choice: '',
+            ba: '',
             terrain: '',
             board: [[]]
         };
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChangeBattle = this.handleChangeBattle.bind(this);
+        this.handleSubmitBattle = this.handleSubmitBattle.bind(this);
     }
     handleClick(event) {
         event.preventDefault();
@@ -40,6 +43,18 @@ export class Board extends React.Component {
         });
         document.getElementById('action').style.visibility = "hidden";
         document.getElementById('select').value = ""; //Reset Action to Null
+    }
+    handleChangeBattle(event) {
+        this.setState({ba: event.target.value});
+    }
+    handleSubmitBattle(event) {
+        event.preventDefault();
+        Socket.emit('battle start', {
+            'battle_action': this.state.ba,
+            'id' : this.state.id
+        });
+        document.getElementById('battle').style.visibility = "hidden";
+        document.getElementById('b_select').value = ""; //Reset Action to Null
     }
     componentDidMount() {
         Socket.on('game start', (data) => {
@@ -74,7 +89,7 @@ export class Board extends React.Component {
                 <div id='action'>
                     <form onSubmit={this.handleSubmit}>
                         <select id='select' onChange={this.handleChange}>
-                            <option value=''>--</option>
+                            <option value=''>No Action</option>
                             <option value='poke'>Search for Pokemon</option>
                             <option value='item'>Look for Supplies</option>
                             <option value='rest'>Rest to Recover</option>
@@ -87,6 +102,15 @@ export class Board extends React.Component {
                         {board}
                     </tbody>
                 </table>
+                <div id='battle'>
+                    <form onSubmit={this.handleSubmitBattle}>
+                        <select id='b_select' onChange={this.handleChangeBattle}>
+                            <option value='run'>Run Away</option>
+                            <option value='fight'>Fight</option>
+                        </select>
+                        <button>Choose an Action</button>
+                    </form>
+                </div>
             </div>
         );
     }

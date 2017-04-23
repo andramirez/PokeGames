@@ -41,6 +41,7 @@ li { display: inline; }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
 #action { visibility: hidden; }
+#battle { visibility: hidden; }
 #game, #content { 
     text-align: center;
 }

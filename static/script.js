@@ -13388,7 +13388,9 @@ var Game = exports.Game = function (_React$Component) {
             var _this2 = this;
 
             _Socket.Socket.on('join', function (data) {
-                alert(data['message']);
+                if (data['message'] != '') {
+                    alert(data['message']);
+                }
             });
             _Socket.Socket.on('game start', function (data) {
                 _this2.setState({
@@ -13423,7 +13425,6 @@ var Game = exports.Game = function (_React$Component) {
                 _this2.setState({
                     messageHolder: data
                 });
-                console.log(data);
             });
         }
     }, {
@@ -13431,7 +13432,6 @@ var Game = exports.Game = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
             var message = document.getElementById("sendMessageBox").value;
-            console.log(message);
             _Socket.Socket.emit('newMessage', message);
             document.getElementById("sendMessageBox").value = " ";
         }
@@ -13981,17 +13981,19 @@ var Board = exports.Board = function (_React$Component) {
 
         _this.state = {
             id: '',
-            name: '',
             image: '',
             pos: '99,99',
             coords: '99,99',
             choice: '',
+            ba: 'run',
             terrain: '',
             board: [[]]
         };
         _this.handleClick = _this.handleClick.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.handleChangeBattle = _this.handleChangeBattle.bind(_this);
+        _this.handleSubmitBattle = _this.handleSubmitBattle.bind(_this);
         return _this;
     }
 
@@ -14022,7 +14024,25 @@ var Board = exports.Board = function (_React$Component) {
                 'id': this.state.id
             });
             document.getElementById('action').style.visibility = "hidden";
-            document.getElementById('select').value = ""; //Reset Action to Null
+            document.getElementById('select').value = ""; //Reset Action to Null - form
+            this.state.choice = ""; //Reset Action to Null - var
+        }
+    }, {
+        key: 'handleChangeBattle',
+        value: function handleChangeBattle(event) {
+            this.setState({ ba: event.target.value });
+        }
+    }, {
+        key: 'handleSubmitBattle',
+        value: function handleSubmitBattle(event) {
+            event.preventDefault();
+            _Socket.Socket.emit('battle start', {
+                'battle_action': this.state.ba,
+                'id': this.state.id
+            });
+            document.getElementById('battle').style.visibility = "hidden";
+            document.getElementById('b_select').value = "run"; //Reset Battle Action to run
+            this.state.ba = "run"; //Reset Battle Action to run - var
         }
     }, {
         key: 'componentDidMount',
@@ -14035,10 +14055,10 @@ var Board = exports.Board = function (_React$Component) {
                 });
             });
             _Socket.Socket.on('draw pos', function (data) {
+                if (data['image'] == '/static/image/swords.png') document.getElementById('battle').style.visibility = "visible";
                 _this2.setState({
                     pos: data['pos'],
-                    image: data['image'],
-                    name: data['name']
+                    image: data['image']
                 });
             });
             _Socket.Socket.on('update id', function (data) {
@@ -14054,7 +14074,6 @@ var Board = exports.Board = function (_React$Component) {
 
             var pos = this.state.pos;
             var img = this.state.image;
-            var name = this.state.name;
             var board = this.state.board.map(function (n, i) {
                 return React.createElement(
                     'tr',
@@ -14084,7 +14103,7 @@ var Board = exports.Board = function (_React$Component) {
                             React.createElement(
                                 'option',
                                 { value: '' },
-                                '--'
+                                'No Action'
                             ),
                             React.createElement(
                                 'option',
@@ -14116,6 +14135,33 @@ var Board = exports.Board = function (_React$Component) {
                         'tbody',
                         null,
                         board
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { id: 'battle' },
+                    React.createElement(
+                        'form',
+                        { onSubmit: this.handleSubmitBattle },
+                        React.createElement(
+                            'select',
+                            { id: 'b_select', onChange: this.handleChangeBattle },
+                            React.createElement(
+                                'option',
+                                { value: 'run' },
+                                'Run Away'
+                            ),
+                            React.createElement(
+                                'option',
+                                { value: 'fight' },
+                                'Fight'
+                            )
+                        ),
+                        React.createElement(
+                            'button',
+                            null,
+                            'Choose an Action'
+                        )
                     )
                 )
             );

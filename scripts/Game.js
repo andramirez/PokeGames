@@ -20,7 +20,9 @@ export class Game extends React.Component {
 
     componentDidMount() {
         Socket.on('join', (data) => { 
-            alert(data['message']);
+            if (data['message']!=''){
+                alert(data['message']);
+            }
         });
         Socket.on('game start', (data) => { 
             this.setState({
@@ -56,14 +58,12 @@ export class Game extends React.Component {
             this.setState({
             messageHolder : data,
             });
-            console.log(data);
         });
     }
 
 handleSubmit(event) {
 event.preventDefault();
 var message = document.getElementById("sendMessageBox").value;
-console.log(message);
 Socket.emit('newMessage', message);
 document.getElementById("sendMessageBox").value = " ";
 }

@@ -74,7 +74,8 @@ document.getElementById("sendMessageBox").value = " ";
             <li key={index}>{n}</li>
         );
         let inventory = this.state.inventory.map((n, index) => 
-            <li key={index}>{n}</li>
+            //<li key={index}>{n}</li>
+            <li><img src={n}/></li>
         );
         let health = this.state.health;
         let session = this.state.session;

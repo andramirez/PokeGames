@@ -175,7 +175,8 @@ def get_pokemon(terrain):
     socketio.emit('new poke', {'team': playerData[request.sid]['team']}, room=request.sid)
     
 def get_item(terrain):
-    item = 'potion' #change later
+    #item = 'potion'#change later
+    item ='static/image/potion.png'
     if len(playerData[request.sid]['inventory']) < 3:
         playerData[request.sid]['inventory'].append(item)
     socketio.emit('new item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)

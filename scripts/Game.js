@@ -22,7 +22,6 @@ export class Game extends React.Component {
         Socket.on('join', (data) => { 
             if (data['message']!=''){
                 Socket.emit("Alert", data['message']);
-                //alert(data['message']);
             }
         });
         Socket.on('game start', (data) => { 
@@ -46,9 +45,11 @@ export class Game extends React.Component {
                 this.setState({
                     'inventory': data['inventory']
                 });
+                alert(data['inventory'])
+                Socket.emit("Alert", data['inventory']);
             }
             else 
-                alert("Nothing found...");
+                Socket.emit("Alert", data['message']);
         });
         Socket.on('new poke', (data) => { 
             this.setState({

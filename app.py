@@ -22,7 +22,7 @@ usersList = []
 ##setting up default user - pokegames (for chat)
 usersList.append({
         'name': "PokeGames Alert",
-        'picture': "https://cdn.pixabay.com/photo/2016/08/14/14/58/pokemon-1593048_960_720.jpg",
+        'picture': "https://pro-rankedboost.netdna-ssl.com/wp-content/uploads/2016/07/PokeBall.png",
         'email' : "Pokegames438@gmail.com",
         'identifier' : "BOT",
         'source': '"BOT',

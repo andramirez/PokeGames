@@ -98,11 +98,6 @@ export class Board extends React.Component {
                         <button>Choose an Action</button>
                     </form>
                 </div>
-                <table>
-                    <tbody>
-                        {board}
-                    </tbody>
-                </table>
                 <div id='battle'>
                     <form onSubmit={this.handleSubmitBattle}>
                         <select id='b_select' onChange={this.handleChangeBattle}>
@@ -112,6 +107,12 @@ export class Board extends React.Component {
                         <button>Choose an Action</button>
                     </form>
                 </div>
+                <table>
+                    <tbody>
+                        {board}
+                    </tbody>
+                </table>
+                
             </div>
         );
     }

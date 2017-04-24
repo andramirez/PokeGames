@@ -9,15 +9,21 @@ export class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            'id':'',
             'session': '',
             'team': [],
             'inventory': [],
             'messageHolder' : [],
             'isGameLaunched': false,
-            'health': 100
+            'health': 100,
+            'select':0
         };
+        this.handleSelect = this.handleSelect.bind(this);
     }
-
+    handleSelect(event) {
+        event.preventDefault();
+        Socket.emit('attack', {'id':this.state.id, 'fighter':event.target.id});
+    }
     componentDidMount() {
         Socket.on('join', (data) => { 
             if (data['message']!=''){
@@ -45,11 +51,10 @@ export class Game extends React.Component {
                 this.setState({
                     'inventory': data['inventory']
                 });
-                alert(data['inventory'])
-                Socket.emit("Alert", data['inventory']);
+                Socket.emit("Alert Self", "New Item!");
             }
             else 
-                Socket.emit("Alert", data['message']);
+                Socket.emit("Alert Self", data['message']);
         });
         Socket.on('new poke', (data) => { 
             this.setState({
@@ -58,7 +63,14 @@ export class Game extends React.Component {
         });
         Socket.on('passedMessageList', (data) => {
             this.setState({
-            messageHolder : data,
+                'messageHolder' : data,
+            });
+        });
+        Socket.on('choose fighter', (data) => { 
+            this.setState({
+                'id': data['id'],
+                'team': data['team'],
+                'select': 1
             });
         });
     }
@@ -70,15 +82,15 @@ Socket.emit('newMessage', message);
 document.getElementById("sendMessageBox").value = " ";
 }
     render() {
+        let select = this.state.select;
         let team = this.state.team.map((n, index) => 
-            <li key={index}>{n}</li>
+            <li key={index}>{select ? <a href='' id={index} onClick={this.handleSelect}>{n}</a> : n}</li>
         );
         let inventory = this.state.inventory.map((n, index) => 
             <li key={index}>{n}</li>
         );
         let health = this.state.health;
         let session = this.state.session;
-      
     
         let energy = 
             <div className="energyContainer">

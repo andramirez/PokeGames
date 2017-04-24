@@ -21,7 +21,8 @@ export class Game extends React.Component {
     componentDidMount() {
         Socket.on('join', (data) => { 
             if (data['message']!=''){
-                alert(data['message']);
+                Socket.emit("Alert", data['message']);
+                //alert(data['message']);
             }
         });
         Socket.on('game start', (data) => { 

@@ -80,29 +80,54 @@ li:last-child:after { content: ""; }
     margin-bottom:30px;
 }
 .energy1 {
-    width: 20%; 
-    background-color: #f44336;
-    flex:1;
+    width: 10%; 
+    background-color: #b20000;
+    flex:.5;
 }
 .energy2 {
-    width: 20%; 
-    background-color: #f4a436;
-    flex:1;
+    width: 10%; 
+    background-color: #ff4949;
+    flex:.5;
 }
 .energy3 {
-    width: 20%; 
-    background-color: #f4e736;
-    flex:1;
+    width: 10%; 
+    background-color: #e28000;
+    flex:.5;
 }
 .energy4 {
-    width: 20%; 
-    background-color: #68f436;
-    flex:1;
+    width: 10%; 
+    background-color: #ffad42;
+    flex:.5;
 }
 .energy5 {
-    width: 20%; 
-    background-color: #36b1f4;
-    flex:1;
+    width: 10%; 
+    background-color: #d3cf00;
+    flex:.5;
+}
+.energy6 {
+    width: 10%; 
+    background-color: #fffc63;
+    flex:.5;
+}
+.energy7 {
+    width: 10%; 
+    background-color: #11d300;
+    flex:.5;
+}
+.energy8 {
+    width: 10%; 
+    background-color: #1cff67;
+    flex:.5;
+}
+.energy9 {
+    width: 10%; 
+    background-color: #1c85ff;
+    flex:.5;
+}
+.energy10 {
+    width: 10%; 
+    background-color: #2bd8ff;
+    flex:.5;
 }
 #login {
     position: absolute;

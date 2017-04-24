@@ -2,3 +2,4 @@ requests
 Flask
 flask_socketio
 pykemon
+flask_sqlalchemy

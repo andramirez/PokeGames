@@ -32,8 +32,9 @@ export class Form extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <fieldset>
-                    <legend>Create Game</legend>
-                    <input type="text" name="key" onChange={this.handleChange}></input>
+                    <legend><h1>PokeGames Set-Up</h1></legend>
+                    Existing Game Key: <input type="text" name="key" onChange={this.handleChange}></input>
+                    <br/>
                     <button>Play</button>
                 </fieldset>
             </form>

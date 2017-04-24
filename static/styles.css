@@ -1,5 +1,17 @@
+body {
+    background-image: url("image/background.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border: 2px solid black;
+    color: white;
+}
 h1 { text-align: center; }
-fieldset { display: inline; }
+fieldset { 
+    display: inline; 
+    background-color: rgba(190, 190, 190, .75);
+}
 table {
     margin: auto;
     border-collapse: collapse;
@@ -13,20 +25,220 @@ audio { width: 100px; }
     height:380px;
     width:300px;
     position: absolute;
-    top:0;
-    right:0;
-    /*visibility: hidden*/
+    top: 60;
+}
+#chatroom {
+    position: absolute;
+    top:100;
+    right: 5;
 }
 ul {
     padding:0;
     display: inline;
     list-style: none;
 }
-li { 
-    display: inline; 
-}
+li { display: inline; }
 li:after { content: " | "; }
 li:last-child:after { content: ""; }
-#game {
-    display: none;
+#action { visibility: hidden; }
+#battle { visibility: hidden; }
+#game, #content { 
+    text-align: center;
 }
+.player {
+    z-index: 2;
+}
+.container {
+    margin: auto;
+    width: 100%;
+    background-color: #ddd;
+}
+.stats {
+    text-align: right;
+    padding-right: 20px;
+    line-height: 20px;
+    color: white;
+}
+.title{
+    margin:auto;
+    font-size: 30px;
+    font-family: Verdana;
+    font-weight: 50;
+    line-height: 26.4px;
+    text-align: center;
+    color: black;
+    -webkit-text-fill-color: white; /* keeping text visible on any background */
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: black;
+}
+.energyContainer{
+    display:flex;
+    height:40px;
+    width:800px;
+    margin:auto;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.energy1 {
+    width: 20%; 
+    background-color: #f44336;
+    flex:1;
+}
+.energy2 {
+    width: 20%; 
+    background-color: #f4a436;
+    flex:1;
+}
+.energy3 {
+    width: 20%; 
+    background-color: #f4e736;
+    flex:1;
+}
+.energy4 {
+    width: 20%; 
+    background-color: #68f436;
+    flex:1;
+}
+.energy5 {
+    width: 20%; 
+    background-color: #36b1f4;
+    flex:1;
+}
+#login {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    margin: auto;
+    height:600px;
+    width:600px;
+    background-image: url("image/logo3.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    display:none;
+}
+#login_buttons {
+    transform: translateY(+200%);
+    text-align: center;
+    margin:auto;
+    width: 200px;
+}
+#loginContainer {
+  margin: 30px;
+
+  background-color: #ffffff;
+  border: 5px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+#spotifyContainer{
+ 
+    
+}
+div.transbox button {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+#msgtext{
+  padding:15px;
+  width: 100%;
+  margin: 5px 10px 0;
+  background: #1ddced;
+  border-radius: 18px;
+  color: black;   
+  font-size: 18px;
+}
+#content{
+    display:none;
+}
+#game{
+    display:none;
+}
+#login{
+    display:block;
+}
+
+#photo{
+  width: 60px;
+  height: 60px;
+  background: #ccc;
+  border-radius: 50%;
+
+}
+.scroll {
+    background-color:white;
+	height:100%;
+    border-radius: 58px 0px 49px 0px;
+    -moz-border-radius: 58px 0px 49px 0px;
+    -webkit-border-radius: 58px 0px 49px 0px;
+    border: 18px solid #000000;
+	opacity: 0.8;
+	overflow-y:scroll;
+    height: 200px;
+    margin: 50px;
+    text-align:center;
+    padding:5px;
+    width: 500px;
+
+ position: absolute;
+ top: 60;
+ right: -50;
+}
+.chatHeading{
+ position: absolute;
+ top: 0;
+ right:20;
+}
+.scrollInput{
+position: absolute;
+ top: 350;
+ right: 0;
+
+}
+h3 {
+font-family: Verdana;
+font-size: 40px;
+font-weight: 50;
+line-height: 26.4px;
+text-align: center;
+color: black;
+-webkit-text-fill-color: white; /* keeping text visible on any background */
+-webkit-text-stroke-width: 3px;
+-webkit-text-stroke-color: black;
+}
+.scrollPhoto {
+    background-color: #ffffff;
+    height: 50px;
+    overflow: scroll;
+    margin: 50px;
+    border: 2px solid black;
+    opacity: 0.8;
+    text-align:center;
+    padding:30px;
+}
+input:focus {
+    border: 2px solid black;
+    background-color:orange;
+    color:black;
+}  
+p {
+    font-family:Verdana;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    color: black;
+}
+/*.energy-container {*/
+/*  width: 50%;*/
+/*  background-color: #ddd;*/
+/*}*/
+/*.energy-text {*/
+/*    text-align: right;*/
+/*    padding-right: 20px;*/
+/*    line-height: 40px;*/
+/*    color: white;*/
+/*}*/
+/*.energy-bar {*/
+/*    width: 100%;*/
+/*    background-color: #4CAF50;*/
+/*}*/

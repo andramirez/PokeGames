@@ -17,18 +17,6 @@ socketio = flask_socketio.SocketIO(app)
 
 #user vars
 usersList = []
-
-
-##setting up default user - pokegames (for chat)
-usersList.append({
-        'name': "PokeGames Alert",
-        'picture': "https://pro-rankedboost.netdna-ssl.com/wp-content/uploads/2016/07/PokeBall.png",
-        'email' : "Pokegames438@gmail.com",
-        'identifier' : "BOT",
-        'source': '"BOT',
-        'socket' : "0000"
-    })
-
 messageList = []
 
 #game vars
@@ -77,7 +65,6 @@ def make_choice(data):
         print playerData[request.sid]['name'] + ' clicked something.'
         image = playerData[request.sid]['image']
         room = request.sid
-        battle_init = True 
         #calculate distance between data['coords'] and location
         pre = data['coords'].split(',')
         post = playerData[request.sid]['location'].split(',')
@@ -90,16 +77,11 @@ def make_choice(data):
         socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
         userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
         for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                if (playerData[key]['battleID'] != key+'battle' or playerData[request.sid]['battleID'] != request.sid+'battle'): #if either player is already in battle
-                    battle_init = False #cant battle here
-        for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                if battle_init: #if no existing battles on this square      
-                    image = '/static/image/swords.png'
-                    playerData[request.sid]['battleID'] = room = key+'battle'
-                    #join other player's pvp room
-                    on_join({'username':playerData[request.sid]['name'],'room':room})
+            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid and (playerData[key]['battleID'] == key+'battle' and playerData[request.sid]['battleID'] == request.sid)): #if same location, same game, different players, both not already in combat
+                image = '/static/image/swords.png'
+                playerData[request.sid]['battleID'] = room = key+'battle'
+                #join other player's pvp room
+                on_join({'username':playerData[request.sid]['name'],'room':room})
         socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
         if data['choice'] == 'poke':
             get_pokemon(data['terrain'])
@@ -112,9 +94,8 @@ def make_choice(data):
 def battle(data):
     if (data['id'] == request.sid):
         print playerData[request.sid]['name'] + ' entered a battle.'
-        if (data['battle_action'] == 'fight' and len(playerData[request.sid]['team'])>0): #if you want to fight and HAVE pokemon
-            print playerData[request.sid]['name'] + ' is ready to fight!'
-            # socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=playerData[request.sid]['battleID'])
+        print playerData[request.sid]['battleID']
+        print playerData[request.sid]['name']+' wants to '+data['battle_action']
         on_leave(playerData[request.sid]['battleID'])
         
 @socketio.on('get id')
@@ -158,7 +139,8 @@ def on_join(data):
     else:
         socketio.emit('join', {'message': username + ' has entered the room: ' + room}, room=room)
     
-def on_leave(room):
+def on_leave(data):
+    room = data['room']
     if ('battle' in room):
         if (room[0:-6] != request.sid): #if leaving someone else's battle room
             playerData[request.sid]['battleID'] = request.sid+'battle' #reset battleID
@@ -232,20 +214,7 @@ def handle_message(messageData):
             })
             socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
             return
-@socketio.on("Alert")
-def handle_game_alert(data): 
-    rec_data = data
-    messageList.append({
-            'message' : data,
-            'socket'  : "0000",
-            'user'   : getUsernameFromID(0000),
-            'picture' : getUserPhotoFromID(0000),
-            })
-    socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
-    print "hi" + rec_data
-    
-    
-    
+            
 def getUsernameFromID(socket_id):
     passedID = socket_id
     if (socket_id != None):

@@ -169,7 +169,6 @@ document.getElementById("sendMessageBox").value = " ";
             <h3> Poke Chat </h3>
             </div>
             <div className="scroll">
-            
                 {messageData}
                 </div>
                 <div className="scrollInput">

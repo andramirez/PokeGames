@@ -17,6 +17,18 @@ socketio = flask_socketio.SocketIO(app)
 
 #user vars
 usersList = []
+
+
+##setting up default user - pokegames (for chat)
+usersList.append({
+        'name': "PokeGames Alert",
+        'picture': "https://cdn.pixabay.com/photo/2016/08/14/14/58/pokemon-1593048_960_720.jpg",
+        'email' : "Pokegames438@gmail.com",
+        'identifier' : "BOT",
+        'source': '"BOT',
+        'socket' : "0000"
+    })
+
 messageList = []
 
 #game vars
@@ -220,7 +232,20 @@ def handle_message(messageData):
             })
             socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
             return
-            
+@socketio.on("Alert")
+def handle_game_alert(data): 
+    rec_data = data
+    messageList.append({
+            'message' : data,
+            'socket'  : "0000",
+            'user'   : getUsernameFromID(0000),
+            'picture' : getUserPhotoFromID(0000),
+            })
+    socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+    print "hi" + rec_data
+    
+    
+    
 def getUsernameFromID(socket_id):
     passedID = socket_id
     if (socket_id != None):

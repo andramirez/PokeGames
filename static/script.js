@@ -13328,7 +13328,6 @@ var Game = exports.Game = function (_React$Component) {
             _Socket.Socket.on('join', function (data) {
                 if (data['message'] != '') {
                     _Socket.Socket.emit("Alert", data['message']);
-                    //alert(data['message']);
                 }
             });
             _Socket.Socket.on('game start', function (data) {
@@ -13353,7 +13352,9 @@ var Game = exports.Game = function (_React$Component) {
                     _this2.setState({
                         'inventory': data['inventory']
                     });
-                } else alert("Nothing found...");
+                    alert(data['inventory']);
+                    _Socket.Socket.emit("Alert", data['inventory']);
+                } else _Socket.Socket.emit("Alert", data['message']);
             });
             _Socket.Socket.on('new poke', function (data) {
                 _this2.setState({

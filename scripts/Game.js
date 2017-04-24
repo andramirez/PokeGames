@@ -87,8 +87,30 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy3"> </div>
               <div className="stats energy4"> </div>
               <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div className="stats energy8"> </div>
+              <div className="stats energy9"> </div>
+              <div className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
+        if(this.state.health < 90)
+        {
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div className="stats energy8"> </div>
+              <div className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
         if(this.state.health < 80)
         {
             energy = 
@@ -97,7 +119,28 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
               <div className="stats energy4"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 70){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -107,8 +150,29 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 50){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -117,9 +181,30 @@ document.getElementById("sendMessageBox").value = " ";
             <div className="energyContainer">
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 30){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -127,10 +212,31 @@ document.getElementById("sendMessageBox").value = " ";
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 10){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy2"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -142,6 +248,11 @@ document.getElementById("sendMessageBox").value = " ";
               <div style={{backgroundColor: "black"}} className="stats energy3"> </div>
               <div style={{backgroundColor: "black"}} className="stats energy4"> </div>
               <div style={{backgroundColor: "black"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }

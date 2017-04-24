@@ -13448,13 +13448,10 @@ var Game = exports.Game = function (_React$Component) {
                 );
             });
             var inventory = this.state.inventory.map(function (n, index) {
-                return (
-                    //<li key={index}>{n}</li>
-                    React.createElement(
-                        'li',
-                        null,
-                        React.createElement('img', { src: n })
-                    )
+                return React.createElement(
+                    'li',
+                    null,
+                    React.createElement('img', { src: n })
                 );
             });
             var health = this.state.health;

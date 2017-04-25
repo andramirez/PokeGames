@@ -76,47 +76,51 @@ def play(data):
 @socketio.on('make choice')
 def make_choice(data):
     if (data['id'] == request.sid):
-        print playerData[request.sid]['name'] + ' clicked something.'
-        image = playerData[request.sid]['image']
-        room = request.sid
-        battle_init = True 
-        #calculate distance between data['coords'] and location
-        pre = data['coords'].split(',')
-        post = playerData[request.sid]['location'].split(',')
-        distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
-        playerData[request.sid]['location'] = data['coords']
-        socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
-        playerData[request.sid]['health'] -= distance*5
-        if (playerData[request.sid]['health'] < 0):
-            playerData[request.sid]['health'] = 0
-        socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
-        userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
-        for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                if (playerData[key]['battleID'] != key+'battle' or playerData[request.sid]['battleID'] != request.sid+'battle'): #if either player is already in battle
-                    battle_init = False #cant battle here
-        for key, value in userPositions.items():
-            if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                if battle_init: #if no existing battles on this square      
-                    image = '/static/image/swords.png'
-                    playerData[request.sid]['battleID'] = room = key+'battle'
-                    #join other player's pvp room
-                    on_join({'username':playerData[request.sid]['name'],'room':room})
-        socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
-        if data['choice'] == 'poke':
-            get_pokemon(data['terrain'])
-        elif data['choice'] == 'item':
-            get_item(data['terrain'])
-        elif data['choice'] == 'rest':
-            get_rest()
+        if(playerData[request.sid]['health'] != 0):
+            print playerData[request.sid]['name'] + ' clicked something.'
+            image = playerData[request.sid]['image']
+            room = request.sid
+            battle_init = True 
+            #calculate distance between data['coords'] and location
+            pre = data['coords'].split(',')
+            post = playerData[request.sid]['location'].split(',')
+            distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
+            playerData[request.sid]['location'] = data['coords']
+            socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
+            playerData[request.sid]['health'] -= distance*5
+            if (playerData[request.sid]['health'] < 0):
+                playerData[request.sid]['health'] = 0
+            socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
+            userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
+            for key, value in userPositions.items():
+                if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
+                    if (playerData[key]['battleID'] != key+'battle' or playerData[request.sid]['battleID'] != request.sid+'battle'): #if either player is already in battle
+                        battle_init = False #cant battle here
+            for key, value in userPositions.items():
+                if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
+                    if battle_init: #if no existing battles on this square      
+                        image = '/static/image/swords.png'
+                        playerData[request.sid]['battleID'] = room = key+'battle'
+                        #join other player's pvp room
+                        on_join({'username':playerData[request.sid]['name'],'room':room})
+            socketio.emit('draw pos', {'image': image, 'pos': playerData[request.sid]['location']}, room=room)
+            if data['choice'] == 'poke':
+                get_pokemon(data['terrain'])
+            elif data['choice'] == 'item':
+                get_item(data['terrain'])
+            elif data['choice'] == 'rest':
+                get_rest()
+        else:
+            socketio.emit('game over', room=request.sid)
             
 @socketio.on('battle start')
 def battle(data):
     if (data['id'] == request.sid):
-        print playerData[request.sid]['name'] + ' entered a battle.'
-        if (len(playerData[request.sid]['team'])>0): #if you HAVE pokemon
-            print playerData[request.sid]['name'] + ' is ready to fight!'
-            socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=request.sid)
+         if(playerData[request.sid]['health'] != 0):
+            print playerData[request.sid]['name'] + ' entered a battle.'
+            if (len(playerData[request.sid]['team'])>0): #if you HAVE pokemon
+                print playerData[request.sid]['name'] + ' is ready to fight!'
+                socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=request.sid)
         
 @socketio.on('attack')
 def attack(data):

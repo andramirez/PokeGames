@@ -60,7 +60,7 @@ export class Game extends React.Component {
             this.setState({
                 'team': data['team']
             });
-            Socket.emit("AlertSelf", "New Pokemon!! " + data['team'].slice(-1)[0]);
+           /* Socket.emit("AlertSelf", "New Pokemon!! " + data['team'].slice(-1)[0]);*/
         });
         Socket.on('passedMessageList', (data) => {
             this.setState({
@@ -78,6 +78,9 @@ export class Game extends React.Component {
             this.setState({
                 'select': 0
             });
+        });
+        Socket.on('game over', (data) =>{
+            alert("Game Over!");
         });
     }
 

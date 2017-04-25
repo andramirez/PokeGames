@@ -13399,6 +13399,12 @@ var _Chat = __webpack_require__(114);
 
 var _SendEmail = __webpack_require__(118);
 
+var _reactSkylight = __webpack_require__(253);
+
+var _reactSkylight2 = _interopRequireDefault(_reactSkylight);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -13551,6 +13557,11 @@ var Game = exports.Game = function (_React$Component) {
                 'div',
                 { className: 'energyContainer' },
                 React.createElement(
+                    'h2',
+                    { className: 'stats title' },
+                    'Energy:'
+                ),
+                React.createElement(
                     'div',
                     { className: 'stats energy1' },
                     ' '
@@ -13610,6 +13621,11 @@ var Game = exports.Game = function (_React$Component) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
+                    React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
                     React.createElement(
                         'div',
                         { className: 'stats energy1' },
@@ -13672,6 +13688,11 @@ var Game = exports.Game = function (_React$Component) {
                     'div',
                     { className: 'energyContainer' },
                     React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
+                    React.createElement(
                         'div',
                         { className: 'stats energy1' },
                         ' '
@@ -13732,6 +13753,11 @@ var Game = exports.Game = function (_React$Component) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
+                    React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
                     React.createElement(
                         'div',
                         { className: 'stats energy1' },
@@ -13794,6 +13820,11 @@ var Game = exports.Game = function (_React$Component) {
                     'div',
                     { className: 'energyContainer' },
                     React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
+                    React.createElement(
                         'div',
                         { className: 'stats energy1' },
                         ' '
@@ -13854,6 +13885,11 @@ var Game = exports.Game = function (_React$Component) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
+                    React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
                     React.createElement(
                         'div',
                         { className: 'stats energy1' },
@@ -13916,6 +13952,11 @@ var Game = exports.Game = function (_React$Component) {
                     'div',
                     { className: 'energyContainer' },
                     React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
+                    React.createElement(
                         'div',
                         { className: 'stats energy1' },
                         ' '
@@ -13976,6 +14017,11 @@ var Game = exports.Game = function (_React$Component) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
+                    React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
                     React.createElement(
                         'div',
                         { className: 'stats energy1' },
@@ -14038,6 +14084,11 @@ var Game = exports.Game = function (_React$Component) {
                     'div',
                     { className: 'energyContainer' },
                     React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
+                    React.createElement(
                         'div',
                         { className: 'stats energy1' },
                         ' '
@@ -14099,6 +14150,11 @@ var Game = exports.Game = function (_React$Component) {
                     'div',
                     { className: 'energyContainer' },
                     React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
+                    React.createElement(
                         'div',
                         { className: 'stats energy1' },
                         ' '
@@ -14159,6 +14215,11 @@ var Game = exports.Game = function (_React$Component) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
+                    React.createElement(
+                        'h2',
+                        { className: 'stats title' },
+                        'Energy:'
+                    ),
                     React.createElement(
                         'div',
                         { style: { backgroundColor: "black" }, className: 'stats energy1' },
@@ -14234,18 +14295,56 @@ var Game = exports.Game = function (_React$Component) {
                     n.message
                 );
             });
+
+            var myBigGreenDialog = {
+                backgroundColor: 'rgba(190, 190, 190, .75)',
+                color: '#ffffff',
+                width: '70%',
+                height: '600px',
+                marginTop: '-300px',
+                marginLeft: '-35%'
+            };
             return React.createElement(
                 'div',
                 null,
+                React.createElement(
+                    'div',
+                    { className: 'buttons' },
+                    React.createElement(
+                        'div',
+                        { className: 'tutorial' },
+                        React.createElement(
+                            'section',
+                            null,
+                            React.createElement(
+                                'button',
+                                { onClick: function onClick() {
+                                        return _this3.refs.customDialog.show();
+                                    } },
+                                'Tutorial'
+                            )
+                        ),
+                        React.createElement(
+                            _reactSkylight2.default,
+                            { dialogStyles: myBigGreenDialog, hideOnOverlayClicked: true, ref: 'customDialog', title: 'A Custom Modal' },
+                            'I\'m a custom modal!'
+                        )
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'logoutContainer' },
+                        React.createElement(_Logout.Logout, null)
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'email' },
+                        React.createElement(_SendEmail.SendEmail, null)
+                    )
+                ),
                 React.createElement(_Board.Board, null),
                 React.createElement(
                     'div',
                     { className: 'statBar' },
-                    React.createElement(
-                        'h2',
-                        { className: 'stats title' },
-                        'Energy:'
-                    ),
                     energy
                 ),
                 'Game ID: ',
@@ -14294,13 +14393,7 @@ var Game = exports.Game = function (_React$Component) {
                         ' ',
                         React.createElement('br', null)
                     )
-                ),
-                React.createElement(
-                    'div',
-                    { className: 'logoutContainer' },
-                    React.createElement(_Logout.Logout, null)
-                ),
-                React.createElement(_SendEmail.SendEmail, null)
+                )
             );
         }
     }]);
@@ -15250,7 +15343,7 @@ var SendEmail = exports.SendEmail = function (_React$Component) {
                     React.createElement(
                         'b',
                         null,
-                        'Invite a friend!'
+                        'Invite a friend! '
                     ),
                     React.createElement('input', { type: 'text', placeholder: 'Enter Friend\'s email!', id: 'emailbox' }),
                     React.createElement('input', { type: 'text', id: 'session', hidden: true }),
@@ -33097,6 +33190,354 @@ module.exports = __webpack_amd_options__;
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+/* 251 */,
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styles = __webpack_require__(255);
+
+var _styles2 = _interopRequireDefault(_styles);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SkyLightStateless = (function (_React$Component) {
+  _inherits(SkyLightStateless, _React$Component);
+
+  function SkyLightStateless() {
+    _classCallCheck(this, SkyLightStateless);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(SkyLightStateless).apply(this, arguments));
+  }
+
+  _createClass(SkyLightStateless, [{
+    key: 'onOverlayClicked',
+    value: function onOverlayClicked() {
+      if (this.props.onOverlayClicked) {
+        this.props.onOverlayClicked();
+      }
+    }
+  }, {
+    key: 'onCloseClicked',
+    value: function onCloseClicked() {
+      if (this.props.onCloseClicked) {
+        this.props.onCloseClicked();
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var mergeStyles = function mergeStyles(key) {
+        return Object.assign({}, _styles2.default[key], _this2.props[key]);
+      };
+      var isVisible = this.props.isVisible;
+
+      var dialogStyles = mergeStyles('dialogStyles');
+      var overlayStyles = mergeStyles('overlayStyles');
+      var closeButtonStyle = mergeStyles('closeButtonStyle');
+      var titleStyle = mergeStyles('titleStyle');
+      overlayStyles.display = dialogStyles.display = 'block';
+
+      var overlay = undefined;
+      if (this.props.showOverlay) {
+        overlay = _react2.default.createElement('div', { className: 'skylight-overlay',
+          onClick: function onClick() {
+            return _this2.onOverlayClicked();
+          },
+          style: overlayStyles
+        });
+      }
+
+      return isVisible ? _react2.default.createElement(
+        'section',
+        { className: 'skylight-wrapper' },
+        overlay,
+        _react2.default.createElement(
+          'div',
+          { className: 'skylight-dialog', style: dialogStyles },
+          _react2.default.createElement(
+            'a',
+            { role: 'button', className: 'skylight-close-button',
+              onClick: function onClick() {
+                return _this2.onCloseClicked();
+              },
+              style: closeButtonStyle
+            },
+            '×'
+          ),
+          _react2.default.createElement(
+            'h2',
+            { style: titleStyle },
+            this.props.title
+          ),
+          this.props.children
+        )
+      ) : _react2.default.createElement('div', null);
+    }
+  }]);
+
+  return SkyLightStateless;
+})(_react2.default.Component);
+
+exports.default = SkyLightStateless;
+
+SkyLightStateless.displayName = 'SkyLightStateless';
+
+SkyLightStateless.sharedPropTypes = {
+  closeButtonStyle: _react2.default.PropTypes.object,
+  dialogStyles: _react2.default.PropTypes.object,
+  onCloseClicked: _react2.default.PropTypes.func,
+  onOverlayClicked: _react2.default.PropTypes.func,
+  overlayStyles: _react2.default.PropTypes.object,
+  showOverlay: _react2.default.PropTypes.bool,
+  title: _react2.default.PropTypes.string,
+  titleStyle: _react2.default.PropTypes.object
+};
+
+SkyLightStateless.propTypes = _extends({}, SkyLightStateless.sharedPropTypes, {
+  isVisible: _react2.default.PropTypes.bool
+});
+
+SkyLightStateless.defaultProps = {
+  title: '',
+  showOverlay: true,
+  overlayStyles: _styles2.default.overlayStyles,
+  dialogStyles: _styles2.default.dialogStyles,
+  closeButtonStyle: _styles2.default.closeButtonStyle
+};
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _skylight = __webpack_require__(254);
+
+Object.defineProperty(exports, 'default', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_skylight).default;
+  }
+});
+
+var _skylightstateless = __webpack_require__(252);
+
+Object.defineProperty(exports, 'SkyLightStateless', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_skylightstateless).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _skylightstateless = __webpack_require__(252);
+
+var _skylightstateless2 = _interopRequireDefault(_skylightstateless);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var isOpening = function isOpening(s1, s2) {
+  return !s1.isVisible && s2.isVisible;
+};
+var isClosing = function isClosing(s1, s2) {
+  return s1.isVisible && !s2.isVisible;
+};
+
+var SkyLight = (function (_React$Component) {
+  _inherits(SkyLight, _React$Component);
+
+  function SkyLight(props) {
+    _classCallCheck(this, SkyLight);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SkyLight).call(this, props));
+
+    _this.state = { isVisible: false };
+    return _this;
+  }
+
+  _createClass(SkyLight, [{
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate(nextProps, nextState) {
+      if (isOpening(this.state, nextState) && this.props.beforeOpen) {
+        this.props.beforeOpen();
+      }
+
+      if (isClosing(this.state, nextState) && this.props.beforeClose) {
+        this.props.beforeClose();
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (isOpening(prevState, this.state) && this.props.afterOpen) {
+        this.props.afterOpen();
+      }
+
+      if (isClosing(prevState, this.state) && this.props.afterClose) {
+        this.props.afterClose();
+      }
+    }
+  }, {
+    key: 'show',
+    value: function show() {
+      this.setState({ isVisible: true });
+    }
+  }, {
+    key: 'hide',
+    value: function hide() {
+      this.setState({ isVisible: false });
+    }
+  }, {
+    key: '_onOverlayClicked',
+    value: function _onOverlayClicked() {
+      if (this.props.hideOnOverlayClicked) {
+        this.hide();
+      }
+
+      if (this.props.onOverlayClicked) {
+        this.props.onOverlayClicked();
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(_skylightstateless2.default, _extends({}, this.props, {
+        isVisible: this.state.isVisible,
+        onOverlayClicked: function onOverlayClicked() {
+          return _this2._onOverlayClicked();
+        },
+        onCloseClicked: function onCloseClicked() {
+          return _this2.hide();
+        }
+      }));
+    }
+  }]);
+
+  return SkyLight;
+})(_react2.default.Component);
+
+exports.default = SkyLight;
+
+SkyLight.displayName = 'SkyLight';
+
+SkyLight.propTypes = _extends({}, _skylightstateless2.default.sharedPropTypes, {
+  afterClose: _react2.default.PropTypes.func,
+  afterOpen: _react2.default.PropTypes.func,
+  beforeClose: _react2.default.PropTypes.func,
+  beforeOpen: _react2.default.PropTypes.func,
+  hideOnOverlayClicked: _react2.default.PropTypes.bool
+});
+
+SkyLight.defaultProps = _extends({}, _skylightstateless2.default.defaultProps, {
+  hideOnOverlayClicked: false
+});
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var styles = {
+  overlayStyles: {
+    position: 'fixed',
+    top: '0px',
+    left: '0px',
+    width: '100%',
+    height: '100%',
+    zIndex: '99',
+    backgroundColor: 'rgba(0,0,0,0.3)'
+  },
+  dialogStyles: {
+    width: '50%',
+    height: '400px',
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    marginTop: '-200px',
+    marginLeft: '-25%',
+    backgroundColor: '#fff',
+    borderRadius: '2px',
+    zIndex: '100',
+    padding: '15px',
+    boxShadow: '0px 0px 4px rgba(0,0,0,.14),0px 4px 8px rgba(0,0,0,.28)'
+  },
+  title: {
+    marginTop: '0px'
+  },
+  closeButtonStyle: {
+    cursor: 'pointer',
+    position: 'absolute',
+    fontSize: '1.8em',
+    right: '10px',
+    top: '0px'
+  }
+};
+
+exports.default = styles;
 
 /***/ })
 /******/ ]);

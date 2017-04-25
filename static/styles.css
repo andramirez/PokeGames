@@ -62,19 +62,16 @@ li:last-child:after { content: ""; }
     color: white;
 }
 .title{
-    margin:auto;
+
     font-size: 30px;
     font-family: Verdana;
-    font-weight: 50;
+    font-weight: 45;
     line-height: 26.4px;
     text-align: center;
     color: black;
     -webkit-text-fill-color: white; /* keeping text visible on any background */
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: black;
-}
-.statBar{
-    margin-top:20px;
 }
 .energyContainer{
     display:flex;
@@ -134,6 +131,26 @@ li:last-child:after { content: ""; }
     background-color: #2bd8ff;
     flex:.5;
 }
+.buttons{
+    text-align: center;
+    width: 47%;
+    display:flex;
+    margin:auto;
+    margin-bottom: 7px;
+    margin-top: 7px;
+}
+.logoutContainer{
+  flex:.5;
+  margin:auto;
+}
+.tutorial{
+  flex:.5;
+  margin:auto;
+}
+.email{
+    flex:2;
+    margin:auto;
+}
 #login {
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
@@ -162,6 +179,7 @@ li:last-child:after { content: ""; }
 #spotifyContainer{
  margin-left: 50px;
  margin-right:30px;
+ margin-top: 40px
 }
 
 #msgtext{

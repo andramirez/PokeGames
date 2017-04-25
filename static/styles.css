@@ -44,6 +44,8 @@ li:last-child:after { content: ""; }
 #battle { visibility: hidden; }
 #game, #content { 
     text-align: center;
+    margin-left: 40px;
+    margin-right:40px;
 }
 .player {
     z-index: 2;
@@ -71,10 +73,13 @@ li:last-child:after { content: ""; }
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: black;
 }
+.statBar{
+    margin-top:20px;
+}
 .energyContainer{
     display:flex;
     height:40px;
-    width:800px;
+    width:60%;
     margin:auto;
     margin-top:30px;
     margin-bottom:30px;
@@ -155,8 +160,8 @@ li:last-child:after { content: ""; }
   filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 #spotifyContainer{
- 
-    
+ margin-left: 50px;
+ margin-right:30px;
 }
 
 #msgtext{
@@ -167,6 +172,7 @@ li:last-child:after { content: ""; }
   border-radius: 18px;
   color: black;   
   font-size: 18px;
+  text-align: left;
 }
 #content{
     display:none;
@@ -191,15 +197,17 @@ li:last-child:after { content: ""; }
     border: 18px solid #000000;
 	opacity: 0.8;
 	overflow-y:scroll;
-    height: 200px;
+    height: 45%;
     margin: 20px;
-    width: 500px;
+    width: 28%;
     position: fixed;
      top: 60;
      right: -25;
      max-width: 100%;
      word-wrap: break-word;
     overflow-x: hidden;
+    margin-right:40px;
+    margin-left:40px;
 }
 .chatHeading{
  position: absolute;
@@ -209,9 +217,11 @@ li:last-child:after { content: ""; }
 }
 .scrollInput{
 position: absolute;
- top: 350;
+ top: 475;
  right: 0;
- position: fixed
+ position: fixed;
+ margin-right:40px;
+ width:25%;
 
 }
 h3 {

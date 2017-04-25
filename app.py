@@ -275,7 +275,7 @@ def generateKey():
 def handle_message(messageData):
     passedContents = messageData
     if (getUsernameFromID(request.sid)):
-            if ("https" or "http" or ".com" in passedContents):
+            if "https" or "http" or ".com" in passedContents:
                 link = passedContents
                 messageList.append({
                 'message' : link,
@@ -286,14 +286,15 @@ def handle_message(messageData):
                 socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
                 print messageList
                 return
-            messageList.append({
-            'message' : passedContents,
-            'socket'  : request.sid,
-            'user'   : getUsernameFromID(request.sid),
-            'picture' : getUserPhotoFromID(request.sid),
-            })
-            socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
-            return
+            else:
+                messageList.append({
+                'message' : passedContents,
+                'socket'  : request.sid,
+                'user'   : getUsernameFromID(request.sid),
+                'picture' : getUserPhotoFromID(request.sid),
+                })
+                socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+                return
         
 @socketio.on("Alert")
 def handle_game_alert(data): 

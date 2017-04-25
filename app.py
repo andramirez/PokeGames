@@ -238,10 +238,10 @@ def handle_game_alert(data):
     messageList.append({
             'message' : data,
             'socket'  : "0000",
-            'user'   : getUsernameFromID(0000),
-            'picture' : getUserPhotoFromID(0000),
+            'user'   : getUsernameFromID("0000"),
+            'picture' : getUserPhotoFromID("0000"),
             })
-    socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+    socketio.emit('passedMessageList', messageList, room=request.sid)
     print "hi" + rec_data
     
     

@@ -286,7 +286,6 @@ document.getElementById("sendMessageBox").value = " ";
                 <input name="text" size="40" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />
                          </div>
-                             <input type="text" id = "sessoionID"/>
                          </form>
                 <div className = "logoutContainer">
                     <Logout/>

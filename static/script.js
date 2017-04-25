@@ -13361,13 +13361,14 @@ var Game = exports.Game = function (_React$Component) {
                     _this2.setState({
                         'inventory': data['inventory']
                     });
-                    _Socket.Socket.emit("Alert Self", "New Item!");
-                } else _Socket.Socket.emit("Alert Self", data['message']);
+                    _Socket.Socket.emit("AlertSelf", "New Item!! " + data['inventory']);
+                } else _Socket.Socket.emit("AlertSelf", "no data found... :(");
             });
             _Socket.Socket.on('new poke', function (data) {
                 _this2.setState({
                     'team': data['team']
                 });
+                _Socket.Socket.emit("AlertSelf", "New Pokemon!! " + data['team'].slice(-1)[0]);
             });
             _Socket.Socket.on('passedMessageList', function (data) {
                 _this2.setState({

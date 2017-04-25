@@ -51,15 +51,16 @@ export class Game extends React.Component {
                 this.setState({
                     'inventory': data['inventory']
                 });
-                Socket.emit("Alert Self", "New Item!");
+                Socket.emit("AlertSelf", "New Item!! " + data['inventory'].slice(-1)[0]);
             }
             else 
-                Socket.emit("Alert Self", data['message']);
+                Socket.emit("AlertSelf", "no data found... :(");
         });
         Socket.on('new poke', (data) => { 
             this.setState({
                 'team': data['team']
             });
+            Socket.emit("AlertSelf", "New Pokemon!! " + data['team'].slice(-1)[0]);
         });
         Socket.on('passedMessageList', (data) => {
             this.setState({

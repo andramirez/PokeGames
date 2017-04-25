@@ -22,7 +22,7 @@ usersList = []
 ##setting up default user - pokegames (for chat)
 usersList.append({
         'name': "PokeGames Alert",
-        'picture': "/static/image/logo3",
+        'picture': "/static/image/logo3.png",
         'email' : "Pokegames438@gmail.com",
         'identifier' : "BOT",
         'source': '"BOT',
@@ -255,19 +255,36 @@ def handle_game_alert(data):
 
     socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
     print "ALERT: " + rec_data
+    #removeSelfAlertFromList("0000")
 
-@socketio.on("Alert Self") #things like picking up items
+@socketio.on("AlertSelf") #things like picking up items
 def handle_game_alert_self(data): 
     rec_data = data
-    # messageList.append({
-    #         'message' : data,
-    #         'socket'  : "0000",
-    #         'user'   : getUsernameFromID(0000),
-    #         'picture' : getUserPhotoFromID(0000),
-    #         })
-    # socketio.emit('passedMessageList', messageList, room=request.sid)
+    messageList.append({
+             'message' : rec_data,
+             'socket'  : "0000",
+             'user'   : getUsernameFromID("0000"),
+             'picture' : getUserPhotoFromID("0000"),
+             })
+    socketio.emit('passedMessageList', messageList,  room=playerData[request.sid]['currentSession'])
+    #removeSelfAlertFromList("0000")
     print "SELF ALERT: " + rec_data
 
+
+def removeSelfAlertFromList(data):
+    user = getUsernameFromID("0000")
+    print user
+    if (user !=None):
+        for alerts in messageList:
+            print alerts['user']
+            if (alerts['user']=="PokeGames Alert"):
+                del alerts['message']
+                del alerts['socket']
+                del alerts['user']
+                del alerts['picture']
+                
+    
+    
 def getUsernameFromID(socket_id):
     passedID = socket_id
     if (socket_id != None):

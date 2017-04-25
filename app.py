@@ -18,7 +18,6 @@ socketio = flask_socketio.SocketIO(app)
 #user vars
 usersList = []
 
-
 ##setting up default user - pokegames (for chat)
 usersList.append({
         'name': "PokeGames Alert",
@@ -141,9 +140,13 @@ def attack(data):
                     if (stats_a > stats_b):
                         win_msg = fighter_a+" wins!"
                         playerData[player2id]['health'] -= (stats_a - stats_b)
+                        if playerData[player2id]['health'] < 0:
+                            playerData[player2id]['health'] = 0
                     elif (stats_a < stats_b):
                         win_msg = fighter_b+" wins!"
                         playerData[request.sid]['health'] -= (stats_b - stats_a)
+                        if playerData[request.sid]['health'] < 0:
+                            playerData[request.sid]['health'] = 0
                     else:
                         win_msg = "Draw!"
                     socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = request.sid)
@@ -154,7 +157,6 @@ def attack(data):
             except KeyError: 
                 loop += 1
         on_leave(playerData[request.sid]['battleID'])
-        
         
 @socketio.on('get id')
 def send_id():
@@ -244,9 +246,7 @@ def generateKey():
     key = os.urandom(24).encode('hex')
     return key
     
-    
 ##Message Handlers
-
 @socketio.on("newMessage")
 def handle_message(messageData):
     passedContents = messageData
@@ -298,7 +298,6 @@ def handle_game_alert_self(data):
     #removeSelfAlertFromList("0000")
     print "SELF ALERT: " + rec_data
 
-
 def removeSelfAlertFromList(data):
     user = getUsernameFromID("0000")
     print user
@@ -311,8 +310,6 @@ def removeSelfAlertFromList(data):
                 del alerts['user']
                 del alerts['picture']
                 
-    
-    
 def getUsernameFromID(socket_id):
     passedID = socket_id
     if (socket_id != None):
@@ -332,7 +329,6 @@ def getUserPhotoFromID(socket_id):
             photoLink = connections['picture']
             print photoLink
             return photoLink
-            
             
 @socketio.on('sendEmail')
 def sendMail(data):
@@ -372,9 +368,6 @@ def spotify(data):
 	random_track_link = "https://embed.spotify.com/?uri="+random_track
 	socketio.emit('fromSpotify', random_track_link)
 	
-	
-
-
 if __name__ == '__main__': # __name__!
     socketio.run(
         app,

@@ -18,15 +18,14 @@
 ### Andrea helped Katelynn set up the webpage shells for the game, implemented PokeAPI, and worked on documentation. Andrea also created the energy bar and tied it to the existing health variable to be regularly updated.                                                                                                               
 ### Dante worked on some design aspects of the page's CSS, and was the go-to debugger for the application. He also helped with setting up the initial sockets in the game and was the primary coder behind social logins.
 
-
 # What were you able to complete for this handin?
-### For this handin, we were able to add multiplayer functionality, interaction between players, and 
+### For this handin, we were able to add multiplayer functionality, interaction between players, and a losing condition.
 
 # What are known problems, if any, with your project?
-### Right now, there is an issue with our Web App running on Firefox.
+### Right now, there is an issue with our Web App running on Firefox. There are some minor bugs throughout as well.
 
 # How would you improve it if you had more time?
-### If given more time, we would have liked to make the site look more asthetically pleasing.
+### If given more time, we would have liked to make the site look more asthetically pleasing and more complete.
 
 # Link to deployed application
 [Heroku Deployment](http://still-beyond-48460.herokuapp.com)

@@ -74,6 +74,11 @@ export class Game extends React.Component {
                 'select': 1
             });
         });
+        Socket.on('deselect',(data) => { 
+            this.setState({
+                'select': 0
+            });
+        });
     }
 
 handleSubmit(event) {

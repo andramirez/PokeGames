@@ -9,10 +9,6 @@ def getStatsByName(name):
     pokemon = pykemon.get(pokemon=name.lower())
     return pokemon.attack + pokemon.sp_atk + pokemon.defense + pokemon.sp_def
     
-def getCRByName(name):
-    pokemon = pykemon.get(pokemon=name.lower())
-    return pokemon.catch_rate
-    
 ##returns type(s)
 def getTypeByName(name):
     pokemon = pykemon.get(pokemon=name.lower())

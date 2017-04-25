@@ -125,7 +125,7 @@ def attack(data):
         if (playerData[request.sid]['battleID'][0:-6]!=request.sid): #if not room host
             combatant[playerData[request.sid]['battleID']] = request.sid
         loop = 1
-        while (loop and loop < 1000): #fix later
+        while (loop and loop < 10): #fix later
             try:
                 if (combatant[playerData[request.sid]['battleID']] and request.sid != combatant[playerData[request.sid]['battleID']]): #if both players are set
                     player2id = combatant[playerData[request.sid]['battleID']]

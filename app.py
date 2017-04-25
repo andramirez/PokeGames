@@ -114,7 +114,7 @@ def make_choice(data):
 def battle(data):
     if (data['id'] == request.sid):
         print playerData[request.sid]['name'] + ' entered a battle.'
-        if (data['battle_action'] == 'fight' and len(playerData[request.sid]['team'])>0): #if you want to fight and HAVE pokemon
+        if (len(playerData[request.sid]['team'])>0): #if you HAVE pokemon
             print playerData[request.sid]['name'] + ' is ready to fight!'
             socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=request.sid)
         
@@ -124,9 +124,33 @@ def attack(data):
         combatTeams[request.sid] = playerData[request.sid]['team'][int(data['fighter'])] 
         if (playerData[request.sid]['battleID'][0:-6]!=request.sid): #if not room host
             combatant[playerData[request.sid]['battleID']] = request.sid
-        if (combatant[playerData[request.sid]['battleID']] and request.sid != combatant[playerData[request.sid]['battleID']]): #if both players are set
-            print combatTeams[request.sid] + ' vs ' + combatTeams[combatant[playerData[request.sid]['battleID']]]
+        loop = 1
+        while (loop and loop < 1000): #fix later
+            try:
+                if (combatant[playerData[request.sid]['battleID']] and request.sid != combatant[playerData[request.sid]['battleID']]): #if both players are set
+                    player2id = combatant[playerData[request.sid]['battleID']]
+                    fighter_a = combatTeams[request.sid]
+                    fighter_b = combatTeams[player2id]
+                    stats_a = pokeAPI.getStatsByName(fighter_a)
+                    stats_b = pokeAPI.getStatsByName(fighter_b)
+                    vs_msg = playerData[request.sid]['name']+"'s "+fighter_a + ' vs ' + playerData[player2id]['name']+"'s "+fighter_b
+                    if (stats_a > stats_b):
+                        win_msg = fighter_a+" wins!"
+                        playerData[player2id]['health'] -= (stats_a - stats_b)
+                    elif (stats_a < stats_b):
+                        win_msg = fighter_b+" wins!"
+                        playerData[request.sid]['health'] -= (stats_b - stats_a)
+                    else:
+                        win_msg = "Draw!"
+                    socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = request.sid)
+                    socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = player2id)
+                    socketio.emit("update health",{'health':playerData[request.sid]['health']},room = request.sid)
+                    socketio.emit("update health",{'health':playerData[player2id]['health']},room = player2id)
+                    loop = 0
+            except KeyError: 
+                loop += 1
         on_leave(playerData[request.sid]['battleID'])
+        
         
 @socketio.on('get id')
 def send_id():

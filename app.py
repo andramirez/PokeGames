@@ -188,7 +188,17 @@ def g_user_details(data):
     })
     playerData[request.sid]['image']=json['pic']
     playerData[request.sid]['name']=json['user']
-    
+
+@socketio.on('use_item')
+def use_item(data):
+    print data
+    if (data['id'] == request.sid):
+        if(playerData[request.sid]['health'] != 0):
+            print playerData[request.sid]['name'] + ' clicked Item.'
+            recover_health()
+            remove_item()
+            
+
 def on_join(data):
     username = data['username']
     room = data['room']
@@ -221,9 +231,22 @@ def get_item(terrain):
         playerData[request.sid]['inventory'].append(item)
     socketio.emit('new item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)
 
+def remove_item():
+    item = 'static/image/potion.png'
+    if len(playerData[request.sid]['inventory']) > 0:
+        playerData[request.sid]['inventory'].remove(item)
+    socketio.emit('remove item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)
+
 def get_rest():
     if playerData[request.sid]['health'] < 100:
         playerData[request.sid]['health'] += 20
+        if (playerData[request.sid]['health'] > 100):
+            playerData[request.sid]['health'] = 100
+    socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
+
+def recover_health():
+    if playerData[request.sid]['health'] < 100:
+        playerData[request.sid]['health'] += 10
         if (playerData[request.sid]['health'] > 100):
             playerData[request.sid]['health'] = 100
     socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)

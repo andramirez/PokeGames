@@ -13382,6 +13382,7 @@ var Game = exports.Game = function (_React$Component) {
             'select': 0
         };
         _this.handleSelect = _this.handleSelect.bind(_this);
+        _this.useItem = _this.useItem.bind(_this);
         return _this;
     }
 
@@ -13426,6 +13427,12 @@ var Game = exports.Game = function (_React$Component) {
                     _Socket.Socket.emit("AlertSelf", "New Item!! " + data['inventory'].slice(-1)[0]);
                 } else _Socket.Socket.emit("AlertSelf", "no items found... :(");
             });
+            _Socket.Socket.on('remove item', function (data) {
+                _this2.setState({
+                    'inventory': data['inventory']
+                });
+                _Socket.Socket.emit("AlertSelf", "removed Item from inventory");
+            });
             _Socket.Socket.on('new poke', function (data) {
                 _this2.setState({
                     'team': data['team']
@@ -13462,6 +13469,14 @@ var Game = exports.Game = function (_React$Component) {
             document.getElementById("sendMessageBox").value = " ";
         }
     }, {
+        key: 'useItem',
+        value: function useItem() {
+            window.console.log("Item has been clicked");
+            _Socket.Socket.emit('use_item', {
+                'id': this.state.id
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this3 = this;
@@ -13482,7 +13497,7 @@ var Game = exports.Game = function (_React$Component) {
                 return React.createElement(
                     'li',
                     null,
-                    React.createElement('img', { src: n })
+                    React.createElement('img', { src: n, onClick: _this3.useItem })
                 );
             });
             var health = this.state.health;

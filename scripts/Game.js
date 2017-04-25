@@ -19,6 +19,7 @@ export class Game extends React.Component {
             'select':0
         };
         this.handleSelect = this.handleSelect.bind(this);
+        this.useItem = this.useItem.bind(this);
     }
     handleSelect(event) {
         event.preventDefault();
@@ -56,6 +57,12 @@ export class Game extends React.Component {
             else 
                 Socket.emit("AlertSelf", "no items found... :(");
         });
+        Socket.on('remove item', (data) =>{
+            this.setState({
+                'inventory': data['inventory']
+            });
+            Socket.emit("AlertSelf", "removed Item from inventory");
+        });
         Socket.on('new poke', (data) => { 
             this.setState({
                 'team': data['team']
@@ -90,13 +97,20 @@ var message = document.getElementById("sendMessageBox").value;
 Socket.emit('newMessage', message);
 document.getElementById("sendMessageBox").value = " ";
 }
+
+useItem(){
+    window.console.log("Item has been clicked");
+    Socket.emit('use_item',{
+          'id': this.state.id
+    });
+}
     render() {
         let select = this.state.select;
         let team = this.state.team.map((n, index) => 
             <li key={index}>{select ? <a href='' id={index} onClick={this.handleSelect}>{n}</a> : n}</li>
         );
         let inventory = this.state.inventory.map((n, index) => 
-            <li><img src={n}/></li>
+            <li><img src={n} onClick={this.useItem}/></li>
         );
         let health = this.state.health;
         let session = this.state.session;

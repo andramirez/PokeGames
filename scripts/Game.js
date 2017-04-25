@@ -51,7 +51,7 @@ export class Game extends React.Component {
                 this.setState({
                     'inventory': data['inventory']
                 });
-                Socket.emit("AlertSelf", "New Item!! " + data['inventory']);
+                Socket.emit("AlertSelf", "New Item!! " + data['inventory'].slice(-1)[0]);
             }
             else 
                 Socket.emit("AlertSelf", "no data found... :(");

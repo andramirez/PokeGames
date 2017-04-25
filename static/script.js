@@ -13361,7 +13361,7 @@ var Game = exports.Game = function (_React$Component) {
                     _this2.setState({
                         'inventory': data['inventory']
                     });
-                    _Socket.Socket.emit("AlertSelf", "New Item!! " + data['inventory']);
+                    _Socket.Socket.emit("AlertSelf", "New Item!! " + data['inventory'].slice(-1)[0]);
                 } else _Socket.Socket.emit("AlertSelf", "no data found... :(");
             });
             _Socket.Socket.on('new poke', function (data) {

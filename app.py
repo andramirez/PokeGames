@@ -255,6 +255,7 @@ def handle_game_alert(data):
 
     socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
     print "ALERT: " + rec_data
+    #removeSelfAlertFromList("0000")
 
 @socketio.on("AlertSelf") #things like picking up items
 def handle_game_alert_self(data): 
@@ -266,8 +267,24 @@ def handle_game_alert_self(data):
              'picture' : getUserPhotoFromID("0000"),
              })
     socketio.emit('passedMessageList', messageList,  room=playerData[request.sid]['currentSession'])
+    #removeSelfAlertFromList("0000")
     print "SELF ALERT: " + rec_data
 
+
+def removeSelfAlertFromList(data):
+    user = getUsernameFromID("0000")
+    print user
+    if (user !=None):
+        for alerts in messageList:
+            print alerts['user']
+            if (alerts['user']=="PokeGames Alert"):
+                del alerts['message']
+                del alerts['socket']
+                del alerts['user']
+                del alerts['picture']
+                
+    
+    
 def getUsernameFromID(socket_id):
     passedID = socket_id
     if (socket_id != None):

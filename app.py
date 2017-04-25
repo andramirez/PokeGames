@@ -17,11 +17,25 @@ socketio = flask_socketio.SocketIO(app)
 
 #user vars
 usersList = []
+
+
+##setting up default user - pokegames (for chat)
+usersList.append({
+        'name': "PokeGames Alert",
+        'picture': "/static/image/logo3.png",
+        'email' : "Pokegames438@gmail.com",
+        'identifier' : "BOT",
+        'source': '"BOT',
+        'socket' : "0000"
+    })
+
 messageList = []
 
 #game vars
 maps = {}
 userPositions = {}
+combatant = {}
+combatTeams = {}
 
 #player vars
 playerData = {}
@@ -34,7 +48,7 @@ def index():
 def on_connect():
     playerID = request.sid
     location = str(randint(0,5))+','+str(randint(0,5))
-    playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':'','battleID':playerID+'battle' }
+    playerData[playerID] = {'team':[],'inventory':[],'image':'/static/image/placeholder.jpg','name':'Placeholder Name','health':100,'location':location,'currentSession':'','battleID':playerID+'battle'}
     on_join({'username':playerData[playerID]['name'],'room':playerID})
     on_join({'username':playerData[playerID]['name'],'room':playerData[playerID]['battleID']}) #room for battle notifs
     print playerID+' connected!'
@@ -102,7 +116,16 @@ def battle(data):
         print playerData[request.sid]['name'] + ' entered a battle.'
         if (data['battle_action'] == 'fight' and len(playerData[request.sid]['team'])>0): #if you want to fight and HAVE pokemon
             print playerData[request.sid]['name'] + ' is ready to fight!'
-            # socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=playerData[request.sid]['battleID'])
+            socketio.emit('choose fighter', {'id':request.sid,'team':playerData[request.sid]['team']}, room=request.sid)
+        
+@socketio.on('attack')
+def attack(data):
+    if (data['id'] == request.sid): 
+        combatTeams[request.sid] = playerData[request.sid]['team'][int(data['fighter'])] 
+        if (playerData[request.sid]['battleID'][0:-6]!=request.sid): #if not room host
+            combatant[playerData[request.sid]['battleID']] = request.sid
+        if (combatant[playerData[request.sid]['battleID']] and request.sid != combatant[playerData[request.sid]['battleID']]): #if both players are set
+            print combatTeams[request.sid] + ' vs ' + combatTeams[combatant[playerData[request.sid]['battleID']]]
         on_leave(playerData[request.sid]['battleID'])
         
 @socketio.on('get id')
@@ -163,7 +186,7 @@ def get_pokemon(terrain):
     socketio.emit('new poke', {'team': playerData[request.sid]['team']}, room=request.sid)
     
 def get_item(terrain):
-    item = 'potion' #change later
+    item = 'static/image/potion.png' #change later
     if len(playerData[request.sid]['inventory']) < 3:
         playerData[request.sid]['inventory'].append(item)
     socketio.emit('new item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)
@@ -176,7 +199,6 @@ def get_rest():
     socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
 
 def createGrid(size):
-    
     # Define Lists
     units = {'small': 5, 'medium': 6, 'large': 7}
     terrain = ['lake','desert','plains','forest','mountain','mountain-peak','factory','swamp','unknown']
@@ -220,7 +242,49 @@ def handle_message(messageData):
             })
             socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
             return
-            
+        
+@socketio.on("Alert")
+def handle_game_alert(data): 
+    rec_data = data
+    messageList.append({
+            'message' : data,
+            'socket'  : "0000",
+            'user'   : getUsernameFromID("0000"),
+            'picture' : getUserPhotoFromID("0000"),
+            })
+
+    socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+    print "ALERT: " + rec_data
+    #removeSelfAlertFromList("0000")
+
+@socketio.on("AlertSelf") #things like picking up items
+def handle_game_alert_self(data): 
+    rec_data = data
+    messageList.append({
+             'message' : rec_data,
+             'socket'  : "0000",
+             'user'   : getUsernameFromID("0000"),
+             'picture' : getUserPhotoFromID("0000"),
+             })
+    socketio.emit('passedMessageList', messageList,  room=playerData[request.sid]['currentSession'])
+    #removeSelfAlertFromList("0000")
+    print "SELF ALERT: " + rec_data
+
+
+def removeSelfAlertFromList(data):
+    user = getUsernameFromID("0000")
+    print user
+    if (user !=None):
+        for alerts in messageList:
+            print alerts['user']
+            if (alerts['user']=="PokeGames Alert"):
+                del alerts['message']
+                del alerts['socket']
+                del alerts['user']
+                del alerts['picture']
+                
+    
+    
 def getUsernameFromID(socket_id):
     passedID = socket_id
     if (socket_id != None):

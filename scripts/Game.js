@@ -9,19 +9,25 @@ export class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            'id':'',
             'session': '',
             'team': [],
             'inventory': [],
             'messageHolder' : [],
             'isGameLaunched': false,
-            'health': 100
+            'health': 100,
+            'select':0
         };
+        this.handleSelect = this.handleSelect.bind(this);
     }
-
+    handleSelect(event) {
+        event.preventDefault();
+        Socket.emit('attack', {'id':this.state.id, 'fighter':event.target.id});
+    }
     componentDidMount() {
         Socket.on('join', (data) => { 
             if (data['message']!=''){
-                alert(data['message']);
+                Socket.emit("Alert", data['message']);
             }
         });
         Socket.on('game start', (data) => { 
@@ -45,18 +51,27 @@ export class Game extends React.Component {
                 this.setState({
                     'inventory': data['inventory']
                 });
+                Socket.emit("AlertSelf", "New Item!! " + data['inventory'].slice(-1)[0]);
             }
             else 
-                alert("Nothing found...");
+                Socket.emit("AlertSelf", "no data found... :(");
         });
         Socket.on('new poke', (data) => { 
             this.setState({
                 'team': data['team']
             });
+            Socket.emit("AlertSelf", "New Pokemon!! " + data['team'].slice(-1)[0]);
         });
         Socket.on('passedMessageList', (data) => {
             this.setState({
-            messageHolder : data,
+                'messageHolder' : data,
+            });
+        });
+        Socket.on('choose fighter', (data) => { 
+            this.setState({
+                'id': data['id'],
+                'team': data['team'],
+                'select': 1
             });
         });
     }
@@ -68,15 +83,15 @@ Socket.emit('newMessage', message);
 document.getElementById("sendMessageBox").value = " ";
 }
     render() {
+        let select = this.state.select;
         let team = this.state.team.map((n, index) => 
-            <li key={index}>{n}</li>
+            <li key={index}>{select ? <a href='' id={index} onClick={this.handleSelect}>{n}</a> : n}</li>
         );
         let inventory = this.state.inventory.map((n, index) => 
-            <li key={index}>{n}</li>
+            <li><img src={n}/></li>
         );
         let health = this.state.health;
         let session = this.state.session;
-      
     
         let energy = 
             <div className="energyContainer">
@@ -85,8 +100,30 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy3"> </div>
               <div className="stats energy4"> </div>
               <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div className="stats energy8"> </div>
+              <div className="stats energy9"> </div>
+              <div className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
+        if(this.state.health < 90)
+        {
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div className="stats energy8"> </div>
+              <div className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
         if(this.state.health < 80)
         {
             energy = 
@@ -95,7 +132,28 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
               <div className="stats energy4"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 70){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -105,8 +163,29 @@ document.getElementById("sendMessageBox").value = " ";
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 50){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -115,9 +194,30 @@ document.getElementById("sendMessageBox").value = " ";
             <div className="energyContainer">
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
-              <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
+              <div className="stats energy3"> </div>
+              <div className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 30){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div className="stats energy3"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -125,10 +225,31 @@ document.getElementById("sendMessageBox").value = " ";
             energy = 
             <div className="energyContainer">
               <div className="stats energy1"> </div>
+              <div className="stats energy2"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
+              <h2>{health}</h2>
+             </div>;
+        }
+        if(this.state.health < 10){
+            energy = 
+            <div className="energyContainer">
+              <div className="stats energy1"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy2"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy4"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "grey"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -140,6 +261,11 @@ document.getElementById("sendMessageBox").value = " ";
               <div style={{backgroundColor: "black"}} className="stats energy3"> </div>
               <div style={{backgroundColor: "black"}} className="stats energy4"> </div>
               <div style={{backgroundColor: "black"}} className="stats energy5"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy6"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy7"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy8"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy9"> </div>
+              <div style={{backgroundColor: "black"}} className="stats energy10"> </div>
               <h2>{health}</h2>
              </div>;
         }
@@ -167,14 +293,12 @@ document.getElementById("sendMessageBox").value = " ";
             <h3> Poke Chat </h3>
             </div>
             <div className="scroll">
-            
                 {messageData}
                 </div>
                 <div className="scrollInput">
                 <input name="text" size="40" id="sendMessageBox" placeholder="enter message here"/>
                          <SubButton /> <br />
                          </div>
-                             <input type="text" id = "sessoionID"/>
                          </form>
                 <div className = "logoutContainer">
                     <Logout/>

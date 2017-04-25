@@ -80,29 +80,54 @@ li:last-child:after { content: ""; }
     margin-bottom:30px;
 }
 .energy1 {
-    width: 20%; 
-    background-color: #f44336;
-    flex:1;
+    width: 10%; 
+    background-color: #b20000;
+    flex:.5;
 }
 .energy2 {
-    width: 20%; 
-    background-color: #f4a436;
-    flex:1;
+    width: 10%; 
+    background-color: #ff4949;
+    flex:.5;
 }
 .energy3 {
-    width: 20%; 
-    background-color: #f4e736;
-    flex:1;
+    width: 10%; 
+    background-color: #e28000;
+    flex:.5;
 }
 .energy4 {
-    width: 20%; 
-    background-color: #68f436;
-    flex:1;
+    width: 10%; 
+    background-color: #ffad42;
+    flex:.5;
 }
 .energy5 {
-    width: 20%; 
-    background-color: #36b1f4;
-    flex:1;
+    width: 10%; 
+    background-color: #d3cf00;
+    flex:.5;
+}
+.energy6 {
+    width: 10%; 
+    background-color: #fffc63;
+    flex:.5;
+}
+.energy7 {
+    width: 10%; 
+    background-color: #11d300;
+    flex:.5;
+}
+.energy8 {
+    width: 10%; 
+    background-color: #1cff67;
+    flex:.5;
+}
+.energy9 {
+    width: 10%; 
+    background-color: #1c85ff;
+    flex:.5;
+}
+.energy10 {
+    width: 10%; 
+    background-color: #2bd8ff;
+    flex:.5;
 }
 #login {
     position: absolute;
@@ -133,16 +158,12 @@ li:last-child:after { content: ""; }
  
     
 }
-div.transbox button {
-  margin: 5%;
-  font-weight: bold;
-  color: #000000;
-}
+
 #msgtext{
   padding:15px;
   width: 100%;
   margin: 5px 10px 0;
-  background: #1ddced;
+  background: #7CFC00;
   border-radius: 18px;
   color: black;   
   font-size: 18px;
@@ -167,31 +188,30 @@ div.transbox button {
 .scroll {
     background-color:white;
 	height:100%;
-    border-radius: 58px 0px 49px 0px;
-    -moz-border-radius: 58px 0px 49px 0px;
-    -webkit-border-radius: 58px 0px 49px 0px;
     border: 18px solid #000000;
 	opacity: 0.8;
 	overflow-y:scroll;
     height: 200px;
-    margin: 50px;
-    text-align:center;
-    padding:5px;
+    margin: 20px;
     width: 500px;
-
- position: absolute;
- top: 60;
- right: -50;
+    position: fixed;
+     top: 60;
+     right: -25;
+     max-width: 100%;
+     word-wrap: break-word;
+    overflow-x: hidden;
 }
 .chatHeading{
  position: absolute;
  top: 0;
- right:20;
+ right:150;
+ position: fixed
 }
 .scrollInput{
 position: absolute;
  top: 350;
  right: 0;
+ position: fixed
 
 }
 h3 {

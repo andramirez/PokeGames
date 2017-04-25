@@ -13472,8 +13472,8 @@ var Game = exports.Game = function (_React$Component) {
             var inventory = this.state.inventory.map(function (n, index) {
                 return React.createElement(
                     'li',
-                    { key: index },
-                    n
+                    null,
+                    React.createElement('img', { src: n })
                 );
             });
             var health = this.state.health;
@@ -13508,11 +13508,97 @@ var Game = exports.Game = function (_React$Component) {
                     ' '
                 ),
                 React.createElement(
+                    'div',
+                    { className: 'stats energy6' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy7' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy8' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy9' },
+                    ' '
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'stats energy10' },
+                    ' '
+                ),
+                React.createElement(
                     'h2',
                     null,
                     health
                 )
             );
+            if (this.state.health < 90) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
             if (this.state.health < 80) {
                 energy = React.createElement(
                     'div',
@@ -13539,7 +13625,93 @@ var Game = exports.Game = function (_React$Component) {
                     ),
                     React.createElement(
                         'div',
-                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        { className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health < 70) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
                         ' '
                     ),
                     React.createElement(
@@ -13570,12 +13742,98 @@ var Game = exports.Game = function (_React$Component) {
                     ),
                     React.createElement(
                         'div',
-                        { style: { backgroundColor: "grey" }, className: 'stats energy4' },
+                        { className: 'stats energy4' },
                         ' '
                     ),
                     React.createElement(
                         'div',
-                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        { className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health < 50) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
                         ' '
                     ),
                     React.createElement(
@@ -13586,6 +13844,128 @@ var Game = exports.Game = function (_React$Component) {
                 );
             }
             if (this.state.health < 40) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health < 30) {
+                energy = React.createElement(
+                    'div',
+                    { className: 'energyContainer' },
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy1' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'stats energy3' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy4' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'h2',
+                        null,
+                        health
+                    )
+                );
+            }
+            if (this.state.health < 20) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
@@ -13615,13 +13995,38 @@ var Game = exports.Game = function (_React$Component) {
                         ' '
                     ),
                     React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
+                        ' '
+                    ),
+                    React.createElement(
                         'h2',
                         null,
                         health
                     )
                 );
             }
-            if (this.state.health < 20) {
+            if (this.state.health < 10) {
                 energy = React.createElement(
                     'div',
                     { className: 'energyContainer' },
@@ -13648,6 +14053,31 @@ var Game = exports.Game = function (_React$Component) {
                     React.createElement(
                         'div',
                         { style: { backgroundColor: "grey" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "grey" }, className: 'stats energy10' },
                         ' '
                     ),
                     React.createElement(
@@ -13684,6 +14114,31 @@ var Game = exports.Game = function (_React$Component) {
                     React.createElement(
                         'div',
                         { style: { backgroundColor: "black" }, className: 'stats energy5' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy6' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy7' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy8' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy9' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'div',
+                        { style: { backgroundColor: "black" }, className: 'stats energy10' },
                         ' '
                     ),
                     React.createElement(
@@ -13770,8 +14225,7 @@ var Game = exports.Game = function (_React$Component) {
                         React.createElement(SubButton, null),
                         ' ',
                         React.createElement('br', null)
-                    ),
-                    React.createElement('input', { type: 'text', id: 'sessoionID' })
+                    )
                 ),
                 React.createElement(
                     'div',

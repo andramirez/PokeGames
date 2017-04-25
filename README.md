@@ -12,10 +12,12 @@
 ### The goal of the game will be to traverse a digital grid by point-and-click and search for pokemon and items in order to out-survive and out-battle all the other players. The primary goal is to be the last one standing.
 
 # Who worked on it?
-### Javar worked on some design aspects of the game, along with integrating spotify api, and the sockets for a collaborative listening envoirment for spotify. Users connected to a specific game/lobby will listen to the same songs. He also worked on debugging the Facebook login functionality and creating the chat used during the game.                                  
+
+### Javar worked on some design aspects of the game, along with integrating spotify api, and the sockets for a collaborative listening envoirment for spotify. Users connected to a specific game/lobby will listen to the same songs. He also worked on debugging the Facebook login functionality and creating the chat used during the game. Helped set up sockets namespaces/rooms for specific users. Javar also added the email functionality to the game. You can input an email and it sends a join email to the user.                                 
 ### Katelynn set up the basic framework for the game, created the early visuals for the game board, and set up the python scripts and the webpage shells. Additionally, Katelynn set up rooms (player/game/battle) and wrote the core functionalites of most game features including: player icon appearing at current position, distance calculation when moving, storage of player data, battle system, performing actions, etc.                                                                                                                      
 ### Andrea helped Katelynn set up the webpage shells for the game, implemented PokeAPI, and worked on documentation. Andrea also created the energy bar and tied it to the existing health variable to be regularly updated.                                                                                                               
 ### Dante worked on some design aspects of the page's CSS, and was the go-to debugger for the application. He also helped with setting up the initial sockets in the game and was the primary coder behind social logins.
+
 
 # What were you able to complete for this handin?
 ### For this handin, we were able to add multiplayer functionality, interaction between players, and 

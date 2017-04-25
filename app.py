@@ -186,7 +186,7 @@ def get_pokemon(terrain):
     socketio.emit('new poke', {'team': playerData[request.sid]['team']}, room=request.sid)
     
 def get_item(terrain):
-    item = 'potion' #change later
+    item = 'static/image/potion.png' #change later
     if len(playerData[request.sid]['inventory']) < 3:
         playerData[request.sid]['inventory'].append(item)
     socketio.emit('new item', {'inventory': playerData[request.sid]['inventory']}, room=request.sid)
@@ -249,12 +249,13 @@ def handle_game_alert(data):
     messageList.append({
             'message' : data,
             'socket'  : "0000",
-            'user'   : getUsernameFromID(0000),
-            'picture' : getUserPhotoFromID(0000),
+            'user'   : getUsernameFromID("0000"),
+            'picture' : getUserPhotoFromID("0000"),
             })
+
     socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
     print "ALERT: " + rec_data
-    
+
 @socketio.on("Alert Self") #things like picking up items
 def handle_game_alert_self(data): 
     rec_data = data

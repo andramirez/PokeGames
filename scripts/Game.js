@@ -297,10 +297,11 @@ useItem(){
             );
         return (
             <div>
+
                 <Board/>
                 <div className="statBar">
-                <h2 className="stats title">Energy:</h2>
-                {energy}
+                    <h2 className="stats title">Energy:</h2>
+                    {energy}
                 </div>
                 Game ID: {session}
                 <br />

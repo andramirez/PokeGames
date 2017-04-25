@@ -5,6 +5,7 @@ import { Socket } from './Socket';
 import { Logout } from './Logout';
 import { Chatroom } from './Chat';
 import {SendEmail} from './SendEmail';
+import SkyLight from 'react-skylight';
 export class Game extends React.Component {
     constructor(props) {
         super(props);
@@ -117,6 +118,7 @@ useItem(){
     
         let energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -133,6 +135,7 @@ useItem(){
         {
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -150,6 +153,7 @@ useItem(){
         {
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -166,6 +170,7 @@ useItem(){
         if(this.state.health < 70){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -182,6 +187,7 @@ useItem(){
         if(this.state.health < 60){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -198,6 +204,7 @@ useItem(){
         if(this.state.health < 50){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -214,6 +221,7 @@ useItem(){
         if(this.state.health < 40){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -230,6 +238,7 @@ useItem(){
         if(this.state.health < 30){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div className="stats energy3"> </div>
@@ -246,6 +255,7 @@ useItem(){
         if(this.state.health < 20){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div className="stats energy2"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
@@ -262,6 +272,7 @@ useItem(){
         if(this.state.health < 10){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div className="stats energy1"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy2"> </div>
               <div style={{backgroundColor: "grey"}} className="stats energy3"> </div>
@@ -278,6 +289,7 @@ useItem(){
         if(this.state.health == 0){
             energy = 
             <div className="energyContainer">
+            <h2 className="stats title">Energy:</h2>
               <div style={{backgroundColor: "black"}} className="stats energy1"> </div>
               <div style={{backgroundColor: "black"}} className="stats energy2"> </div>
               <div style={{backgroundColor: "black"}} className="stats energy3"> </div>
@@ -295,12 +307,35 @@ useItem(){
             (n, index) => 
                 <p id="msgtext" key={index}><img id="photo" style={{width : 50, height: 50}} src={n.picture}/><b><font size="2">{n.user}</font><br /></b>{n.message}</p>
             );
+            
+        var myBigGreenDialog = {
+          backgroundColor: 'rgba(190, 190, 190, .75)',
+          color: '#ffffff',
+          width: '70%',
+          height: '600px',
+          marginTop: '-300px',
+          marginLeft: '-35%',
+        };
         return (
             <div>
-
+                <div className = "buttons">
+                    <div className = "tutorial">
+                        <section>
+                          <button onClick={() => this.refs.customDialog.show()}>Tutorial</button>
+                        </section>
+                        <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref="customDialog" title="A Custom Modal">
+                          I'm a custom modal!
+                        </SkyLight>
+                    </div>
+                    <div className = "logoutContainer">
+                        <Logout/>
+                    </div>
+                    <div className = "email">
+                        <SendEmail/>
+                    </div>
+                </div>
                 <Board/>
                 <div className="statBar">
-                    <h2 className="stats title">Energy:</h2>
                     {energy}
                 </div>
                 Game ID: {session}
@@ -323,10 +358,6 @@ useItem(){
                          <SubButton /> <br />
                          </div>
                          </form>
-                <div className = "logoutContainer">
-                    <Logout/>
-                </div>
-                <SendEmail/>
             </div>
     )}
 }

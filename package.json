@@ -12,6 +12,7 @@
     "react-facebook-login-component": "^0.6.0",
     "react-google-login": "^2.8.5",
     "react-google-login-component": "^0.5.2",
+    "react-skylight": "^0.4.1",
     "socket.io-client": "1.7.2"
   },
   "devDependencies": {

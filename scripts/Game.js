@@ -54,7 +54,7 @@ export class Game extends React.Component {
                 Socket.emit("AlertSelf", "New Item!! " + data['inventory'].slice(-1)[0]);
             }
             else 
-                Socket.emit("AlertSelf", "no data found... :(");
+                Socket.emit("AlertSelf", "no items found... :(");
         });
         Socket.on('new poke', (data) => { 
             this.setState({

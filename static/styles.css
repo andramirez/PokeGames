@@ -158,16 +158,12 @@ li:last-child:after { content: ""; }
  
     
 }
-div.transbox button {
-  margin: 5%;
-  font-weight: bold;
-  color: #000000;
-}
+
 #msgtext{
   padding:15px;
   width: 100%;
   margin: 5px 10px 0;
-  background: #1ddced;
+  background: #7CFC00;
   border-radius: 18px;
   color: black;   
   font-size: 18px;
@@ -192,31 +188,30 @@ div.transbox button {
 .scroll {
     background-color:white;
 	height:100%;
-    border-radius: 58px 0px 49px 0px;
-    -moz-border-radius: 58px 0px 49px 0px;
-    -webkit-border-radius: 58px 0px 49px 0px;
     border: 18px solid #000000;
 	opacity: 0.8;
 	overflow-y:scroll;
     height: 200px;
-    margin: 50px;
-    text-align:center;
-    padding:5px;
+    margin: 20px;
     width: 500px;
-
- position: absolute;
- top: 60;
- right: -50;
+    position: fixed;
+     top: 60;
+     right: -25;
+     max-width: 100%;
+     word-wrap: break-word;
+    overflow-x: hidden;
 }
 .chatHeading{
  position: absolute;
  top: 0;
- right:20;
+ right:150;
+ position: fixed
 }
 .scrollInput{
 position: absolute;
  top: 350;
  right: 0;
+ position: fixed
 
 }
 h3 {

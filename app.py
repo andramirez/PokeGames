@@ -294,7 +294,7 @@ def handle_game_alert_self(data):
              'user'   : getUsernameFromID("0000"),
              'picture' : getUserPhotoFromID("0000"),
              })
-    socketio.emit('passedMessageList', messageList,  room=playerData[request.sid]['currentSession'])
+    #socketio.emit('passedMessageList', messageList,  room=playerData[request.sid]['currentSession'])
     #removeSelfAlertFromList("0000")
     print "SELF ALERT: " + rec_data
 

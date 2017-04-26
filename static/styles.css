@@ -146,6 +146,14 @@ li:last-child:after { content: ""; }
 .tutorial{
   flex:.5;
   margin:auto;
+
+}
+.text{
+    text-align: left;
+      overflow-y:scroll;
+  height:530px;
+  color:black;
+  font-size: 18px
 }
 .email{
     flex:2;

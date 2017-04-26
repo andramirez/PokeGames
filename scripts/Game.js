@@ -309,8 +309,8 @@ useItem(){
             );
             
         var myBigGreenDialog = {
-          backgroundColor: 'rgba(190, 190, 190, .75)',
-          color: '#ffffff',
+          backgroundColor: 'rgba(190, 190, 190, .85)',
+          color: 'black',
           width: '70%',
           height: '600px',
           marginTop: '-300px',
@@ -323,8 +323,30 @@ useItem(){
                         <section>
                           <button onClick={() => this.refs.customDialog.show()}>Tutorial</button>
                         </section>
-                        <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref="customDialog" title="A Custom Modal">
-                          I'm a custom modal!
+                        <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref="customDialog" title="PokeGames Tutorial">
+                          <div className="tutorial text">Click squares to move. With each move, energy is lost depending on how far the player moves. 
+                          Once the Square is clicked, the player gets one of three choices: Find Pokemon, Search for Supplies, or to Rest. <br/>
+                            <h1>Find Pokemon:</h1><br/>
+                            When the user selects the Find Pokemon Option, they are given a Pokemon based on the terrain they are currently in. <br/>
+                            The type breakdown is as follows:<br/>
+                            Lake: Water and Flying Types<br/>
+                            Desert: Ground and Fire Types<br/>
+                            Plains: Grass and Normal Types<br/>
+                            Forest: Bug and Fairy Types<br/>
+                            Mountain: Rock and Fighting Types<br/>
+                            Mountain-Peak: Ice and Dragon Types<br/>
+                            Factory: Steel and Electric Types<br/>
+                            Swamp: Poison and Dark Types <br/>
+                            Unknown: Ghost and Psychic Types<br/>
+                            <h1>Search for Supplies</h1><br/>
+                            Gathering items is rare. Items found are potions that raise the players' Energy by 10 Points. Often, it can be easier to choose the Rest Option if low on Energy.<br/>
+                            <h1>Rest</h1><br/>
+                            Resting allows the player to restore 20 Points to their energy.<br/>
+                            <h1>Battle</h1><br/>
+                            When a player lands on the same square as another player, a battle is initiated. During the battle, the players choose which pokemon they want to battle with and attack their opponent
+                            until one player loses all energy. <br/>
+                            If one player does not have any pokemon, the battle is cancelled. 
+                        </div>
                         </SkyLight>
                     </div>
                     <div className = "logoutContainer">

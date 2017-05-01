@@ -139,14 +139,21 @@ def attack(data):
                     vs_msg = playerData[request.sid]['name']+"'s "+fighter_a + ' vs ' + playerData[player2id]['name']+"'s "+fighter_b
                     if (stats_a > stats_b):
                         win_msg = fighter_a+" wins!"
-                        playerData[player2id]['health'] -= (stats_a - stats_b)
+                        playerData[player2id]['health'] -= 30
+                        if (stats_a > (stats_b * 2)):
+                            playerData[player2id]['health'] -= 30
                         if playerData[player2id]['health'] < 0:
                             playerData[player2id]['health'] = 0
+                            
                     elif (stats_a < stats_b):
                         win_msg = fighter_b+" wins!"
-                        playerData[request.sid]['health'] -= (stats_b - stats_a)
-                        if playerData[request.sid]['health'] < 0:
+                        playerData[request.sid]['health'] -= 30
+                        if (stats_b > (stats_a * 2)):
+                            playerData[request.sid]['health'] -= 30
+                        elif playerData[request.sid]['health'] < 0:
                             playerData[request.sid]['health'] = 0
+
+                            
                     else:
                         win_msg = "Draw!"
                     socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = request.sid)
@@ -400,4 +407,3 @@ if __name__ == '__main__': # __name__!
         port=int(os.getenv('PORT', 8080)),
         debug=True
     )
-

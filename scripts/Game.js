@@ -324,26 +324,81 @@ useItem(){
                           <button onClick={() => this.refs.customDialog.show()}>Tutorial</button>
                         </section>
                         <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref="customDialog" title="PokeGames Tutorial">
-                          <div className="tutorial text">Click squares to move. With each move, energy is lost depending on how far the player moves. 
-                          Once the Square is clicked, the player gets one of three choices: Find Pokemon, Search for Supplies, or to Rest. <br/>
+                          <div className="tutorial text"><h1>Game Objective:</h1><br/>
+                          Battle other players using Pokemon until one player remains<br/>
+                          <h1>Walkthrough:</h1><br/>
+                          Click squares to move. <br/><br/>
+                          <img src="/static/image/user.png"/> => <img src="static/image/desert.jpg"/> <br/>
+                          <img src="/static/image/plains.jpg"/> => <img src="/static/image/user.png"/> <br/><br/>
+                          With each move, energy is lost depending on how far the player moves. <br/><br/>
+                          <img className ="bar"src="/static/image/bar1.PNG"/> => <img className="bar" src="/static/image/bar2.PNG"/><br/><br/>
+                          Once the Square is clicked, the player gets one of three choices: Find Pokemon, Search for Supplies, or to Rest. <br/><br/>
+                          <img className ="drop"src="/static/image/drop.png"/><br/><br/>
                             <h1>Find Pokemon:</h1><br/>
                             When the user selects the Find Pokemon Option, they are given a Pokemon based on the terrain they are currently in. <br/>
                             The type breakdown is as follows:<br/>
-                            Lake: Water and Flying Types<br/>
-                            Desert: Ground and Fire Types<br/>
-                            Plains: Grass and Normal Types<br/>
-                            Forest: Bug and Fairy Types<br/>
-                            Mountain: Rock and Fighting Types<br/>
-                            Mountain-Peak: Ice and Dragon Types<br/>
-                            Factory: Steel and Electric Types<br/>
-                            Swamp: Poison and Dark Types <br/>
-                            Unknown: Ghost and Psychic Types<br/>
+                            <table>
+                            <tr>
+                            <td className="data">
+                            <div><img src="/static/image/lake.jpg"/></div>
+                            <div>Lake</div>
+                            <div>Water and Flying Types</div>
+                            </td>
+                            <td className="data">
+                            <div><img src="static/image/desert.jpg"/></div>
+                            <div>Desert</div>
+                            <div>Ground and Fire Types</div>
+                            </td>
+                            <td className="data">
+                            <div><img src="/static/image/plains.jpg"/></div>
+                            <div>Plains</div>
+                            <div>Grass and Normal Types</div>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td className="data">
+                            <div><img src="static/image/forest.jpg"/></div>
+                            <div>Desert</div>
+                            <div>Bug and Fairy Types</div>
+                            </td>
+                            <td className="data">
+                            <div><img src="/static/image/mountain.jpg"/></div>
+                            <div>Mountain</div>
+                            <div>Rock and Fighting Types</div>
+                            </td>
+                            <td className="data">
+                            <div><img src="static/image/mountain-peak.jpg"/></div>
+                            <div>Mountain Peak</div>
+                            <div>Ice and Dragon Types</div>
+                            </td>
+                            </tr>
+                            <tr>
+                            <td className="data">
+                            <div><img src="/static/image/factory.jpg"/></div>
+                            <div>Factory</div>
+                            <div>Steel and Electric Types</div>
+                            </td>
+                            <td className="data">
+                            <div><img src="static/image/swamp.jpg"/></div>
+                            <div>Swamp</div>
+                            <div>Poison and Dark Types</div>
+                            </td>
+                            <td className="data">
+                            <div><img src="static/image/unknown.jpg"/></div>
+                            <div>Unknown</div>
+                            <div>Ghost and Psychic Types</div>
+                            </td>
+                            </tr>
+                            </table>
                             <h1>Search for Supplies</h1><br/>
-                            Gathering items is rare. Items found are potions that raise the players' Energy by 10 Points. Often, it can be easier to choose the Rest Option if low on Energy.<br/>
+                            Gathering items is rare.<br/> Items found are potions that raise the players' Energy by 10 Points.<br/>
+                            <img src="/static/image/potion.png"/><br/>Often, it can be easier to choose the Rest Option if low on Energy.<br/>
                             <h1>Rest</h1><br/>
                             Resting allows the player to restore 20 Points to their energy.<br/>
                             <h1>Battle</h1><br/>
-                            When a player lands on the same square as another player, a battle is initiated. During the battle, the players choose which pokemon they want to battle with and attack their opponent
+                            When a player lands on the same square as another player, a battle is initiated. <br/>
+                            <img src="/static/image/swords.png"/><br/>
+                            During the battle, the players choose which pokemon they want to battle with and attack their opponent
                             until one player loses all energy. <br/>
                             If one player does not have any pokemon, the battle is cancelled. 
                         </div>

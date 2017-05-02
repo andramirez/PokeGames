@@ -149,11 +149,30 @@ li:last-child:after { content: ""; }
 
 }
 .text{
-    text-align: left;
-      overflow-y:scroll;
-  height:530px;
-  color:black;
-  font-size: 18px
+  /*overflow-y:scroll;*/
+  height:500px;
+  background-color: #5DBA84;
+  color: #000000;
+  border: 6px double #FFFFFF;
+  padding: 10px;
+  margin: 5px;
+  font-family: verdana;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  overflow: scroll;
+  vertical-align: text-top;
+}
+.bar{
+    width:450px;
+}
+.drop{
+    width:350px;
+    height:150px;
+}
+.data{
+    text-align: center;
+    padding:12px;
 }
 .email{
     flex:2;

@@ -14468,7 +14468,47 @@ var Game = exports.Game = function (_React$Component) {
                             React.createElement(
                                 'div',
                                 { className: 'tutorial text' },
-                                'Click squares to move. With each move, energy is lost depending on how far the player moves. Once the Square is clicked, the player gets one of three choices: Find Pokemon, Search for Supplies, or to Rest. ',
+                                React.createElement(
+                                    'h1',
+                                    null,
+                                    'Game Objective:'
+                                ),
+                                React.createElement('br', null),
+                                'Battle other players using Pokemon until one player remains',
+                                React.createElement('br', null),
+                                React.createElement(
+                                    'h1',
+                                    null,
+                                    'Walkthrough:'
+                                ),
+                                React.createElement('br', null),
+                                'Click squares to move. ',
+                                React.createElement('br', null),
+                                React.createElement('br', null),
+                                React.createElement('img', { src: '/static/image/user.png' }),
+                                ' => ',
+                                React.createElement('img', { src: 'static/image/desert.jpg' }),
+                                ' ',
+                                React.createElement('br', null),
+                                React.createElement('img', { src: '/static/image/plains.jpg' }),
+                                ' => ',
+                                React.createElement('img', { src: '/static/image/user.png' }),
+                                ' ',
+                                React.createElement('br', null),
+                                React.createElement('br', null),
+                                'With each move, energy is lost depending on how far the player moves. ',
+                                React.createElement('br', null),
+                                React.createElement('br', null),
+                                React.createElement('img', { className: 'bar', src: '/static/image/bar1.PNG' }),
+                                ' => ',
+                                React.createElement('img', { className: 'bar', src: '/static/image/bar2.PNG' }),
+                                React.createElement('br', null),
+                                React.createElement('br', null),
+                                'Once the Square is clicked, the player gets one of three choices: Find Pokemon, Search for Supplies, or to Rest. ',
+                                React.createElement('br', null),
+                                React.createElement('br', null),
+                                React.createElement('img', { className: 'drop', src: '/static/image/drop.png' }),
+                                React.createElement('br', null),
                                 React.createElement('br', null),
                                 React.createElement(
                                     'h1',
@@ -14480,31 +14520,206 @@ var Game = exports.Game = function (_React$Component) {
                                 React.createElement('br', null),
                                 'The type breakdown is as follows:',
                                 React.createElement('br', null),
-                                'Lake: Water and Flying Types',
-                                React.createElement('br', null),
-                                'Desert: Ground and Fire Types',
-                                React.createElement('br', null),
-                                'Plains: Grass and Normal Types',
-                                React.createElement('br', null),
-                                'Forest: Bug and Fairy Types',
-                                React.createElement('br', null),
-                                'Mountain: Rock and Fighting Types',
-                                React.createElement('br', null),
-                                'Mountain-Peak: Ice and Dragon Types',
-                                React.createElement('br', null),
-                                'Factory: Steel and Electric Types',
-                                React.createElement('br', null),
-                                'Swamp: Poison and Dark Types ',
-                                React.createElement('br', null),
-                                'Unknown: Ghost and Psychic Types',
-                                React.createElement('br', null),
+                                React.createElement(
+                                    'table',
+                                    null,
+                                    React.createElement(
+                                        'tr',
+                                        null,
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: '/static/image/lake.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Lake'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Water and Flying Types'
+                                            )
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: 'static/image/desert.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Desert'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Ground and Fire Types'
+                                            )
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: '/static/image/plains.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Plains'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Grass and Normal Types'
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        'tr',
+                                        null,
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: 'static/image/forest.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Desert'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Bug and Fairy Types'
+                                            )
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: '/static/image/mountain.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Mountain'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Rock and Fighting Types'
+                                            )
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: 'static/image/mountain-peak.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Mountain Peak'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Ice and Dragon Types'
+                                            )
+                                        )
+                                    ),
+                                    React.createElement(
+                                        'tr',
+                                        null,
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: '/static/image/factory.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Factory'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Steel and Electric Types'
+                                            )
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: 'static/image/swamp.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Swamp'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Poison and Dark Types'
+                                            )
+                                        ),
+                                        React.createElement(
+                                            'td',
+                                            { className: 'data' },
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                React.createElement('img', { src: 'static/image/unknown.jpg' })
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Unknown'
+                                            ),
+                                            React.createElement(
+                                                'div',
+                                                null,
+                                                'Ghost and Psychic Types'
+                                            )
+                                        )
+                                    )
+                                ),
                                 React.createElement(
                                     'h1',
                                     null,
                                     'Search for Supplies'
                                 ),
                                 React.createElement('br', null),
-                                'Gathering items is rare. Items found are potions that raise the players\' Energy by 10 Points. Often, it can be easier to choose the Rest Option if low on Energy.',
+                                'Gathering items is rare.',
+                                React.createElement('br', null),
+                                ' Items found are potions that raise the players\' Energy by 10 Points.',
+                                React.createElement('br', null),
+                                React.createElement('img', { src: '/static/image/potion.png' }),
+                                React.createElement('br', null),
+                                'Often, it can be easier to choose the Rest Option if low on Energy.',
                                 React.createElement('br', null),
                                 React.createElement(
                                     'h1',
@@ -14520,7 +14735,11 @@ var Game = exports.Game = function (_React$Component) {
                                     'Battle'
                                 ),
                                 React.createElement('br', null),
-                                'When a player lands on the same square as another player, a battle is initiated. During the battle, the players choose which pokemon they want to battle with and attack their opponent until one player loses all energy. ',
+                                'When a player lands on the same square as another player, a battle is initiated. ',
+                                React.createElement('br', null),
+                                React.createElement('img', { src: '/static/image/swords.png' }),
+                                React.createElement('br', null),
+                                'During the battle, the players choose which pokemon they want to battle with and attack their opponent until one player loses all energy. ',
                                 React.createElement('br', null),
                                 'If one player does not have any pokemon, the battle is cancelled.'
                             )

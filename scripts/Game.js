@@ -321,7 +321,7 @@ useItem(){
                 <div className = "buttons">
                     <div className = "tutorial">
                         <section>
-                          <button onClick={() => this.refs.customDialog.show()}>Tutorial</button>
+                          <button className="greenButton" onClick={() => this.refs.customDialog.show()}>Tutorial</button>
                         </section>
                         <SkyLight dialogStyles={myBigGreenDialog} hideOnOverlayClicked ref="customDialog" title="PokeGames Tutorial">
                           <div className="tutorial text"><h1>Game Objective:</h1><br/>
@@ -442,7 +442,7 @@ useItem(){
 export class SubButton extends React.Component {
     render() {
         return (
-            <button>Send it!</button>
+            <button className="greenButton">Send it!</button>
         );
     }
 }

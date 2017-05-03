@@ -14,7 +14,7 @@ export class Logout extends React.Component{
     }
     render(){
         return(
-            <button onClick={this.handleClick}>Logout of Game</button>     
+            <button className="greenButton" onClick={this.handleClick}>Logout of Game</button>     
         );
     }
 }

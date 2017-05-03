@@ -14456,7 +14456,7 @@ var Game = exports.Game = function (_React$Component) {
                             null,
                             React.createElement(
                                 'button',
-                                { onClick: function onClick() {
+                                { className: 'greenButton', onClick: function onClick() {
                                         return _this3.refs.customDialog.show();
                                     } },
                                 'Tutorial'
@@ -14830,7 +14830,7 @@ var SubButton = exports.SubButton = function (_React$Component2) {
         value: function render() {
             return React.createElement(
                 'button',
-                null,
+                { className: 'greenButton' },
                 'Send it!'
             );
         }
@@ -15642,7 +15642,7 @@ var Logout = exports.Logout = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 'button',
-                { onClick: this.handleClick },
+                { className: 'greenButton', onClick: this.handleClick },
                 'Logout of Game'
             );
         }
@@ -15762,7 +15762,7 @@ var SendEmail = exports.SendEmail = function (_React$Component) {
                     ),
                     React.createElement('input', { type: 'text', placeholder: 'Enter Friend\'s email!', id: 'emailbox' }),
                     React.createElement('input', { type: 'text', id: 'session', hidden: true }),
-                    React.createElement('input', { type: 'submit', name: 'Send Email' })
+                    React.createElement('input', { className: 'greenButton', type: 'submit', name: 'Send Email' })
                 )
             );
         }

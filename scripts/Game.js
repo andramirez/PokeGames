@@ -415,11 +415,13 @@ useItem(){
                 <div className="statBar">
                     {energy}
                 </div>
-                Game ID: {session}
-                <br />
-                Pokemon: <ul>{team}</ul>
-                <br />
-                Inventory: <ul>{inventory}</ul>
+                <div className="statInfo">
+                    Game ID: {session}
+                    <br />
+                    Pokemon: <ul>{team}</ul>
+                    <br />
+                    Inventory: <ul>{inventory}</ul>
+                </div>
                 <div className = "spotifyContainer">
                       <Sound/> 
                 </div>

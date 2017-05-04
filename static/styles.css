@@ -61,6 +61,19 @@ li:last-child:after { content: ""; }
     line-height: 20px;
     color: white;
 }
+.statInfo{
+  width: 45%;
+  color: #FFFFFF;
+  border: 6px solid #000000;
+  padding: 5px;
+  margin: auto;
+  font-family: verdana;
+  font-size: 16px;
+  line-height: 25px;
+  text-align: left;
+  background-color: rgba(190, 190, 190, .60);
+  
+}
 .title{
 
     font-size: 30px;
@@ -189,8 +202,8 @@ li:last-child:after { content: ""; }
   border-radius: 28px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 17px;
-  padding: 10px 20px 10px 20px;
+  font-size: 16px;
+  padding: 7px 17px 7px 17px;
   margin:5px;
 }
 

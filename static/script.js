@@ -14762,21 +14762,25 @@ var Game = exports.Game = function (_React$Component) {
                     { className: 'statBar' },
                     energy
                 ),
-                'Game ID: ',
-                session,
-                React.createElement('br', null),
-                'Pokemon: ',
                 React.createElement(
-                    'ul',
-                    null,
-                    team
-                ),
-                React.createElement('br', null),
-                'Inventory: ',
-                React.createElement(
-                    'ul',
-                    null,
-                    inventory
+                    'div',
+                    { className: 'statInfo' },
+                    'Game ID: ',
+                    session,
+                    React.createElement('br', null),
+                    'Pokemon: ',
+                    React.createElement(
+                        'ul',
+                        null,
+                        team
+                    ),
+                    React.createElement('br', null),
+                    'Inventory: ',
+                    React.createElement(
+                        'ul',
+                        null,
+                        inventory
+                    )
                 ),
                 React.createElement(
                     'div',

@@ -111,7 +111,7 @@ useItem(){
             <li key={index}>{select ? <a href='' id={index} onClick={this.handleSelect}>{n}</a> : n}</li>
         );
         let inventory = this.state.inventory.map((n, index) => 
-            <li><img src={n} onClick={this.useItem}/></li>
+            <li><img className="potion" src={n} onClick={this.useItem}/></li>
         );
         let health = this.state.health;
         let session = this.state.session;
@@ -330,12 +330,13 @@ useItem(){
                           Click squares to move. <br/><br/>
                           <img src="/static/image/user.png"/> => <img src="static/image/desert.jpg"/> <br/>
                           <img src="/static/image/plains.jpg"/> => <img src="/static/image/user.png"/> <br/><br/>
-                          With each move, energy is lost depending on how far the player moves. <br/><br/>
+                          With each move, energy is lost depending on how far the player moves (5 points per square). <br/><br/>
                           <img className ="bar"src="/static/image/bar1.PNG"/> => <img className="bar" src="/static/image/bar2.PNG"/><br/><br/>
                           Once the Square is clicked, the player gets one of three choices: Find Pokemon, Search for Supplies, or to Rest. <br/><br/>
                           <img className ="drop"src="/static/image/drop.png"/><br/><br/>
                             <h1>Find Pokemon:</h1><br/>
                             When the user selects the Find Pokemon Option, they are given a Pokemon based on the terrain they are currently in. <br/>
+                            Each player can have a max of 6 Pokemon. <br/>
                             The type breakdown is as follows:<br/>
                             <table>
                             <tr>
@@ -391,7 +392,8 @@ useItem(){
                             </tr>
                             </table>
                             <h1>Search for Supplies</h1><br/>
-                            Gathering items is rare.<br/> Items found are potions that raise the players' Energy by 10 Points.<br/>
+                            Gathering items is rare.<br/> Items found are potions that raise the players' Energy by 50 Points.<br/>
+                            Players can have at most 3 items. <br/>
                             <img src="/static/image/potion.png"/><br/>Often, it can be easier to choose the Rest Option if low on Energy.<br/>
                             <h1>Rest</h1><br/>
                             Resting allows the player to restore 20 Points to their energy.<br/>
@@ -416,8 +418,6 @@ useItem(){
                     {energy}
                 </div>
                 <div className="statInfo">
-                    Game ID: {session}
-                    <br />
                     Pokemon: <ul>{team}</ul>
                     <br />
                     Inventory: <ul>{inventory}</ul>

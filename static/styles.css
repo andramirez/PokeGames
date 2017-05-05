@@ -86,13 +86,17 @@ li:last-child:after { content: ""; }
     -webkit-text-stroke-width: 1.5px;
     -webkit-text-stroke-color: black;
 }
+.potion{
+    width:40px; 
+    height:40px;
+}
 .energyContainer{
     display:flex;
     height:40px;
     width:60%;
     margin:auto;
     margin-top:30px;
-    margin-bottom:30px;
+    margin-bottom:20px;
 }
 .energy1 {
     width: 10%; 
@@ -149,7 +153,7 @@ li:last-child:after { content: ""; }
     width: 47%;
     display:flex;
     margin:auto;
-    margin-bottom: 9px;
+    margin-bottom: 5px;
 }
 .logoutContainer{
   flex:1;
@@ -160,16 +164,17 @@ li:last-child:after { content: ""; }
   margin:auto;
 
 }
+SkyLight{
+    font-family: verdana;
+}
 .text{
   /*overflow-y:scroll;*/
   height:500px;
   background-color: #5DBA84;
-  color: #000000;
   border: 6px double #FFFFFF;
   padding: 10px;
   margin: 5px;
   font-family: verdana;
-  font-size: 20px;
   line-height: 25px;
   text-align: center;
   overflow: scroll;
@@ -202,8 +207,8 @@ li:last-child:after { content: ""; }
   border-radius: 28px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 16px;
-  padding: 7px 17px 7px 17px;
+  font-size: 14px;
+  padding: 5px 15px 5px 15px;
   margin:5px;
 }
 

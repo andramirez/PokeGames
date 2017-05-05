@@ -14865,19 +14865,15 @@ var Login = exports.Login = function (_React$Component) {
                 React.createElement(
                     'div',
                     { id: 'login_buttons' },
-                    React.createElement(
-                        'div',
-                        { className: 'loginBtn loginBtn--facebook' },
-                        React.createElement(_reactFacebookLoginComponent.FacebookLogin, { socialId: '1566496380057860',
-                            language: 'en_US',
-                            scope: 'public_profile, email',
-                            fields: 'name,email,picture',
-                            responseHandler: this.responseFacebook,
-                            xfbml: true,
-                            version: 'v2.8',
-                            'class': 'facebook-login',
-                            buttonText: 'Login With Facebook' })
-                    ),
+                    React.createElement(_reactFacebookLoginComponent.FacebookLogin, { socialId: '1566496380057860',
+                        language: 'en_US',
+                        scope: 'public_profile, email',
+                        fields: 'name,email,picture',
+                        responseHandler: this.responseFacebook,
+                        xfbml: true,
+                        version: 'v2.8',
+                        'class': 'facebook-login',
+                        buttonText: 'Login With Facebook' }),
                     React.createElement('div', { id: 'g-signin2', 'data-onSuccess': this.responseGoogle, 'data-theme': 'dark' })
                 )
             );

@@ -294,7 +294,7 @@ def handle_message(messageData):
                 'user'   : getUsernameFromID(request.sid),
                 'picture' : getUserPhotoFromID(request.sid),
                 })
-                socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+                socketio.emit('passedMessageList', messageList)
                 print messageList
                 return
             else:
@@ -304,7 +304,7 @@ def handle_message(messageData):
                 'user'   : getUsernameFromID(request.sid),
                 'picture' : getUserPhotoFromID(request.sid),
                 })
-                socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+                socketio.emit('passedMessageList', messageList)
                 return
         
 @socketio.on("Alert")

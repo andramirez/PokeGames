@@ -13685,7 +13685,7 @@ var Game = exports.Game = function (_React$Component) {
                 return React.createElement(
                     'li',
                     null,
-                    React.createElement('img', { src: n, onClick: _this3.useItem })
+                    React.createElement('img', { className: 'potion', src: n, onClick: _this3.useItem })
                 );
             });
             var health = this.state.health;
@@ -14496,7 +14496,7 @@ var Game = exports.Game = function (_React$Component) {
                                 ' ',
                                 React.createElement('br', null),
                                 React.createElement('br', null),
-                                'With each move, energy is lost depending on how far the player moves. ',
+                                'With each move, energy is lost depending on how far the player moves (5 points per square). ',
                                 React.createElement('br', null),
                                 React.createElement('br', null),
                                 React.createElement('img', { className: 'bar', src: '/static/image/bar1.PNG' }),
@@ -14517,6 +14517,8 @@ var Game = exports.Game = function (_React$Component) {
                                 ),
                                 React.createElement('br', null),
                                 'When the user selects the Find Pokemon Option, they are given a Pokemon based on the terrain they are currently in. ',
+                                React.createElement('br', null),
+                                'Each player can have a max of 6 Pokemon. ',
                                 React.createElement('br', null),
                                 'The type breakdown is as follows:',
                                 React.createElement('br', null),
@@ -14715,7 +14717,9 @@ var Game = exports.Game = function (_React$Component) {
                                 React.createElement('br', null),
                                 'Gathering items is rare.',
                                 React.createElement('br', null),
-                                ' Items found are potions that raise the players\' Energy by 10 Points.',
+                                ' Items found are potions that raise the players\' Energy by 50 Points.',
+                                React.createElement('br', null),
+                                'Players can have at most 3 items. ',
                                 React.createElement('br', null),
                                 React.createElement('img', { src: '/static/image/potion.png' }),
                                 React.createElement('br', null),
@@ -14765,9 +14769,6 @@ var Game = exports.Game = function (_React$Component) {
                 React.createElement(
                     'div',
                     { className: 'statInfo' },
-                    'Game ID: ',
-                    session,
-                    React.createElement('br', null),
                     'Pokemon: ',
                     React.createElement(
                         'ul',

@@ -254,7 +254,7 @@ def get_rest():
 
 def recover_health():
     if playerData[request.sid]['health'] < 100:
-        playerData[request.sid]['health'] += 10
+        playerData[request.sid]['health'] += 50
         if (playerData[request.sid]['health'] > 100):
             playerData[request.sid]['health'] = 100
     socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)

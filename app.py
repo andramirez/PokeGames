@@ -127,6 +127,7 @@ def attack(data):
         combatTeams[request.sid] = playerData[request.sid]['team'][int(data['fighter'])] 
         if (playerData[request.sid]['battleID'][0:-6]!=request.sid): #if not room host
             combatant[playerData[request.sid]['battleID']] = request.sid 
+            on_leave(playerData[request.sid]['battleID'])
         else:
             loop = 1
             while (loop > 0): #fix later
@@ -162,17 +163,11 @@ def attack(data):
                         socketio.emit("update health",{'health':playerData[player2id]['health']},room = player2id)
                         loop = 0
                     else:
-                        print combatant[playerData[request.sid]['battleID']]
-                        print request.sid
-                        loop = 0
+                        print loop
                 except KeyError: 
                     loop += 1
             on_leave(playerData[request.sid]['battleID'])
             on_leave(playerData[player2id]['battleID'])
-        
-@socketio.on('redraw')
-def redraw():
-    socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
     
 @socketio.on('get id')
 def send_id():

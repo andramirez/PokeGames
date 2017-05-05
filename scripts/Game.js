@@ -17,7 +17,7 @@ export class Game extends React.Component {
             'messageHolder' : [],
             'isGameLaunched': false,
             'health': 100,
-            'select':0
+            'select':false
         };
         this.handleSelect = this.handleSelect.bind(this);
         this.useItem = this.useItem.bind(this);
@@ -25,6 +25,7 @@ export class Game extends React.Component {
     handleSelect(event) {
         event.preventDefault();
         Socket.emit('attack', {'id':this.state.id, 'fighter':event.target.id});
+        this.state.select=false;
     }
     componentDidMount() {
         Socket.on('join', (data) => { 
@@ -79,14 +80,14 @@ export class Game extends React.Component {
             this.setState({
                 'id': data['id'],
                 'team': data['team'],
-                'select': 1
+                'select': true
             });
         });
-        Socket.on('deselect',(data) => { 
-            this.setState({
-                'select': 0
-            });
-        });
+        // Socket.on('deselect',(data) => {
+        //     this.setState({
+        //         'select': false
+        //     });
+        // });
         Socket.on('game over', (data) =>{
             alert("Game Over!");
         });
@@ -108,7 +109,7 @@ useItem(){
     render() {
         let select = this.state.select;
         let team = this.state.team.map((n, index) => 
-            <li key={index}>{select ? <a href='' id={index} onClick={this.handleSelect}>{n}</a> : n}</li>
+            <li key={index}>{select==true ? <a href='' id={index} onClick={this.handleSelect}>{n}</a> : n}</li>
         );
         let inventory = this.state.inventory.map((n, index) => 
             <li><img className="potion" src={n} onClick={this.useItem}/></li>

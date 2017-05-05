@@ -13523,7 +13523,7 @@ var Game = exports.Game = function (_React$Component) {
             'messageHolder': [],
             'isGameLaunched': false,
             'health': 100,
-            'select': 0
+            'select': false
         };
         _this.handleSelect = _this.handleSelect.bind(_this);
         _this.useItem = _this.useItem.bind(_this);
@@ -13535,6 +13535,7 @@ var Game = exports.Game = function (_React$Component) {
         value: function handleSelect(event) {
             event.preventDefault();
             _Socket.Socket.emit('attack', { 'id': this.state.id, 'fighter': event.target.id });
+            this.state.select = false;
         }
     }, {
         key: 'componentDidMount',
@@ -13592,14 +13593,14 @@ var Game = exports.Game = function (_React$Component) {
                 _this2.setState({
                     'id': data['id'],
                     'team': data['team'],
-                    'select': 1
+                    'select': true
                 });
             });
-            _Socket.Socket.on('deselect', function (data) {
-                _this2.setState({
-                    'select': 0
-                });
-            });
+            // Socket.on('deselect',(data) => {
+            //     this.setState({
+            //         'select': false
+            //     });
+            // });
             _Socket.Socket.on('game over', function (data) {
                 alert("Game Over!");
             });
@@ -13630,7 +13631,7 @@ var Game = exports.Game = function (_React$Component) {
                 return React.createElement(
                     'li',
                     { key: index },
-                    select ? React.createElement(
+                    select == true ? React.createElement(
                         'a',
                         { href: '', id: index, onClick: _this3.handleSelect },
                         n

@@ -75,7 +75,7 @@ def play(data):
 @socketio.on('make choice')
 def make_choice(data):
     if (data['id'] == request.sid):
-        if(playerData[request.sid]['health'] != 0):
+        if(playerData[request.sid]['health'] > 0):
             print playerData[request.sid]['name'] + ' clicked something.'
             image = playerData[request.sid]['image']
             room = request.sid
@@ -85,12 +85,12 @@ def make_choice(data):
             post = playerData[request.sid]['location'].split(',')
             distance = abs(int(pre[0]) - int(post[0])) + abs(int(pre[1]) - int(post[1]))
             playerData[request.sid]['location'] = data['coords']
-            socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
             playerData[request.sid]['health'] -= distance*5
             if (playerData[request.sid]['health'] < 0):
                 playerData[request.sid]['health'] = 0
             socketio.emit('update health', {'health': playerData[request.sid]['health']}, room=request.sid)
             userPositions[request.sid] = playerData[request.sid]['location'] = data['coords']
+            #check for battle
             for key, value in userPositions.items():
                 if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
                     if (playerData[key]['battleID'] != key+'battle' or playerData[request.sid]['battleID'] != request.sid+'battle'): #if either player is already in battle
@@ -126,45 +126,54 @@ def attack(data):
     if (data['id'] == request.sid): 
         combatTeams[request.sid] = playerData[request.sid]['team'][int(data['fighter'])] 
         if (playerData[request.sid]['battleID'][0:-6]!=request.sid): #if not room host
-            combatant[playerData[request.sid]['battleID']] = request.sid
-        loop = 1
-        while (loop and loop < 10): #fix later
-            try:
-                if (combatant[playerData[request.sid]['battleID']] and request.sid != combatant[playerData[request.sid]['battleID']]): #if both players are set
-                    player2id = combatant[playerData[request.sid]['battleID']]
-                    fighter_a = combatTeams[request.sid]
-                    fighter_b = combatTeams[player2id]
-                    stats_a = pokeAPI.getStatsByName(fighter_a)
-                    stats_b = pokeAPI.getStatsByName(fighter_b)
-                    vs_msg = playerData[request.sid]['name']+"'s "+fighter_a + ' vs ' + playerData[player2id]['name']+"'s "+fighter_b
-                    if (stats_a > stats_b):
-                        win_msg = fighter_a+" wins!"
-                        playerData[player2id]['health'] -= 30
-                        if (stats_a > (stats_b * 2)):
+            combatant[playerData[request.sid]['battleID']] = request.sid 
+        else:
+            loop = 1
+            while (loop > 0): #fix later
+                try:
+                    if (combatant[playerData[request.sid]['battleID']] and request.sid != combatant[playerData[request.sid]['battleID']]): #if both players are set
+                        player2id = combatant[playerData[request.sid]['battleID']]
+                        fighter_a = combatTeams[request.sid]
+                        fighter_b = combatTeams[player2id]
+                        stats_a = pokeAPI.getStatsByName(fighter_a)
+                        stats_b = pokeAPI.getStatsByName(fighter_b)
+                        vs_msg = playerData[request.sid]['name']+"'s "+fighter_a + ' vs ' + playerData[player2id]['name']+"'s "+fighter_b
+                        if (stats_a > stats_b):
+                            win_msg = fighter_a+" wins!"
                             playerData[player2id]['health'] -= 30
-                        if playerData[player2id]['health'] < 0:
-                            playerData[player2id]['health'] = 0
-                            
-                    elif (stats_a < stats_b):
-                        win_msg = fighter_b+" wins!"
-                        playerData[request.sid]['health'] -= 30
-                        if (stats_b > (stats_a * 2)):
+                            if (stats_a > (stats_b * 2)):
+                                playerData[player2id]['health'] -= 30
+                            if playerData[player2id]['health'] < 0:
+                                playerData[player2id]['health'] = 0
+                        elif (stats_a < stats_b):
+                            win_msg = fighter_b+" wins!"
                             playerData[request.sid]['health'] -= 30
-                        elif playerData[request.sid]['health'] < 0:
-                            playerData[request.sid]['health'] = 0
-
-                            
+                            if (stats_b > (stats_a * 2)):
+                                playerData[request.sid]['health'] -= 30
+                            elif playerData[request.sid]['health'] < 0:
+                                playerData[request.sid]['health'] = 0
+                        else:
+                            win_msg = "Draw!"
+                        socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = request.sid)
+                        socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
+                        socketio.emit("update health",{'health':playerData[request.sid]['health']},room = request.sid)
+                        socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = player2id)
+                        socketio.emit('draw pos', {'image': playerData[player2id]['image'], 'pos': playerData[player2id]['location']}, room=player2id)
+                        socketio.emit("update health",{'health':playerData[player2id]['health']},room = player2id)
+                        loop = 0
                     else:
-                        win_msg = "Draw!"
-                    socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = request.sid)
-                    socketio.emit("battle end",{'vs':vs_msg,'win':win_msg},room = player2id)
-                    socketio.emit("update health",{'health':playerData[request.sid]['health']},room = request.sid)
-                    socketio.emit("update health",{'health':playerData[player2id]['health']},room = player2id)
-                    loop = 0
-            except KeyError: 
-                loop += 1
-        on_leave(playerData[request.sid]['battleID'])
+                        print combatant[playerData[request.sid]['battleID']]
+                        print request.sid
+                        loop = 0
+                except KeyError: 
+                    loop += 1
+            on_leave(playerData[request.sid]['battleID'])
+            on_leave(playerData[player2id]['battleID'])
         
+@socketio.on('redraw')
+def redraw():
+    socketio.emit('draw pos', {'image': playerData[request.sid]['image'], 'pos': playerData[request.sid]['location']}, room=request.sid)
+    
 @socketio.on('get id')
 def send_id():
     print request.sid

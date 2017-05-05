@@ -93,7 +93,6 @@ def make_choice(data):
             #check for battle
             for key, value in userPositions.items():
                 if (value == playerData[request.sid]['location'] and playerData[request.sid]['currentSession'] == playerData[key]['currentSession'] and key != request.sid): #if same location, same game, different players
-                    print playerData[key]['battleID'] + "   " + playerData[request.sid]['battleID'] 
                     if (playerData[key]['battleID'] != key+'battle' or playerData[request.sid]['battleID'] != request.sid+'battle'): #if either player is already in battle
                         battle_init = False #cant battle here
             for key, value in userPositions.items():
@@ -229,8 +228,8 @@ def on_join(data):
 def on_leave(room):
     if ('battle' in room):
         if (room[0:-6] != request.sid): #if leaving someone else's battle room
+            playerData[request.sid]['battleID'] = request.sid+'battle' #reset battleID
             leave_room(room)
-        playerData[request.sid]['battleID'] = request.sid+'battle' #reset battleID
     else:
         leave_room(room)
 

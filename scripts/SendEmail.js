@@ -41,7 +41,7 @@ handleSubmitEmail(event) {
 				<br />
 				<b>Invite a friend! </b><input type = "text" placeholder = "Enter Friend's email!" id="emailbox"/>
 				<input type = "text" id="session" hidden/>
-			     <input type="submit" name='Send Email'/>
+			     <input className="greenButton" type="submit" name='Send Email'/>
 				</form>
 			</div>
         );

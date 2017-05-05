@@ -25,6 +25,8 @@ export class Board extends React.Component {
         });
         document.getElementById('action').style.visibility = "visible";
         document.getElementById('battle').style.visibility = "hidden";
+        document.getElementById('vs').innerHTML = "Select a Pokemon from your team!";
+        document.getElementById('win').innerHTML = "";
         Socket.emit('get id');
     }
     handleChange(event) {
@@ -49,11 +51,12 @@ export class Board extends React.Component {
             });
         });
         Socket.on('draw pos', (data) => {
-            if (data['image']== '/static/image/swords.png')
+            if (data['image']== '/static/image/swords.png'){
                 document.getElementById('battle').style.visibility = "visible";
                 Socket.emit('battle start', {
                     'id' : this.state.id
                 });
+            }
             this.setState({
                 pos: data['pos'],
                 image: data['image']
@@ -67,7 +70,6 @@ export class Board extends React.Component {
         Socket.on('battle end', (data) => {
             document.getElementById('vs').innerHTML = data['vs'];
             document.getElementById('win').innerHTML = data['win'];
-            Socket.emit('deselect','');
         });
     }
     

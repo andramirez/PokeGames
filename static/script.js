@@ -13526,6 +13526,7 @@ var Game = exports.Game = function (_React$Component) {
                 _this2.setState({
                     'messageHolder': data
                 });
+                document.getElementsByClassName('scroll').scrollTop = -9999999;
             });
             _Socket.Socket.on('choose fighter', function (data) {
                 _this2.setState({

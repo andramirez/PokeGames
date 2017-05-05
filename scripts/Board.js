@@ -70,7 +70,7 @@ export class Board extends React.Component {
         Socket.on('battle end', (data) => {
             document.getElementById('vs').innerHTML = data['vs'];
             document.getElementById('win').innerHTML = data['win'];
-            Socket.emit('deselect','');
+            // Socket.emit('deselect','');
         });
     }
     

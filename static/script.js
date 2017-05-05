@@ -15073,7 +15073,7 @@ var Board = exports.Board = function (_React$Component) {
             _Socket.Socket.on('battle end', function (data) {
                 document.getElementById('vs').innerHTML = data['vs'];
                 document.getElementById('win').innerHTML = data['win'];
-                _Socket.Socket.emit('deselect', '');
+                // Socket.emit('deselect','');
             });
         }
     }, {

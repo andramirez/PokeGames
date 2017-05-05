@@ -308,17 +308,17 @@ def handle_message(messageData):
                 return
         
 @socketio.on("Alert")
-def handle_game_alert(data): 
-    rec_data = data
-    messageList.append({
-            'message' : data,
-            'socket'  : "0000",
-            'user'   : getUsernameFromID("0000"),
-            'picture' : getUserPhotoFromID("0000"),
-            })
+#def handle_game_alert(data): 
+   # rec_data = data
+    #messageList.append({
+     #       'message' : data,
+    #         'socket'  : "0000",
+    #         'user'   : getUsernameFromID("0000"),
+    #         'picture' : getUserPhotoFromID("0000"),
+    #         })
 
-    socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
-    print "ALERT: " + rec_data
+    # socketio.emit('passedMessageList', messageList, room=playerData[request.sid]['currentSession'])
+    # print "ALERT: " + rec_data
     #removeSelfAlertFromList("0000")
 
 @socketio.on("AlertSelf") #things like picking up items

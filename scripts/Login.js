@@ -88,7 +88,9 @@ export class Login extends React.Component{
     render(){
         return (
             <div>
-                <div id="login_buttons">
+            
+                <div id="login_buttons" >
+                <div className = "loginBtn loginBtn--facebook">
                     <FacebookLogin socialId="1566496380057860"
                     language="en_US"
                     scope="public_profile, email"
@@ -98,6 +100,7 @@ export class Login extends React.Component{
                     version="v2.8"
                     class="facebook-login"
                     buttonText="Login With Facebook"/>
+                    </div>
                     <div id="g-signin2" data-onSuccess={this.responseGoogle} data-theme="dark"/>
                 </div>
             </div>
